@@ -24,7 +24,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ActionPointsInfo;
 
     [Header("Player Action System UI")]
-    [SerializeField] private Image PlayerActionSystemUI;
+    [SerializeField] private ActionCategoryUi PlayerActionSystemUI;
     [SerializeField] private Color actionInactiveStateColor;
     [SerializeField] private Color actionActiveStateColor;
 
@@ -33,7 +33,6 @@ public class PlayerHUD : MonoBehaviour
     private ManaSystem _manaSystem;
     private LevelingSystem _levelingSystem;
     private ActionSystem _actionSystem;
-
 
     private string MetricFormat = "{0}/{1}";
     private string LevelFormat = "LV {0}";
@@ -47,9 +46,6 @@ public class PlayerHUD : MonoBehaviour
     private const float MaxTime = 0.01f;
     private const float RotationUnit = 90f;
     private const string PlayerEntityTag = "PlayerEntity";
-
-    //Tweening
-    Tween primaryActionColorTween;
 
     private void Start()
     {
@@ -187,9 +183,15 @@ public class PlayerHUD : MonoBehaviour
         targetAngle += RotationUnit * units % MaxDegrees;
     }
 
+    public void UpdateSlotIndex(int index)
+    {
+        PlayerActionSystemUI.EnlargeSlot(index);
+    }
+
     internal void ResetActionUi()
     {
         targetAngle = 0;
+        PlayerActionSystemUI.NormalizeAllSlots();
     }
     #endregion
 }

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RuntimeActionSystem : GameSystem
 {
     // The RuntimeActionSystem has reference to 
@@ -15,17 +17,24 @@ public class RuntimeActionSystem : GameSystem
 
     public IActionCategory this[int categoryIndex]
     {
-        get { return SystemCategories[categoryIndex]; }
+        get {
+            if (SystemCategories == null) InitalizeCategories();
+            return SystemCategories[categoryIndex];
+        }
     }
 
     protected override void OnInit()
     {
+        GetSystems();
+    }
+
+    void GetSystems()
+    {
+        Debug.Log("Getting systems...");
         SkillSystem = GameManager.Command.GetSystem<SkillSystem>();
         WeaponSystem = GameManager.Command.GetSystem<WeaponSystem>();
         DeitySystem = GameManager.Command.GetSystem<DeitySystem>();
         ItemSystem = GameManager.Command.GetSystem<ItemSystem>();
-
-        InitalizeCategories();
     }
 
     void InitalizeCategories()

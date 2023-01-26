@@ -33,7 +33,7 @@ public class ActionSystem : GameSystem
     public PlayerHUD PlayerHUD { get; private set; }
 
     protected override void OnInit()
-    {
+    { 
         RuntimeActionSystem ??= GameManager.Command.GetSystem<RuntimeActionSystem>();
     }
 
@@ -68,6 +68,7 @@ public class ActionSystem : GameSystem
         if (_isPerformingAction == false)
         {
             _isPerformingAction = true;
+            PlayerHUD.UpdateSlotIndex(_previousSelectedPrimary);
         }
         ListenForPrimaryInput();
         ListenForSecondaryInput();
@@ -90,6 +91,7 @@ public class ActionSystem : GameSystem
     {
         var difference = _selectedPrimarySlot - _previousSelectedPrimary;
         PlayerHUD.UpdateTargetAngle(difference);
+        PlayerHUD.UpdateSlotIndex(_selectedPrimarySlot);
     }
 
     private void ListenForSecondaryInput()

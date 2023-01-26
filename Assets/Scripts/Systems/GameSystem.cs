@@ -39,6 +39,7 @@ public abstract class GameSystem : MonoBehaviour
 
     void Init()
     {
+        if (isInitialized) return;
         status = GameManager.Command.GetSystemStatus(this);
         isInitialized = status != null;
         OnInit();

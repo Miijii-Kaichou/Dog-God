@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
             CreateProfileDirectory();
 
         StartUpAllSystems();
+        ReportStartUp();
     }
 
     void RegisterSystems()
@@ -128,6 +129,11 @@ public class GameManager : MonoBehaviour
         systemInfoList = systemInfoList.OrderBy(sysInfo => sysInfo.systemName).ToList();
     }
 
+    void ReportStartUp()
+    {
+        if (systemInfoList.Where(systemInfo => systemInfo.systemStatus.systemStatus == Status.STOPPED).Any()) return;
+        Debug.Log("All Systems Green!");
+    }
 
     void StartUpAllSystems()
     {
@@ -144,6 +150,7 @@ public class GameManager : MonoBehaviour
         Command.GetSystem<HeavensPlazaSystem>().Run();
         Command.GetSystem<ActionSystem>().Run();
         Command.GetSystem<AttackDefenseSystem>().Run();
+        Command.GetSystem<RuntimeActionSystem>().Run();
     }
 
     internal T WithSystem<T>() where T : GameSystem
