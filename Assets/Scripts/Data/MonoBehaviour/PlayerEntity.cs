@@ -62,11 +62,6 @@ public class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILeve
 
     private void Start()
     {
-        MaxHealthValue = 50000;
-        HealthValue = MaxHealthValue;
-        MaxManaValue = 1000;
-        ManaValue = MaxManaValue;
-
         _attackDefenseSystem ??= GameManager.Command.GetSystem<AttackDefenseSystem>();
         _playerActionSystem ??= GameManager.Command.GetSystem<ActionSystem>();
         _levelingSystem ??= GameManager.Command.GetSystem<LevelingSystem>();
@@ -79,10 +74,12 @@ public class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILeve
         ((IRegisterPlayer<IManaProperty>)_manaSystem).RegisterPlayerEntity(this);
 
         // Health system can talk multiple, so we use this instead
-        _healthSystem.AddNewEntry("PlayerEntity", this);
+        _healthSystem.AddNewEntry(nameof(PlayerEntity), this);
 
         //Set Max Values
-        _healthSystem.SetMaxHealth("PlayerEntity", 50000);
+        _healthSystem.SetHealth(nameof(PlayerEntity), 50000);
+        _healthSystem.SetMaxHealth(nameof(PlayerEntity), 50000);
+        _manaSystem.SetMana(1000);
         _manaSystem.SetMaxMana(1000);
     }
 

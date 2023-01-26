@@ -11,35 +11,10 @@ public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
 
     public ManaSystemOperation? onManaChange;
 
-    public Slider playerManaSlider;
-    public float playerMaxMana;
-
     public IManaProperty EntityRef { get; set; }
 
-    protected override void OnInit()
-    {
-        //We give the max value for the boss, and the player.
-        if (EntityRef != null)
-        {
-            EntityRef.ManaValue = playerMaxMana;
-        }
-    }
 
-    protected override void Main()
-    {
-        if (playerManaSlider != null)
-            ManagerHealthMeter();
-    }
-
-    /// <summary>
-    /// Manages both the player's health, and the boss' health
-    /// </summary>
-    void ManagerHealthMeter()
-    {
-        playerManaSlider.value = EntityRef.ManaValue / playerMaxMana;
-    }
-
-    internal void SetMana(float value, bool isRelative)
+    internal void SetMana(float value, bool isRelative = false)
     {
         if (isRelative)
             EntityRef.AddToMana(value);
@@ -51,6 +26,5 @@ public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
     internal void SetMaxMana(float value)
     {
         EntityRef.SetMaxMana(value);
-
     }
 }
