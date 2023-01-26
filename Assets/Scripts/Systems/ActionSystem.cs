@@ -3,6 +3,8 @@ using UnityEngine;
 public class ActionSystem : GameSystem
 {
     private bool _isPerformingAction = false;
+    public bool IsPerformingAction => _isPerformingAction;
+
     private bool _slotUsed = false;
     private int _previousSelectedPrimary = 0;
     private int _selectedPrimarySlot = -1;

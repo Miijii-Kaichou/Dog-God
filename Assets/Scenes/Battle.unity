@@ -1930,6 +1930,8 @@ MonoBehaviour:
   EXPMetrics: {fileID: 1501119902}
   ActionPointsInfo: {fileID: 1359455237}
   PlayerActionSystemUI: {fileID: 1775503431}
+  actionInactiveStateColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}
+  actionActiveStateColor: {r: 0, g: 0.92462564, b: 1, a: 1}
 --- !u!1 &953884268
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,7 +3903,7 @@ GameObject:
   - component: {fileID: 1660931644}
   - component: {fileID: 1660931645}
   m_Layer: 0
-  m_Name: $PlayerActionSystem
+  m_Name: $ActionSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

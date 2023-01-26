@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using TMPro;
@@ -22,8 +23,10 @@ public class PlayerHUD : MonoBehaviour
     [Header("Player Action Points")]
     [SerializeField] private TextMeshProUGUI ActionPointsInfo;
 
-    [Header("Player Action System UI (Temp)")]
+    [Header("Player Action System UI")]
     [SerializeField] private Image PlayerActionSystemUI;
+    [SerializeField] private Color actionInactiveStateColor;
+    [SerializeField] private Color actionActiveStateColor;
 
     // Dependencies
     private HealthSystem _healthSystem;
@@ -45,6 +48,9 @@ public class PlayerHUD : MonoBehaviour
     private const float RotationUnit = 90f;
     private const string PlayerEntityTag = "PlayerEntity";
 
+    //Tweening
+    Tween primaryActionColorTween;
+
     private void Start()
     {
         _healthSystem = GameManager.Command.GetSystem<HealthSystem>();
@@ -62,6 +68,8 @@ public class PlayerHUD : MonoBehaviour
         StartCoroutine(HPSmoothDampCycle());
         StartCoroutine(MPSmoothDampCycle());
         StartCoroutine(EXPSmoothDampCycle());
+
+        StartCoroutine(ActionColorFade());
         StartCoroutine(ActionViewRotation());
     }
 
@@ -93,11 +101,27 @@ public class PlayerHUD : MonoBehaviour
         });
     }
 
+    IEnumerator ActionColorFade()
+    {
+        yield return DelayedCycle(() =>
+        {
+            if (_actionSystem.IsPerformingAction)
+            {
+                PlayerActionSystemUI.DOColor(actionActiveStateColor, SmoothTime);
+            }
+
+            if (_actionSystem.IsPerformingAction == false)
+            {
+                PlayerActionSystemUI.DOColor(actionInactiveStateColor, SmoothTime);
+            }
+        });
+    }
+
     IEnumerator ActionViewRotation()
     {
         yield return DelayedCycle(() =>
         {
-            float zEulerAngle = Mathf.SmoothDamp(PlayerActionSystemUI.transform.localEulerAngles.z, targetAngle, ref zEulerAngleVelocity, 0.1f);
+            float zEulerAngle = Mathf.SmoothDamp(PlayerActionSystemUI.transform.localEulerAngles.z, targetAngle, ref zEulerAngleVelocity, SmoothTime);
             PlayerActionSystemUI.transform.localEulerAngles = new Vector3(0, 0, zEulerAngle);
         });
     }
@@ -166,11 +190,6 @@ public class PlayerHUD : MonoBehaviour
     internal void ResetActionUi()
     {
         targetAngle = 0;
-    }
-
-    public void ActivatePrimaryAction()
-    {
-
     }
     #endregion
 }
