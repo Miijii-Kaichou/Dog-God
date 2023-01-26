@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public delegate void ItemUseCallaback();
+﻿public delegate void ItemUseCallaback();
 
 public interface IActionableItem
 {
@@ -20,8 +18,8 @@ public interface IActionableItem
 
     public void IncreaseQuantity()
     {
-        if (AllowQuantityResize && Quantity != 0)   return;
-        if (Quantity >= MaxQuantity)                return;
+        if (AllowQuantityResize && Quantity != 0) return;
+        if (Quantity >= MaxQuantity) return;
         Quantity++;
     }
 }

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IEntityStatus
+﻿public interface IEntityStatus
 {
     public StanceState EntityStanceState { get; set; }
     public OffensiveState EntityOffsensiveState { get; set; }

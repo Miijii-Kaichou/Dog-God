@@ -1,9 +1,7 @@
-﻿using Cakewalk.IoC;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class SystemInfo
 {
     public string systemName;
-    [Dependency] public GameSystem system;
-    [Dependency] public SystemStatus systemStatus;
+    public GameSystem system;
+    public SystemStatus systemStatus;
 }

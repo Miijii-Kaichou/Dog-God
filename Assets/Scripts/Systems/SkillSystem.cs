@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-public class SkillSystem : GameSystem, IActionCategory
+﻿public class SkillSystem : GameSystem, IActionCategory
 {
     public IActionableItem[] Slots { get; set; } = new IActionableItem[IActionCategory.MaxSlots];
 

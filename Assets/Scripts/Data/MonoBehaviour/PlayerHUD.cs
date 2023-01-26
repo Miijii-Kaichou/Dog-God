@@ -1,12 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
-// Importing DoTween (HoTween v2)
-using DG.Tweening;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -165,7 +161,7 @@ public class PlayerHUD : MonoBehaviour
     #region Player Action UI Methods
     public void UpdateTargetAngle(int units)
     {
-        targetAngle += (RotationUnit * units) % MaxDegrees;
+        targetAngle += RotationUnit * units % MaxDegrees;
     }
 
     internal void ResetActionUi()

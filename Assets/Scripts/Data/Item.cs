@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public abstract class Item : IActionableItem
+﻿public abstract class Item : IActionableItem
 {
     /*An item can be something that can heal you, replenish your mana, buff your stats, etc.
      

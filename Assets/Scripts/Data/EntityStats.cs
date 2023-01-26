@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public enum StatVariable 
+public enum StatVariable
 {
     STRENGTH,
     VITALITY,
@@ -15,17 +15,17 @@ public enum StatVariable
 
 public enum DamageStatVariable
 {
-    NONE            = 0 << 0,
-    PHYSICAL        = 0 << 1,
-    BURNING         = 0 << 2,
-    FREEZING        = 0 << 3,
-    POISON          = 0 << 4,
-    LIGHTNING       = 0 << 5,
-    LIGHTSPIRITUAL  = 0 << 6,
-    DARKSPIRITUAL   = 0 << 7,
-    ONEHAND         = 0 << 8,
-    TWOHAND         = 0 << 9,
-    DUALWIELD       = 0 << 10
+    NONE = 0 << 0,
+    PHYSICAL = 0 << 1,
+    BURNING = 0 << 2,
+    FREEZING = 0 << 3,
+    POISON = 0 << 4,
+    LIGHTNING = 0 << 5,
+    LIGHTSPIRITUAL = 0 << 6,
+    DARKSPIRITUAL = 0 << 7,
+    ONEHAND = 0 << 8,
+    TWOHAND = 0 << 9,
+    DUALWIELD = 0 << 10
 }
 
 

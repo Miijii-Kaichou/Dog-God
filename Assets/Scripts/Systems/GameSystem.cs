@@ -53,7 +53,7 @@ public abstract class GameSystem : MonoBehaviour
             case Status.STOPPED: Stop(); break;
             case Status.PAUSED: Pause(); break;
             case Status.RUNNING: Run(); break;
-            default:  break;
+            default: break;
         }
     }
 
@@ -107,14 +107,14 @@ public abstract class GameSystem : MonoBehaviour
     protected virtual IEnumerator SystemRoutine()
     {
         //Main Loop
-        while(true)
+        while (true)
         {
             try
             {
                 //Try calling main every fram
                 Main();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 //We'll stop the process, and throw an exception.
                 Stop(e);

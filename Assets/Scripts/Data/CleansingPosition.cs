@@ -12,7 +12,8 @@ public class CleasingPosition
     public const int HOUR_INDEX = 3;
     public const int MINUTE_INDEX = 4;
     public const int SECOND_INDEX = 5;
-    public DateTime Date {
+    public DateTime Date
+    {
         get
         {
             return new DateTime((int)date[YEAR_INDEX], (int)date[MONTH_INDEX], (int)date[DAY_INDEX], (int)date[HOUR_INDEX], (int)date[MINUTE_INDEX], (int)date[SECOND_INDEX]);
@@ -46,7 +47,7 @@ public class CleasingPosition
         DateTime dateTimeB = new DateTime(b.year, b.month, b.day, b.hour, b.minute, b.second, DateTimeKind.Local);
 
         DateTime newDateTime = new DateTime(dateTimeA.Ticks + dateTimeB.Ticks);
-        CleasingPosition newCleasingPosition = new CleasingPosition(newDateTime.Month, newDateTime.Day, newDateTime.Year,newDateTime.Hour,newDateTime.Minute,newDateTime.Second, TimeZoneInfo.Local);
+        CleasingPosition newCleasingPosition = new CleasingPosition(newDateTime.Month, newDateTime.Day, newDateTime.Year, newDateTime.Hour, newDateTime.Minute, newDateTime.Second, TimeZoneInfo.Local);
         return newCleasingPosition;
     }
 
@@ -55,7 +56,7 @@ public class CleasingPosition
         DateTime dateTimeA = new DateTime(a.year, a.month, a.day, a.hour, a.minute, a.second, DateTimeKind.Local);
         DateTime dateTimeB = new DateTime(b.year, b.month, b.day, b.hour, b.minute, b.second, DateTimeKind.Local);
 
-        DateTime newDateTime = new DateTime((long)Mathf.Max(dateTimeA.Ticks, dateTimeB.Ticks) - (long)Mathf.Min(dateTimeA.Ticks, dateTimeB.Ticks)) ;
+        DateTime newDateTime = new DateTime((long)Mathf.Max(dateTimeA.Ticks, dateTimeB.Ticks) - (long)Mathf.Min(dateTimeA.Ticks, dateTimeB.Ticks));
         CleasingPosition newCleasingPosition = new CleasingPosition(newDateTime.Month, newDateTime.Day, newDateTime.Year, newDateTime.Hour, newDateTime.Minute, newDateTime.Second, TimeZoneInfo.Local);
         return newCleasingPosition;
     }

@@ -43,7 +43,7 @@ public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
     {
         if (isRelative)
             EntityRef.AddToMana(value);
-        if(!isRelative)
+        if (!isRelative)
             EntityRef.SetMana(value);
         onManaChange?.Invoke();
     }
@@ -51,6 +51,6 @@ public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
     internal void SetMaxMana(float value)
     {
         EntityRef.SetMaxMana(value);
-        
+
     }
 }

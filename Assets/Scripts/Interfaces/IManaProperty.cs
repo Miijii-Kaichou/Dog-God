@@ -1,7 +1,7 @@
 ﻿public interface IManaProperty
 {
     public float ManaValue { get; set; }
-    public float MaxManaValue{ get; set; }
+    public float MaxManaValue { get; set; }
 
     public void AddToMana(float value)
     {

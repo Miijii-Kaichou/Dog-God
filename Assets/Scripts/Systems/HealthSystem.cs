@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class HealthSystem : GameSystem
 {
@@ -28,9 +27,9 @@ public class HealthSystem : GameSystem
 
     internal void SetHealth(string id, float value, bool isRelative = false)
     {
-        if(isRelative)
+        if (isRelative)
             entities[id].AddHealth(value);
-        if(!isRelative)
+        if (!isRelative)
             entities[id].SetHealth(value);
         onHealthChange?.Invoke(id);
     }

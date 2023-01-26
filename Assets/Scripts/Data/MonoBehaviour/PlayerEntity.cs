@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using Cakewalk.IoC;
-using UnityEditor;
 
 public class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILevelProperty, IEntityStatus
 {
@@ -46,14 +44,14 @@ public class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILeve
     }
 
     public float ExperienceValue
-    { 
+    {
         get { return XPValue; }
         set { XPValue = value; }
     }
     public StanceState EntityStanceState { get; set; }
     public OffensiveState EntityOffsensiveState { get; set; }
     public DefensiveState EntityDefensiveState { get; set; }
-   
+
 
     // Dependencies
     private AttackDefenseSystem _attackDefenseSystem;

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AttackDefenseSystem : GameSystem, IRegisterPlayer<PlayerEntity>
@@ -115,6 +114,6 @@ public class AttackDefenseSystem : GameSystem, IRegisterPlayer<PlayerEntity>
     private void ExecuteDefense()
     {
         if (rightClickHoldFrames < GuardTimeThreshold) ((IEntityStatus)EntityRef).ChangeDefensiveState(DefensiveState.Parry);
-    } 
+    }
     #endregion
 }

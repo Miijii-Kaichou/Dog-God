@@ -1,12 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Threading;
-using System.Collections;
-using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 using UnityEngine.U2D;
 
 #if UNITY_EDITOR
@@ -85,9 +83,6 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("Sprite Atlas")]
     SpriteAtlas spriteAtlas;
 
-    [SerializeField]
-    BootStrapper bootStrapper;
-
     public static SpriteAtlas SpriteAtlas
     {
         get { return Instance.spriteAtlas; }
@@ -97,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         public static T GetSystem<T>() where T : GameSystem => Instance.GetGameSystem<T>();
         public static SystemStatus GetSystemStatus(GameSystem system) => Instance.GetSystemStatus(system.SystemName);
-        public static SystemInfo[] GetSystemInfo() =>Instance.GetAllSystemInfo();
+        public static SystemInfo[] GetSystemInfo() => Instance.GetAllSystemInfo();
         public static SystemInfo[] GetSystemInfo(Status _status) => Instance.GetAllSystemInfo(_status);
     }
 
@@ -179,7 +174,7 @@ public class GameManager : MonoBehaviour
 
         if (!dirInfo.Exists)
             CreateProfileDirectory();
-        
+
         StartUpAllSystems();
     }
 
@@ -200,7 +195,7 @@ public class GameManager : MonoBehaviour
         systemInfoList = systemInfoList.OrderBy(sysInfo => sysInfo.systemName).ToList();
     }
 
-    
+
     void StartUpAllSystems()
     {
         //We're going to turn on all systems defined in the game.
@@ -346,7 +341,7 @@ public class GameManager : MonoBehaviour
                                       select markedAchievement).ToArray();
 
                 //Change sorting if set to true
-                return (_descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements);
+                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
 
             #endregion
 
@@ -359,7 +354,7 @@ public class GameManager : MonoBehaviour
                                       select markedAchievement).ToArray();
 
                 //Change sorting if set to true
-                return (_descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements);
+                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
             #endregion
 
             #region Sort by Total Days
@@ -371,7 +366,7 @@ public class GameManager : MonoBehaviour
                                       select markedAchievement).ToArray();
 
                 //Change sorting if set to true
-                return (_descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements);
+                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
             #endregion
 
             #region Sort by Total Hours
@@ -383,7 +378,7 @@ public class GameManager : MonoBehaviour
                                       select markedAchievement).ToArray();
 
                 //Change sorting if set to true
-                return (_descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements);
+                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
             #endregion
 
             #region Sort by Total Minutes
@@ -395,7 +390,7 @@ public class GameManager : MonoBehaviour
                                       select markedAchievement).ToArray();
 
                 //Change sorting if set to true
-                return (_descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements);
+                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
             #endregion
 
             #region Sort by Total Seconds
@@ -407,7 +402,7 @@ public class GameManager : MonoBehaviour
                                       select markedAchievement).ToArray();
 
                 //Change sorting if set to true
-                return (_descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements);
+                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
             #endregion
 
             #region Sort by Rarity
@@ -419,11 +414,11 @@ public class GameManager : MonoBehaviour
                                       select markedAchievement).ToArray();
 
                 //Change sorting if set to true
-                return (_descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements);
+                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
             #endregion
 
             #region Default
-            default: return null; 
+            default: return null;
                 #endregion
 
         }

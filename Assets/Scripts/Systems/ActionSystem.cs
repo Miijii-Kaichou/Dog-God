@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ActionSystem : GameSystem
@@ -86,7 +85,7 @@ public class ActionSystem : GameSystem
     }
 
     private void OpenActionView()
-    {     
+    {
         var difference = _selectedPrimarySlot - _previousSelectedPrimary;
         PlayerHUD.UpdateTargetAngle(difference);
     }

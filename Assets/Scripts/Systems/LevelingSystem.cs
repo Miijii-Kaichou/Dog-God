@@ -1,5 +1,4 @@
-﻿using Cakewalk.IoC;
-using System;
+﻿using System;
 using UnityEngine;
 
 public class LevelingSystem : GameSystem, IRegisterPlayer<ILevelProperty>
@@ -55,12 +54,12 @@ public class LevelingSystem : GameSystem, IRegisterPlayer<ILevelProperty>
     void UpdateLevel()
     {
         experienceTilNextLevel = Mathf.RoundToInt(experienceTilNextLevel / Mathf.Log(Two));
-        
+
     }
 
     void ListenForLevelUp()
     {
-        if(currentLevel != previousLevel)
+        if (currentLevel != previousLevel)
         {
             previousLevel = currentLevel;
             UpdateLevel();
@@ -77,6 +76,6 @@ public class LevelingSystem : GameSystem, IRegisterPlayer<ILevelProperty>
 
     void UpdateExperienceGainValue()
     {
-        experienceGainValue = DefaultMaxExperience / ((DefaultMaxExperience*10) * currentLevel);
+        experienceGainValue = DefaultMaxExperience / (DefaultMaxExperience * 10 * currentLevel);
     }
 }
