@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+Assets/Fonts/COURAsset.asset
+
+Assets/TextMesh Pro/Fonts/LiberationSans.asset

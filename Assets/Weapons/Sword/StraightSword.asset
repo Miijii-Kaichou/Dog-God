@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de8b1b1f457f8842a1612c35c0724b7, type: 3}
+  m_Name: StraightSword
+  m_EditorClassIdentifier: 
+  m_name: Straight Sword
+  caption: Just your normal everyday straight sword.
+  stats: {fileID: 0}
+  requirements:
+  - stat: 0
+    statVal: 10
+  - stat: 2
+    statVal: 5
+  - stat: 8
+    statVal: 5
+  weaponImage: {fileID: 2800000, guid: eb143680cfe25a6478ed313be466793c, type: 3}
+  weaponDamageType: 0
