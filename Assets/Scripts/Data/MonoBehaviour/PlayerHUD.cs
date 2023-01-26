@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
-
     [Header("Player Health UI")]
     [SerializeField] private Slider HPSlider;
     [SerializeField] private TextMeshProUGUI HPMetrics;
@@ -167,6 +166,11 @@ public class PlayerHUD : MonoBehaviour
     internal void ResetActionUi()
     {
         targetAngle = 0;
+    }
+
+    public void ActivatePrimaryAction()
+    {
+
     }
     #endregion
 }
