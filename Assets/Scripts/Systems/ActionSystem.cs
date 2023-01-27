@@ -4,6 +4,7 @@ public class ActionSystem : GameSystem
 {
     private bool _isPerformingAction = false;
     public bool IsPerformingAction => _isPerformingAction;
+    public bool IsCategorySelected => _selectedPrimarySlot != -1;
 
     private bool _slotUsed = false;
     private int _previousSelectedPrimary = 0;

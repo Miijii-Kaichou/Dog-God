@@ -1,9 +1,10 @@
-using DG.Tweening;
 using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+using static SharedData.Constants;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -23,10 +24,13 @@ public class PlayerHUD : MonoBehaviour
     [Header("Player Action Points")]
     [SerializeField] private TextMeshProUGUI ActionPointsInfo;
 
-    [Header("Player Action System UI")]
-    [SerializeField] private ActionCategoryUi PlayerActionSystemUI;
+    [Header("Player Action System UI (Primary Selection)")]
+    [SerializeField] private ActionCategoryUi PlayerActionSystemCategoryUI;
     [SerializeField] private Color actionInactiveStateColor;
     [SerializeField] private Color actionActiveStateColor;
+
+    [Header("Player Action System UI (Secondary Selection")]
+    [SerializeField] private ActionItemUI PlayerActionSystemItemUI;
 
     // Dependencies
     private HealthSystem _healthSystem;
@@ -45,7 +49,6 @@ public class PlayerHUD : MonoBehaviour
     private const float MaxDegrees = 360f;
     private const float MaxTime = 0.01f;
     private const float RotationUnit = 90f;
-    private const string PlayerEntityTag = "PlayerEntity";
 
     private void Start()
     {
@@ -67,6 +70,7 @@ public class PlayerHUD : MonoBehaviour
 
         StartCoroutine(ActionColorFade());
         StartCoroutine(ActionViewRotation());
+        StartCoroutine(ItemAlphaFade());
     }
 
     #region Coroutines
@@ -103,13 +107,25 @@ public class PlayerHUD : MonoBehaviour
         {
             if (_actionSystem.IsPerformingAction)
             {
-                PlayerActionSystemUI.DOColor(actionActiveStateColor, SmoothTime);
+                PlayerActionSystemCategoryUI.DOColor(actionActiveStateColor, SmoothTime);
+                return;
             }
 
-            if (_actionSystem.IsPerformingAction == false)
+            PlayerActionSystemCategoryUI.DOColor(actionInactiveStateColor, SmoothTime);
+        });
+    }
+
+    IEnumerator ItemAlphaFade()
+    {
+        yield return DelayedCycle(() =>
+        {
+            if (_actionSystem.IsCategorySelected)
             {
-                PlayerActionSystemUI.DOColor(actionInactiveStateColor, SmoothTime);
+                PlayerActionSystemItemUI.Reveal();
+                return;
             }
+
+            PlayerActionSystemItemUI.Hide();
         });
     }
 
@@ -117,14 +133,14 @@ public class PlayerHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            float zEulerAngle = Mathf.SmoothDamp(PlayerActionSystemUI.transform.localEulerAngles.z, targetAngle, ref zEulerAngleVelocity, SmoothTime);
-            PlayerActionSystemUI.transform.localEulerAngles = new Vector3(0, 0, zEulerAngle);
+            float zEulerAngle = Mathf.SmoothDamp(PlayerActionSystemCategoryUI.transform.localEulerAngles.z, targetAngle, ref zEulerAngleVelocity, SmoothTime);
+            PlayerActionSystemCategoryUI.transform.localEulerAngles = new Vector3(Zero, Zero, zEulerAngle);
         });
     }
 
     IEnumerator DelayedCycle(Action function, float timeInSecs = MaxTime)
     {
-        var elapsedTime = 0f;
+        float elapsedTime = Zero;
 
         while (true)
         {
@@ -132,10 +148,10 @@ public class PlayerHUD : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float timeTilUpdate = timeInSecs - elapsedTime;
 
-            if (timeTilUpdate <= 0)
+            if (timeTilUpdate <= Zero)
             {
                 yield return null;
-                elapsedTime = 0;
+                elapsedTime = Zero;
                 continue;
             }
         }
@@ -185,13 +201,13 @@ public class PlayerHUD : MonoBehaviour
 
     public void UpdateSlotIndex(int index)
     {
-        PlayerActionSystemUI.EnlargeSlot(index);
+        PlayerActionSystemCategoryUI.EnlargeSlot(index);
     }
 
     internal void ResetActionUi()
     {
-        targetAngle = 0;
-        PlayerActionSystemUI.NormalizeAllSlots();
+        targetAngle = Zero;
+        PlayerActionSystemCategoryUI.NormalizeAllSlots();
     }
     #endregion
 }

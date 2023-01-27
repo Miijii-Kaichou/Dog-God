@@ -1,27 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor.EditorTools;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConstantsManager : MonoBehaviour
 {
-    [SerializeField] Constant[] test = new Constant[4];
+    [SerializeField] Constant[] ConstantsList = new Constant[1];
 
-}
-[Serializable]
-public sealed class Constant
-{
-    public string Key;
-    public string Value;
-    public ConstantType Type;
-}
-public enum ConstantType
-{
-    INT,
-    FLOAT,
-    DOUBLE,
-    STRING
+    public void AlterConstant(int index, string name, string value, ConstantType type)
+    {
+        ConstantsList[index].Key = name;
+        ConstantsList[index].Value = value;
+        ConstantsList[index].Type = type;
+    }
 }
 
