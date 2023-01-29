@@ -1,5 +1,7 @@
 ﻿using UnityEngine.UI;
 
+#nullable enable
+
 public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
 {
     /*So, the Mana System takes in all the things that has
@@ -11,20 +13,20 @@ public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
 
     public ManaSystemOperation? onManaChange;
 
-    public IManaProperty EntityRef { get; set; }
+    public IManaProperty? EntityRef { get; set; }
 
 
     internal void SetMana(float value, bool isRelative = false)
     {
         if (isRelative)
-            EntityRef.AddToMana(value);
+            EntityRef?.AddToMana(value);
         if (!isRelative)
-            EntityRef.SetMana(value);
+            EntityRef?.SetMana(value);
         onManaChange?.Invoke();
     }
 
     internal void SetMaxMana(float value)
     {
-        EntityRef.SetMaxMana(value);
+        EntityRef?.SetMaxMana(value);
     }
 }

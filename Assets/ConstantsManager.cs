@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConstantsManager : MonoBehaviour

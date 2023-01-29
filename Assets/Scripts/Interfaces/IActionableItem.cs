@@ -1,5 +1,6 @@
 ﻿public delegate void ItemUseCallaback();
 
+#nullable enable
 public interface IActionableItem
 {
     public string? itemName { get; set; }

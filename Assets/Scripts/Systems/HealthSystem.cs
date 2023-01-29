@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+#nullable enable
 public class HealthSystem : GameSystem
 {
     /*So, the Health System takes in all the things that has

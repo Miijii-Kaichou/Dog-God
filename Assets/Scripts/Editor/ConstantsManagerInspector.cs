@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using System;
 using System.Text;
 using System.IO;
-using System.Threading.Tasks;
-using Codice.CM.Common;
 
 [CustomEditor(typeof(ConstantsManager))]
 public class ConstantsManagerInspector : Editor
@@ -17,7 +13,6 @@ public class ConstantsManagerInspector : Editor
     private Vector2 scrollPosition;
     private bool generateOnConstantListChangeAllowed;
     private bool promptOnConstantRemovalAllowed = true;
-    private bool isInView = true;
     private bool changeLastEntryName;
 
     private bool CacheExists => File.Exists(Application.dataPath + ConstantCacheFile);

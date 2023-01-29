@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
+#nullable enable
+
 public class LevelingSystem : GameSystem, IRegisterPlayer<ILevelProperty>
 {
     /*So, the Leveling System takes in all the things that has
@@ -32,10 +34,10 @@ public class LevelingSystem : GameSystem, IRegisterPlayer<ILevelProperty>
     const float DefaultMaxExperience = 42;
     private const int Two = 2;
 
-    public ILevelProperty EntityRef { get; set; }
+    public ILevelProperty? EntityRef { get; set; }
     public Action? OnLevelUp { get; internal set; }
 
-    public PlayerHUD PlayerHUD;
+    public PlayerHUD? PlayerHUD;
     private float targetExperience;
     private float experienceVelocity;
 
