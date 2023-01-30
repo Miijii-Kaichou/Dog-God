@@ -17,7 +17,7 @@ public class ConstantsManagerInspector : Editor
 
     private bool CacheExists => File.Exists(Application.dataPath + ConstantCacheFile);
 
-    private const int MaxScrollHeight = 250;
+    private const int MaxScrollHeight = 640;
     private const float MaxWidth = 100;
     private const string ClassDefinition = "public static class Constants\n";
     private const string StringPropertyName = "Key";

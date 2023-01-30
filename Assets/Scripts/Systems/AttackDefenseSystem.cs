@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using static SharedData.Constants;
+
 public class AttackDefenseSystem : GameSystem, IRegisterPlayer<PlayerEntity>
 {
     public bool AreInputsReversed
@@ -26,9 +28,11 @@ public class AttackDefenseSystem : GameSystem, IRegisterPlayer<PlayerEntity>
     private const float GuardTimeThreshold = 0.1f;
     private const float ChargeAttackTimeThreshold = 0.5f;
 
+    HealthSystem healthSystem;
+
     protected override void OnInit()
     {
-
+        healthSystem ??= GameManager.Command.GetSystem<HealthSystem>();
     }
 
     protected override void Main()
@@ -71,6 +75,8 @@ public class AttackDefenseSystem : GameSystem, IRegisterPlayer<PlayerEntity>
     private void ExecuteAttack()
     {
         EntityRef.AddExperience();
+
+        healthSystem.SetHealth(BossEntityTag, -952, isRelative: true);
 
         if (leftClickHoldFrames > ChargeAttackTimeThreshold)
         {

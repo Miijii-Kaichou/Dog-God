@@ -556,7 +556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DOG GOD
+  m_text: Inugami Koko
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2204,8 +2204,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.5498047, y: 0}
-  m_SizeDelta: {x: 1.0999, y: 0}
+  m_AnchoredPosition: {x: -0.8540039, y: 0}
+  m_SizeDelta: {x: 0.4906, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953884270
 MonoBehaviour:
@@ -3470,6 +3470,12 @@ MonoBehaviour:
   - Key: BossEntityTag
     Value: BossEntity
     Type: 3
+  - Key: SmoothTime
+    Value: 0.1
+    Type: 1
+  - Key: MaxTime
+    Value: 0.01
+    Type: 1
 --- !u!1 &1293408400
 GameObject:
   m_ObjectHideFlags: 0
@@ -3504,8 +3510,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.86816406, y: 0}
-  m_SizeDelta: {x: -0.463, y: 0}
+  m_AnchoredPosition: {x: -0.31829834, y: 0}
+  m_SizeDelta: {x: 0.63684, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1298411279
 GameObject:
@@ -3517,6 +3523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1298411280}
   - component: {fileID: 1298411281}
+  - component: {fileID: 1298411282}
   m_Layer: 5
   m_Name: BossHP
   m_TagString: Untagged
@@ -3600,6 +3607,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1298411282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298411279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36667057f4708942ac34f3a36db0dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPSlider: {fileID: 1298411281}
+  HPMetrics: {fileID: 1384030477}
 --- !u!1 &1350309315
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,4 +8,6 @@ namespace SharedData
 	public const float MaxBossHealth = 1000000f;
 	public const string PlayerEntityTag = "PlayerEntity";
 	public const string BossEntityTag = "BossEntity";
+	public const float SmoothTime = 0.1f;
+	public const float MaxTime = 0.01f;
 }}

@@ -17,12 +17,19 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
         set { MaxHPValue = value; }
     }
 
+    private HealthSystem _healthSystem;
+
     public StanceState EntityStanceState { get; set; }
     public OffensiveState EntityOffsensiveState { get; set; }
     public DefensiveState EntityDefensiveState { get; set; }
 
     void Start()
     {
-        ((IHealthProperty)this).SetMaxHealth(100000);
+        _healthSystem ??= GameManager.Command.GetSystem<HealthSystem>();
+
+        _healthSystem.AddNewEntry(nameof(BossEntity), this);
+
+        _healthSystem.SetHealth(nameof(BossEntity), 1000000);
+        _healthSystem.SetMaxHealth(nameof(BossEntity), 100000);
     }
 }
