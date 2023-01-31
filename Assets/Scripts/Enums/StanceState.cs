@@ -2,5 +2,6 @@
 {
     Idle,
     Offensive,
-    Defensive
+    Defensive,
+    Stunned
 }

@@ -1,7 +1,7 @@
 ﻿public interface IEntityStatus
 {
     public StanceState EntityStanceState { get; set; }
-    public OffensiveState EntityOffsensiveState { get; set; }
+    public OffensiveState EntityOffensiveState { get; set; }
     public DefensiveState EntityDefensiveState { get; set; }
 
     public void ChangeStanceState(StanceState newState)
@@ -11,8 +11,8 @@
     }
     public void ChangeOffensiveState(OffensiveState newState)
     {
-        if (EntityOffsensiveState == newState) return;
-        EntityOffsensiveState = newState;
+        if (EntityOffensiveState == newState) return;
+        EntityOffensiveState = newState;
     }
     public void ChangeDefensiveState(DefensiveState newState)
     {

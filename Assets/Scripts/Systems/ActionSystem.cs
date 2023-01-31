@@ -36,7 +36,7 @@ public class ActionSystem : GameSystem
 
     protected override void OnInit()
     { 
-        RuntimeActionSystem ??= GameManager.Command.GetSystem<RuntimeActionSystem>();
+        RuntimeActionSystem ??= GameManager.GetSystem<RuntimeActionSystem>();
 
     }
 

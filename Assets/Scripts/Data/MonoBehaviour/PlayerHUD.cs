@@ -45,17 +45,15 @@ public class PlayerHUD : MonoBehaviour
     private float smoothHPVelocity;
     private float smoothMPVelocity;
     private float smoothEXPVelocity;
-    private const float SmoothTime = 0.1f;
     private const float MaxDegrees = 360f;
-    private const float MaxTime = 0.01f;
     private const float RotationUnit = 90f;
 
     private void Start()
     {
-        _healthSystem = GameManager.Command.GetSystem<HealthSystem>();
-        _manaSystem = GameManager.Command.GetSystem<ManaSystem>();
-        _levelingSystem = GameManager.Command.GetSystem<LevelingSystem>();
-        _actionSystem = GameManager.Command.GetSystem<ActionSystem>();
+        _healthSystem = GameManager.GetSystem<HealthSystem>();
+        _manaSystem = GameManager.GetSystem<ManaSystem>();
+        _levelingSystem = GameManager.GetSystem<LevelingSystem>();
+        _actionSystem = GameManager.GetSystem<ActionSystem>();
 
         _levelingSystem.onLevelChange = () =>
         {
@@ -152,7 +150,6 @@ public class PlayerHUD : MonoBehaviour
             {
                 yield return null;
                 elapsedTime = Zero;
-                continue;
             }
         }
     }
@@ -171,17 +168,17 @@ public class PlayerHUD : MonoBehaviour
     }
     void UpdateManaMetrics()
     {
-        if (_manaSystem.EntityRef == null) return;
+        if (_manaSystem.EntityReference == null) return;
 
-        MPSlider.maxValue = _manaSystem.EntityRef.MaxManaValue;
+        MPSlider.maxValue = _manaSystem.EntityReference.MaxManaValue;
         MPSlider.minValue = 0;
-        MPSlider.value = Mathf.SmoothDamp(MPSlider.value, _manaSystem.EntityRef.ManaValue, ref smoothMPVelocity, SmoothTime);
+        MPSlider.value = Mathf.SmoothDamp(MPSlider.value, _manaSystem.EntityReference.ManaValue, ref smoothMPVelocity, SmoothTime);
 
-        MPMetrics.text = string.Format(MetricFormat, _manaSystem.EntityRef.ManaValue, _manaSystem.EntityRef.ManaValue);
+        MPMetrics.text = string.Format(MetricFormat, _manaSystem.EntityReference.ManaValue, _manaSystem.EntityReference.ManaValue);
     }
     void UpdateExperienceMetrics()
     {
-        if (_levelingSystem.EntityRef == null) return;
+        if (_levelingSystem.EntityReference == null) return;
 
         EXPSlider.maxValue = 1;
         EXPSlider.minValue = 0;

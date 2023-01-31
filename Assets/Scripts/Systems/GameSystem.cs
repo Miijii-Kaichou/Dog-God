@@ -10,7 +10,7 @@ public class SystemException : Exception
 }
 
 [System.Serializable]
-public abstract class GameSystem : MonoBehaviour
+public abstract class GameSystem : Singleton<GameSystem>
 {
     /*Game System can be any system that handles a defined part of the game;
      the buy of items, the battle system, the resurrection, the leveling system and enchancting system, etc.
@@ -40,7 +40,7 @@ public abstract class GameSystem : MonoBehaviour
     void Init()
     {
         if (isInitialized) return;
-        status = GameManager.Command.GetSystemStatus(this);
+        status = GameManager.GetSystemStatus(this);
         isInitialized = status != null;
         OnInit();
     }

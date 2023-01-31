@@ -2,7 +2,7 @@
 
 #nullable enable
 
-public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
+public class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
 {
     /*So, the Mana System takes in all the things that has
     HP. All of this information will be displayed in game, keeping track
@@ -13,20 +13,20 @@ public class ManaSystem : GameSystem, IRegisterPlayer<IManaProperty>
 
     public ManaSystemOperation? onManaChange;
 
-    public IManaProperty? EntityRef { get; set; }
+    public IManaProperty? EntityReference { get; set; }
 
 
     internal void SetMana(float value, bool isRelative = false)
     {
         if (isRelative)
-            EntityRef?.AddToMana(value);
+            EntityReference?.AddToMana(value);
         if (!isRelative)
-            EntityRef?.SetMana(value);
+            EntityReference?.SetMana(value);
         onManaChange?.Invoke();
     }
 
     internal void SetMaxMana(float value)
     {
-        EntityRef?.SetMaxMana(value);
+        EntityReference?.SetMaxMana(value);
     }
 }

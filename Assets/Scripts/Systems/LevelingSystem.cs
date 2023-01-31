@@ -3,7 +3,7 @@ using UnityEngine;
 
 #nullable enable
 
-public class LevelingSystem : GameSystem, IRegisterPlayer<ILevelProperty>
+public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
 {
     /*So, the Leveling System takes in all the things that has
     LV. All of this information will be displayed in game, keeping track
@@ -34,7 +34,7 @@ public class LevelingSystem : GameSystem, IRegisterPlayer<ILevelProperty>
     const float DefaultMaxExperience = 42;
     private const int Two = 2;
 
-    public ILevelProperty? EntityRef { get; set; }
+    public ILevelProperty? EntityReference { get; set; }
     public Action? OnLevelUp { get; internal set; }
 
     public PlayerHUD? PlayerHUD;

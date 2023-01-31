@@ -7,8 +7,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 
-
-
 public class GameManager : MonoBehaviour
 {
     private static GameManager Instance;
@@ -21,13 +19,12 @@ public class GameManager : MonoBehaviour
         get { return Instance.spriteAtlas; }
     }
 
-    public struct Command
-    {
-        public static T GetSystem<T>() where T : GameSystem => Instance.GetGameSystem<T>();
-        public static SystemStatus GetSystemStatus(GameSystem system) => Instance.GetSystemStatus(system.SystemName);
-        public static SystemInfo[] GetSystemInfo() => Instance.GetAllSystemInfo();
-        public static SystemInfo[] GetSystemInfo(Status _status) => Instance.GetAllSystemInfo(_status);
-    }
+
+    public static T GetSystem<T>() where T : GameSystem => Instance.GetGameSystem<T>();
+    public static SystemStatus GetSystemStatus(GameSystem system) => Instance.GetSystemStatus(system.SystemName);
+    public static SystemInfo[] GetSystemInfo() => Instance.GetAllSystemInfo();
+    public static SystemInfo[] GetSystemInfo(Status _status) => Instance.GetAllSystemInfo(_status);
+
 
     public struct Achievement
     {
@@ -138,24 +135,24 @@ public class GameManager : MonoBehaviour
     void StartUpAllSystems()
     {
         //We're going to turn on all systems defined in the game.
-        //Command.GetSystem<CurrencySystem>().Run();
-        Command.GetSystem<DeitySystem>().Run();
-        Command.GetSystem<HealthSystem>().Run();
-        Command.GetSystem<ManaSystem>().Run();
-        Command.GetSystem<LevelingSystem>().Run();
-        Command.GetSystem<ResurrectionSystem>().Run();
-        Command.GetSystem<SkillSystem>().Run();
-        Command.GetSystem<ItemSystem>().Run();
-        Command.GetSystem<WeaponSystem>().Run();
-        Command.GetSystem<HeavensPlazaSystem>().Run();
-        Command.GetSystem<ActionSystem>().Run();
-        Command.GetSystem<AttackDefenseSystem>().Run();
-        Command.GetSystem<RuntimeActionSystem>().Run();
+        //GetSystem<CurrencySystem>().Run();
+        GetSystem<DeitySystem>().Run();
+        GetSystem<HealthSystem>().Run();
+        GetSystem<ManaSystem>().Run();
+        GetSystem<LevelingSystem>().Run();
+        GetSystem<ResurrectionSystem>().Run();
+        GetSystem<SkillSystem>().Run();
+        GetSystem<ItemSystem>().Run();
+        GetSystem<WeaponSystem>().Run();
+        GetSystem<HeavensPlazaSystem>().Run();
+        GetSystem<ActionSystem>().Run();
+        GetSystem<AttackDefenseSystem>().Run();
+        GetSystem<RuntimeActionSystem>().Run();
     }
 
     internal T WithSystem<T>() where T : GameSystem
     {
-        return Command.GetSystem<T>();
+        return GetSystem<T>();
     }
 
     public void Goto(string _scene)

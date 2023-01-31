@@ -1,7 +1,12 @@
-﻿public interface IHealthProperty
+﻿using System;
+using UnityEngine;
+
+public interface IHealthProperty
 {
     public float HealthValue { get; set; }
     public float MaxHealthValue { get; set; }
+    public Action OnHealthDown {get;set;}
+
     const float DefaultMaxHealth = 100;
 
     public void AddHealth(float value)

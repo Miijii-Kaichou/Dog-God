@@ -31,10 +31,10 @@ public class RuntimeActionSystem : GameSystem
     void GetSystems()
     {
         Debug.Log("Getting systems...");
-        SkillSystem = GameManager.Command.GetSystem<SkillSystem>();
-        WeaponSystem = GameManager.Command.GetSystem<WeaponSystem>();
-        DeitySystem = GameManager.Command.GetSystem<DeitySystem>();
-        ItemSystem = GameManager.Command.GetSystem<ItemSystem>();
+        SkillSystem = GameManager.GetSystem<SkillSystem>();
+        WeaponSystem = GameManager.GetSystem<WeaponSystem>();
+        DeitySystem = GameManager.GetSystem<DeitySystem>();
+        ItemSystem = GameManager.GetSystem<ItemSystem>();
     }
 
     void InitalizeCategories()

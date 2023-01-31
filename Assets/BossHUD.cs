@@ -13,20 +13,19 @@ public class BossHUD : MonoBehaviour
     [SerializeField] private Slider HPSlider;
     [SerializeField] private TextMeshProUGUI HPMetrics;
 
-    private HealthSystem _healthSystem;
-    
     private float smoothHPVelocity;
-    
+
     private string MetricFormat = "{0}/{1}";
-    
+
     private const float SmoothTime = 0.1f;
     private const float MaxTime = 0.01f;
+
+    private HealthSystem _healthSystem;
 
     // Start is called before the first frame update
     void Start()
     {
-        _healthSystem = GameManager.Command.GetSystem<HealthSystem>();
-
+        _healthSystem = GameManager.GetSystem<HealthSystem>();
         StartCoroutine(HPSmoothDampCycle());
     }
 
@@ -34,11 +33,7 @@ public class BossHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            if (_healthSystem == null)
-            {
-                Debug.Log("So help me child");
-                return;
-            }
+            if (_healthSystem == null) return;
             UpdateHPMetrics(BossEntityTag);
         });
     }
@@ -57,7 +52,6 @@ public class BossHUD : MonoBehaviour
             {
                 yield return null;
                 elapsedTime = Zero;
-                continue;
             }
         }
     }

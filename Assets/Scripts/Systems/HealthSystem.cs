@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable enable
 public class HealthSystem : GameSystem
@@ -34,7 +35,7 @@ public class HealthSystem : GameSystem
             entities[id].SetHealth(value);
         onHealthChange?.Invoke(id);
     }
-
+     
     internal void SetMaxHealth(string id, float value)
     {
         entities[id].SetMaxHealth(value);
