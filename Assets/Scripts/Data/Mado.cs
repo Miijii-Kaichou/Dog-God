@@ -1,9 +1,21 @@
-﻿using static SharedData.Constants;
+﻿using System;
+using static SharedData.Constants;
+
+#nullable enable
 
 internal class Mado : IActionableItem
 {
+    public virtual string MadoName { get; }
+    public virtual ItemUseCallaback OnActionUse { get; }
+    public virtual Type? StaticItemType { get; }
+    
     public int SlotNumber { get; set; }
 
-    public ItemUseCallaback OnActionUse { get; }
+
+    public void UseAction()
+    {
+
+        OnActionUse?.Invoke();
+    }
 }
 

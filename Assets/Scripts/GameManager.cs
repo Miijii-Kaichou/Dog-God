@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
             Debug.Log(typeof(T) + "isn't an existing system. Why not creating one that derives from 'GameSystem'?");
             return default;
         }
-        return (T)Convert.ChangeType(data.Single(), typeof(T));
+        return (T)Convert.ChangeType(data.Single().system, typeof(T));
     }
 
     /// <summary>

@@ -11,6 +11,8 @@ public sealed class ITPurifiedAdulite : Item, IRegisterEntity<PlayerEntity>, IHe
 {
     public override string? ItemName => "Purified Adulite";
 
+    public override System.Type? StaticItemType => typeof(ITPurifiedAdulite);
+
     // We use the SetHealthBonus to know the value we want to work with
     public float SetHealthBonus => Random.Range(8, 12);
     public BonusModificationType HealthModificationType => BonusModificationType.PercentageOf;
@@ -30,7 +32,6 @@ public sealed class ITPurifiedAdulite : Item, IRegisterEntity<PlayerEntity>, IHe
 
     public override ItemUseCallaback? OnActionUse => OnUse;
 
-
     HealthSystem? _healthSystem;
     ManaSystem? _manaSystem;
     LevelingSystem? _levelSystem;
@@ -47,6 +48,11 @@ public sealed class ITPurifiedAdulite : Item, IRegisterEntity<PlayerEntity>, IHe
 
     public void OnUse()
     {
+        if (EntityReference == null ||
+            _healthSystem == null ||
+            _manaSystem == null ||
+            _levelSystem == null) return;
+
         // Restore all HP and MP on Use
         // Then increase the player's level up 3
         _healthSystem.RestoreAllHealth(nameof(PlayerEntity));

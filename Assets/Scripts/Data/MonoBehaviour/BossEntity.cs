@@ -50,6 +50,7 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
 
     private Alarm alarm = new(DefaultAlarmSize);
     private AttackDefenseSystem _attackDefenseSystem;
+    private int cap;
 
     void Start()
     {
@@ -76,7 +77,6 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
         alarm.SetFor(Random.Range(1, 3), Zero, false, () =>
         {
             if (EntityStanceState == StanceState.Stunned) return;
-            Debug.Log("Get Ready!!!");
             StartCoroutine(DoNormalAttack());
             alarm[Zero].SetDuration = Random.Range(1, 3);
             alarm[Zero].CurrentTime = Zero;
@@ -102,10 +102,6 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
             EntityOffensiveState = OffensiveState.Attack;
             motionPercentage = alarm[One].CurrentTime / alarm[One].SetDuration;
             parryPercentageRange = (0.49f, 0.91f);
-            if(WasParryTimed)
-            {
-                Debug.Log("Parry Now!!!");
-            }
             yield return new WaitForSeconds(MaxTime);
         }
     }

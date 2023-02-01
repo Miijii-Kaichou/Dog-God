@@ -3502,6 +3502,18 @@ MonoBehaviour:
   - Key: MinutesInSeconds
     Value: 60
     Type: 0
+  - Key: SkillSystemRuntimeID
+    Value: 0
+    Type: 0
+  - Key: ItemSystemRuntimeID
+    Value: 1
+    Type: 0
+  - Key: MadoSystemRuntimeID
+    Value: 2
+    Type: 0
+  - Key: DeitySystemRuntimeID
+    Value: 3
+    Type: 0
 --- !u!1 &1293408400
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,4 +18,8 @@ namespace SharedData
 	public const string BossEntityTag = "BossEntity";
 	public const float Hundred = 100f;
 	public const int MinutesInSeconds = 60;
+	public const int SkillSystemRuntimeID = 0;
+	public const int ItemSystemRuntimeID = 1;
+	public const int MadoSystemRuntimeID = 2;
+	public const int DeitySystemRuntimeID = 3;
 }}

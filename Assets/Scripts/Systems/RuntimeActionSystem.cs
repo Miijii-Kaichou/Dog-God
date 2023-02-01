@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using static SharedData.Constants;
+
 public class RuntimeActionSystem : GameSystem
 {
     // The RuntimeActionSystem has reference to 
@@ -7,9 +9,9 @@ public class RuntimeActionSystem : GameSystem
     // All it does is passes the request made from the KeyboardInputSystem
 
     private SkillSystem SkillSystem;
-    private MadoSystem WeaponSystem;
-    private DeitySystem DeitySystem;
     private ItemSystem ItemSystem;
+    private MadoSystem MadoSystem;
+    private DeitySystem DeitySystem;
 
     IActionCategory[] SystemCategories { get; set; }
 
@@ -26,13 +28,25 @@ public class RuntimeActionSystem : GameSystem
     protected override void OnInit()
     {
         GetSystems();
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
+
+        AddToSlot(ItemSystemRuntimeID, 1, new ITPurifiedAdulite());
     }
 
     void GetSystems()
     {
         Debug.Log("Getting systems...");
         SkillSystem = GameManager.GetSystem<SkillSystem>();
-        WeaponSystem = GameManager.GetSystem<MadoSystem>();
+        MadoSystem = GameManager.GetSystem<MadoSystem>();
         DeitySystem = GameManager.GetSystem<DeitySystem>();
         ItemSystem = GameManager.GetSystem<ItemSystem>();
     }
@@ -43,8 +57,18 @@ public class RuntimeActionSystem : GameSystem
         {
             SkillSystem,
             ItemSystem,
-            WeaponSystem,
+            MadoSystem,
             DeitySystem
         };
+    }
+
+    public void AddToSlot(int runtimeID, int slotNumber, IActionableItem item)
+    {
+        this[runtimeID].AddItemToSlot(slotNumber, item);
+    }
+
+    public void RemoveFromSlot(int runtimeID, int slotNumber, int count)
+    {
+        this[runtimeID].RemoveFromSlot(slotNumber, count);
     }
 }
