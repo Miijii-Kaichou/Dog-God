@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using System;
+using UnityEngine.UI;
 
 #nullable enable
 
@@ -28,5 +29,10 @@ public class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
     internal void SetMaxMana(float value)
     {
         EntityReference?.SetMaxMana(value);
+    }
+
+    internal void RestoreAllMana()
+    {
+        throw new NotImplementedException();
     }
 }

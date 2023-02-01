@@ -2,7 +2,9 @@
 
 public abstract class Weapon : ScriptableObject, IActionableItem
 {
-    public string itemName { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public ItemUseCallaback OnUse => throw new System.NotImplementedException();
+
+    public string ItemName { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     public int Quantity { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     public bool AllowQuantityResize => throw new System.NotImplementedException();
@@ -56,5 +58,10 @@ public abstract class Weapon : ScriptableObject, IActionableItem
 
         //We'll toggle it on or off.
         weaponDamageType ^= WeaponDamageType.LIGHTNING;
+    }
+
+    public void UseItem()
+    {
+        throw new System.NotImplementedException();
     }
 }

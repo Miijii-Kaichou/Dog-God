@@ -1,0 +1,4 @@
+﻿interface IUsable
+{
+    void OnUse();
+}

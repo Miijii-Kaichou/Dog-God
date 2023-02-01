@@ -174,15 +174,13 @@ public class GameManager : MonoBehaviour
     /// <returns>A game system.</returns>
     private T GetGameSystem<T>() where T : GameSystem
     {
-
-        foreach (SystemInfo info in systemInfoList)
+        var data = from sys in systemInfoList where sys.system.GetType() == typeof(T) select sys;
+        if (data.Any() == false)
         {
-            if (info.system.GetType() == typeof(T))
-                return (T)Convert.ChangeType(info.system, typeof(T));
+            Debug.Log(typeof(T) + "isn't an existing system. Why not creating one that derives from 'GameSystem'?");
+            return default;
         }
-
-        Debug.Log(typeof(T) + "isn't an existing system. Why not creating one that derives from 'GameSystem'?");
-        return default;
+        return (T)Convert.ChangeType(data.Single(), typeof(T));
     }
 
     /// <summary>

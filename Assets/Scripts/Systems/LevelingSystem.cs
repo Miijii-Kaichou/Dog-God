@@ -80,4 +80,9 @@ public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
     {
         experienceGainValue = DefaultMaxExperience / (DefaultMaxExperience * 10 * currentLevel);
     }
+
+    internal void IncreaseToLevel(float levelGain)
+    {
+        throw new NotImplementedException();
+    }
 }

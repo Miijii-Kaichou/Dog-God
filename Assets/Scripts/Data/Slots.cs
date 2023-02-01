@@ -30,9 +30,9 @@ public class Slots : MonoBehaviour
         slotLocation = slotImage.gameObject.transform;
     }
 
-    public void AddObjectImage(IActionableItem item)
-    {
-        if (item.itemName == null) return;
-        slotImage.sprite = GameManager.SpriteAtlas.GetSprite($"s_{item.itemName}");
-    }
+    //public void AddObjectImage(IActionableItem item)
+    //{
+    //    if (item.itemName == null) return;
+    //    slotImage.sprite = GameManager.SpriteAtlas.GetSprite($"s_{item.itemName}");
+    //}
 }

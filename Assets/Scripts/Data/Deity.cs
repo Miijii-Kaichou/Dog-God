@@ -23,9 +23,19 @@ public abstract class Deity : MonoBehaviour, IActionableItem
     //public Requirement[] requirements;
 
     //And the Deity's Emblem
-    public string itemName { get; set; }
-    public int Quantity { get; set; } = 0;
-    public bool AllowQuantityResize { get; set; } = false;
-    public int SlotNumber { get; set; } = -1;
+    public ItemUseCallaback OnUse => throw new System.NotImplementedException();
+
+    public string ItemName { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public int Quantity { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    public bool AllowQuantityResize => throw new System.NotImplementedException();
+
+    public int SlotNumber { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     public ItemUseCallaback OnItemUse => throw new System.NotImplementedException();
+
+    public void UseItem()
+    {
+        throw new System.NotImplementedException();
+    }
 }

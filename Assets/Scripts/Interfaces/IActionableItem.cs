@@ -3,14 +3,13 @@
 #nullable enable
 public interface IActionableItem
 {
-    public string? itemName { get; set; }
-    public int Quantity { get; set; }
+    public int Quantity { get; set;}
     public bool AllowQuantityResize { get; }
     public int SlotNumber { get; set; }
     public ItemUseCallaback OnItemUse { get; }
     const int MaxQuantity = 4;
 
-    public void Use()
+    public void UseItem()
     {
         if (Quantity == 0) return;
         Quantity = Quantity > 0 ? Quantity-- : 0;

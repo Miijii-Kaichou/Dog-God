@@ -23,4 +23,9 @@ public interface IHealthProperty
     {
         MaxHealthValue = value;
     }
+
+    void RestoreAllHealth()
+    {
+        HealthValue = MaxHealthValue;
+    }
 }

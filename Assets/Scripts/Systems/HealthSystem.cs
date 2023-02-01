@@ -46,4 +46,9 @@ public class HealthSystem : GameSystem
     {
         return entities.ContainsKey(playerEntityTag);
     }
+
+    internal void RestoreAllHealth(string id)
+    {
+        entities[id].RestoreAllHealth();
+    }
 }

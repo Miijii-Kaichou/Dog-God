@@ -7,5 +7,5 @@
         item.SlotNumber = slotNumber;
         Slots[slotNumber].Quantity++;
     }
-    public void UseActionItem(int slotNumber) => Slots[slotNumber]?.Use();
+    public void UseActionItem(int slotNumber) => Slots[slotNumber]?.UseItem();
 }
