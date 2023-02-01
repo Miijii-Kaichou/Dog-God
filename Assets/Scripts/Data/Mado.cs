@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using static SharedData.Constants;
 
-internal class Mado
+internal class Mado : IActionableItem
 {
+    public int SlotNumber { get; set; }
 
+    public ItemUseCallaback OnActionUse { get; }
 }
 

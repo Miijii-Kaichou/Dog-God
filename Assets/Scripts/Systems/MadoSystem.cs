@@ -1,14 +1,15 @@
 ﻿using static SharedData.Constants;
 
-public class DeitySystem : GameSystem, IActionCategory
+public class MadoSystem : GameSystem, IActionCategory
 {
     public (IActionableItem[] slots, int[] quantities, int[] capacities, bool isExpensible) ActionCategoryDetails { get; set; } = new()
     {
         slots = new IActionableItem[MaxSlotSize],
         quantities = new int[MaxSlotSize],
-        capacities = new int[MaxSlotSize] {One, One, One, One},
+        capacities = new int[MaxSlotSize]{One, One, One, One},
         isExpensible = false
     };
+
     protected override void OnInit()
     {
 

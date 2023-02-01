@@ -1,6 +1,14 @@
-﻿public class SkillSystem : GameSystem, IActionCategory
+﻿using static SharedData.Constants;
+
+public class SkillSystem : GameSystem, IActionCategory
 {
-    public IActionableItem[] Slots { get; set; } = new IActionableItem[IActionCategory.MaxSlots];
+    public (IActionableItem[] slots, int[] quantities, int[] capacities, bool isExpensible) ActionCategoryDetails { get; set; } = new()
+    {
+        slots = new IActionableItem[MaxSlotSize],
+        quantities = new int[MaxSlotSize],
+        capacities = new int[MaxSlotSize] { One, One, One, One },
+        isExpensible = false
+    };
 
     protected override void OnInit()
     {

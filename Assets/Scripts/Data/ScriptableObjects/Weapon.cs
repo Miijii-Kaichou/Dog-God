@@ -11,7 +11,7 @@ public abstract class Weapon : ScriptableObject, IActionableItem
 
     public int SlotNumber { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-    public ItemUseCallaback OnItemUse => throw new System.NotImplementedException();
+    public ItemUseCallaback OnActionUse => throw new System.NotImplementedException();
 
     //The description or lore of the weapon.
     [TextArea(minLines: 1, maxLines: 10)]
@@ -60,7 +60,7 @@ public abstract class Weapon : ScriptableObject, IActionableItem
         weaponDamageType ^= WeaponDamageType.LIGHTNING;
     }
 
-    public void UseItem()
+    public void UseAction()
     {
         throw new System.NotImplementedException();
     }

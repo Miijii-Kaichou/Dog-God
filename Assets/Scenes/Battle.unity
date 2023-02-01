@@ -3464,6 +3464,9 @@ MonoBehaviour:
     Value: 12
     Type: 0
   - Key: MaxQuantity
+    Value: 99
+    Type: 0
+  - Key: MaxSlotSize
     Value: 4
     Type: 0
   - Key: MaxPlayerHealth

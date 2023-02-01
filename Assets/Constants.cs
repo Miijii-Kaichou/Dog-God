@@ -5,7 +5,8 @@ namespace SharedData
 	public const int One = 1;
 	public const int Two = 2;
 	public const int DefaultAlarmSize = 12;
-	public const int MaxQuantity = 4;
+	public const int MaxQuantity = 99;
+	public const int MaxSlotSize = 4;
 	public const float MaxPlayerHealth = 500000f;
 	public const float MaxBossHealth = 1000000f;
 	public const float SmoothTime = 0.1f;

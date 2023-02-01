@@ -1,6 +1,20 @@
-﻿internal class ItemSystem : GameSystem, IActionCategory
+﻿using static SharedData.Constants;
+
+internal class ItemSystem : GameSystem, IActionCategory
 {
-    public IActionableItem[] Slots { get; set; } = new IActionableItem[IActionCategory.MaxSlots];
+    public (IActionableItem[] slots, int[] quantities, int[] capacities, bool isExpensible) ActionCategoryDetails { get; set; } = new()
+    {
+        slots = new IActionableItem[MaxSlotSize],
+        quantities = new int[MaxSlotSize],
+        capacities = new int[MaxSlotSize]
+        {
+            MaxQuantity,
+            MaxQuantity,
+            MaxQuantity,
+            MaxQuantity
+        },
+        isExpensible = true
+    };
 
     protected override void OnInit()
     {

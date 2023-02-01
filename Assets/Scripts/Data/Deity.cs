@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+#nullable enable
+
 public abstract class Deity : MonoBehaviour, IActionableItem
 {
     /*This class will include contain the name of the deity,
@@ -10,32 +12,19 @@ public abstract class Deity : MonoBehaviour, IActionableItem
      once you have signed a contract.*/
 
     //The name of the weapon
-    public string m_name;
-
-    //The description or lore of the weapon.
+    public string? DeityName { get; set; }
+    
+    //The description or lore of the deity
     public string caption;
 
-    //Weapon stats (these states will be added to the players)
+    //Deity stats (these states will be added to the players)
     public EntityStats stats;
     public List<DamageStatVariable> damageProperties;
 
     //Requirements that the player has to have in order to wield it.
     //public Requirement[] requirements;
 
-    //And the Deity's Emblem
-    public ItemUseCallaback OnUse => throw new System.NotImplementedException();
+    public int SlotNumber { get; set; }
 
-    public string ItemName { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public int Quantity { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    public bool AllowQuantityResize => throw new System.NotImplementedException();
-
-    public int SlotNumber { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    public ItemUseCallaback OnItemUse => throw new System.NotImplementedException();
-
-    public void UseItem()
-    {
-        throw new System.NotImplementedException();
-    }
+    public virtual ItemUseCallaback? OnActionUse { get; }
 }

@@ -28,16 +28,25 @@ public sealed class ITPurifiedAdulite : Item, IRegisterEntity<PlayerEntity>, IHe
     // We'll regenerate every seconds
     public float TickDuration => 1;
 
+    public override ItemUseCallaback? OnActionUse => OnUse;
+
+
     HealthSystem? _healthSystem;
     ManaSystem? _manaSystem;
     LevelingSystem? _levelSystem;
 
+    public ITPurifiedAdulite()
+    {
+        GameManager.OnSystemRegistrationProcessCompleted = () =>
+        {
+            _healthSystem = GameManager.GetSystem<HealthSystem>();
+            _manaSystem = GameManager.GetSystem<ManaSystem>();
+            _levelSystem = GameManager.GetSystem<LevelingSystem>();
+        };
+    }
+
     public void OnUse()
     {
-        _healthSystem = GameManager.GetSystem<HealthSystem>();
-        _manaSystem = GameManager.GetSystem<ManaSystem>();
-        _levelSystem = GameManager.GetSystem<LevelingSystem>();
-
         // Restore all HP and MP on Use
         // Then increase the player's level up 3
         _healthSystem.RestoreAllHealth(nameof(PlayerEntity));

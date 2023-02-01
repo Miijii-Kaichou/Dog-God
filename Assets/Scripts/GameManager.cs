@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         get { return Instance.spriteAtlas; }
     }
 
+    public static Action? OnSystemRegistrationProcessCompleted { get; internal set; }
 
     public static T GetSystem<T>() where T : GameSystem => Instance.GetGameSystem<T>();
     public static SystemStatus GetSystemStatus(GameSystem system) => Instance.GetSystemStatus(system.SystemName);
@@ -124,6 +125,7 @@ public class GameManager : MonoBehaviour
             systemInfoList.Add(newSystemInfo);
         }
         systemInfoList = systemInfoList.OrderBy(sysInfo => sysInfo.systemName).ToList();
+        OnSystemRegistrationProcessCompleted?.Invoke();
     }
 
     void ReportStartUp()
@@ -143,7 +145,7 @@ public class GameManager : MonoBehaviour
         GetSystem<ResurrectionSystem>().Run();
         GetSystem<SkillSystem>().Run();
         GetSystem<ItemSystem>().Run();
-        GetSystem<WeaponSystem>().Run();
+        GetSystem<MadoSystem>().Run();
         GetSystem<HeavensPlazaSystem>().Run();
         GetSystem<ActionSystem>().Run();
         GetSystem<AttackDefenseSystem>().Run();

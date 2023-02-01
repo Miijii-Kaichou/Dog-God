@@ -7,7 +7,7 @@ public class RuntimeActionSystem : GameSystem
     // All it does is passes the request made from the KeyboardInputSystem
 
     private SkillSystem SkillSystem;
-    private WeaponSystem WeaponSystem;
+    private MadoSystem WeaponSystem;
     private DeitySystem DeitySystem;
     private ItemSystem ItemSystem;
 
@@ -32,7 +32,7 @@ public class RuntimeActionSystem : GameSystem
     {
         Debug.Log("Getting systems...");
         SkillSystem = GameManager.GetSystem<SkillSystem>();
-        WeaponSystem = GameManager.GetSystem<WeaponSystem>();
+        WeaponSystem = GameManager.GetSystem<MadoSystem>();
         DeitySystem = GameManager.GetSystem<DeitySystem>();
         ItemSystem = GameManager.GetSystem<ItemSystem>();
     }

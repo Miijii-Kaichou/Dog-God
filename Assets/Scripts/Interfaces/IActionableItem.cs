@@ -1,25 +1,14 @@
-﻿public delegate void ItemUseCallaback();
+﻿using static SharedData.Constants;
+public delegate void ItemUseCallaback();
 
 #nullable enable
 public interface IActionableItem
 {
-    public int Quantity { get; set;}
-    public bool AllowQuantityResize { get; }
     public int SlotNumber { get; set; }
-    public ItemUseCallaback OnItemUse { get; }
-    const int MaxQuantity = 4;
+    public abstract ItemUseCallaback? OnActionUse { get; }
 
-    public void UseItem()
+    void UseAction()
     {
-        if (Quantity == 0) return;
-        Quantity = Quantity > 0 ? Quantity-- : 0;
-        OnItemUse?.Invoke();
-    }
-
-    public void IncreaseQuantity()
-    {
-        if (AllowQuantityResize && Quantity != 0) return;
-        if (Quantity >= MaxQuantity) return;
-        Quantity++;
+        OnActionUse?.Invoke();
     }
 }
