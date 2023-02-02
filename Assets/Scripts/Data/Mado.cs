@@ -3,7 +3,7 @@ using static SharedData.Constants;
 
 #nullable enable
 
-internal class Mado : IActionableItem
+public class Mado : IActionableItem
 {
     public virtual string MadoName { get; }
     public virtual ItemUseCallaback OnActionUse { get; }
