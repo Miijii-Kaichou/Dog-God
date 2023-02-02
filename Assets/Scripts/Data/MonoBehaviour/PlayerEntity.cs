@@ -73,6 +73,8 @@ public class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILeve
 
     private void Start()
     {
+        GameManager.ReferencePlayer(this);
+
         _attackDefenseSystem ??= GameManager.GetSystem<AttackDefenseSystem>();
         _playerActionSystem ??= GameManager.GetSystem<ActionSystem>();
         _levelingSystem ??= GameManager.GetSystem<LevelingSystem>();
@@ -88,10 +90,10 @@ public class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILeve
         _healthSystem.AddNewEntry(nameof(PlayerEntity), this);
 
         //Set Max Values
-        _healthSystem.SetHealth(nameof(PlayerEntity), PlayerStartingMaxHealth);
         _healthSystem.SetMaxHealth(nameof(PlayerEntity), PlayerStartingMaxHealth);
-        _manaSystem.SetMana(PlayerStatingMaxMana);
+        _healthSystem.SetHealth(nameof(PlayerEntity), PlayerStartingMaxHealth);
         _manaSystem.SetMaxMana(100);
+        _manaSystem.SetMana(PlayerStatingMaxMana);
 
         _attackDefenseSystem.onParry = EventManager.AddEvent(001, string.Empty, () =>
         {

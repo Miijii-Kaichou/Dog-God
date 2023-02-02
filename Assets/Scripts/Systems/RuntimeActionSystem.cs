@@ -28,17 +28,6 @@ public class RuntimeActionSystem : GameSystem
     protected override void OnInit()
     {
         GetSystems();
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-        AddToSlot(ItemSystemRuntimeID, 0, new ITPotion());
-
         AddToSlot(ItemSystemRuntimeID, 1, new ITPurifiedAdulite());
     }
 

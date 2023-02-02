@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
+using static SharedData.Constants;
+
 #nullable enable
 
 public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
@@ -28,7 +30,6 @@ public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
     public float ExperienceTilNextLevel => experienceTilNextLevel;
     private float experienceGainValue;
 
-    const float MaxLevel = 100;
     const float DefaultLevel = 1;
     const float DefaultExperience = 0;
     const float DefaultMaxExperience = 42;
@@ -39,6 +40,7 @@ public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
 
     public PlayerHUD? PlayerHUD;
     private float targetExperience;
+    private float targetLevel = 0;
     private float experienceVelocity;
 
     protected override void OnInit()
@@ -50,13 +52,15 @@ public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
     {
         currentExperience = Mathf.SmoothDamp(currentExperience, targetExperience, ref experienceVelocity, 0.1f);
         currentLevel = Mathf.FloorToInt(DefaultLevel + (currentExperience / DefaultLevel));
+        if(targetLevel != Zero) GainExperience();
         ListenForLevelUp();
+
     }
 
     void UpdateLevel()
     {
         experienceTilNextLevel = Mathf.RoundToInt(experienceTilNextLevel / Mathf.Log(Two));
-
+        targetLevel -= targetLevel > Zero ? One : Zero;
     }
 
     void ListenForLevelUp()
@@ -81,8 +85,12 @@ public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
         experienceGainValue = DefaultMaxExperience / (DefaultMaxExperience * 10 * currentLevel);
     }
 
-    internal void IncreaseToLevel(float levelGain)
+    internal void UpTotalLevelsMore(float levelGain)
     {
-        throw new NotImplementedException();
+        // Just setting this will automatically trigger
+        // a level gain cycle. The Main Cycle will subtract on each
+        // level up until it hits 0 again.
+        // BTW. this stacks (it sort of needs to be).
+        targetLevel += levelGain;
     }
 }

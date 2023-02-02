@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine.UI;
+﻿#nullable enable
 
-#nullable enable
+using UnityEngine;
 
 public class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
 {
@@ -23,6 +22,11 @@ public class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
             EntityReference?.AddToMana(value);
         if (!isRelative)
             EntityReference?.SetMana(value);
+
+        if (EntityReference!.ManaValue > EntityReference!.MaxManaValue)
+        {
+            EntityReference.SetMana(EntityReference!.MaxManaValue);
+        }
         onManaChange?.Invoke();
     }
 
@@ -33,6 +37,6 @@ public class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
 
     internal void RestoreAllMana()
     {
-        throw new NotImplementedException();
+        SetMaxMana(EntityReference!.MaxManaValue);
     }
 }

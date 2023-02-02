@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+
+#nullable enable
 
 interface IUseLifeCycle
 {
@@ -8,27 +11,26 @@ interface IUseLifeCycle
     // The frequency of which the OnTick is invoked in seconds
     public float TickDuration { get; }
 
-    Alarm alarm => new(2);
+    public Action? OnLifeExpired { get; }
+    public Action? OnTick { get; }
 
     void BeginLifeCycle()
     {
+        Alarm alarm = new(2);
+
         // Keep Track of the time.
         // If time is greater or equal to the LifeDuration,
         // invoke OnLifeExpired method
         alarm.SetFor(LifeDuration, 0, true, () =>
         {
-            OnLifeExpired();
+            OnLifeExpired?.Invoke();
         });
 
         alarm.SetFor(TickDuration, 1, false, () =>
         {
-            OnTick();
+            OnTick?.Invoke();
             if (alarm[0].TimeStarted == false)
                 alarm.SetToZero(1, true);
         });
     }
-
-    void OnLifeExpired() { }
-
-    void OnTick() { }
 }

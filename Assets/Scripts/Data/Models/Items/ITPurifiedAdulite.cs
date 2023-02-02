@@ -1,6 +1,8 @@
-using static SharedData.Constants;
+using UnityEngine;
 using Random = UnityEngine.Random;
-using Extensions;
+
+using static SharedData.Constants;
+using System;
 
 #nullable enable
 
@@ -26,9 +28,11 @@ public sealed class ITPurifiedAdulite : Item, IRegisterEntity<PlayerEntity>, IHe
     public PlayerEntity? EntityReference { get; set; }
 
     public float LifeDuration => MinutesInSeconds * 3;
+    public Action? OnLifeExpired => null;
 
     // We'll regenerate every seconds
     public float TickDuration => 1;
+    public Action? OnTick => TickResponse;
 
     public override ItemUseCallaback? OnActionUse => OnUse;
 
@@ -36,31 +40,27 @@ public sealed class ITPurifiedAdulite : Item, IRegisterEntity<PlayerEntity>, IHe
     ManaSystem? _manaSystem;
     LevelingSystem? _levelSystem;
 
-    public ITPurifiedAdulite()
-    {
-        GameManager.OnSystemRegistrationProcessCompleted = () =>
-        {
-            _healthSystem = GameManager.GetSystem<HealthSystem>();
-            _manaSystem = GameManager.GetSystem<ManaSystem>();
-            _levelSystem = GameManager.GetSystem<LevelingSystem>();
-        };
-    }
-
     public void OnUse()
     {
-        if (EntityReference == null ||
-            _healthSystem == null ||
-            _manaSystem == null ||
-            _levelSystem == null) return;
+        _healthSystem ??= GameManager.GetSystem<HealthSystem>();
+        _manaSystem ??= GameManager.GetSystem<ManaSystem>();
+        _levelSystem ??= GameManager.GetSystem<LevelingSystem>();
+
+        EntityReference ??= GameManager.Player;
+
+        // Begin Item Effect Life Cycle
+        ((IUseLifeCycle)this).BeginLifeCycle();
+
+        Debug.Log("Purified Adulite Life Cycle is in effect.");
 
         // Restore all HP and MP on Use
         // Then increase the player's level up 3
         _healthSystem.RestoreAllHealth(nameof(PlayerEntity));
         _manaSystem.RestoreAllMana();
-        _levelSystem.IncreaseToLevel(LevelGain);
+        _levelSystem.UpTotalLevelsMore(LevelGain);
     }
 
-    void OnTick()
+    void TickResponse()
     {
         if (EntityReference == null ||
             _healthSystem == null ||

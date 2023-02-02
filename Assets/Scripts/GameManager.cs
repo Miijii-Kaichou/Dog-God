@@ -7,10 +7,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
 
-public class GameManager : MonoBehaviour
-{
-    private static GameManager Instance;
+using static SharedData.Constants;
 
+public class GameManager : Singleton<GameManager>
+{
     [SerializeField, Header("Sprite Atlas")]
     SpriteAtlas spriteAtlas;
 
@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviour
     [Header("Achievements"), SerializeField]
     private List<Achievement> achievements = new List<Achievement>();
 
+    public static PlayerEntity Player { get; set; }
+    public static BossEntity Boss { get; set; }
 
     void Awake()
     {
@@ -91,6 +93,16 @@ public class GameManager : MonoBehaviour
         }
         #endregion  
         RegisterSystems();
+    }
+
+    public static void ReferencePlayer(PlayerEntity player)
+    {
+        Player = player;
+    }
+
+    public static void ReferenceBoss(BossEntity boss)
+    {
+        Boss = boss;
     }
 
     // Start is called before the first frame update

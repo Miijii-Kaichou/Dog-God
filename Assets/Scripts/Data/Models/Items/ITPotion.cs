@@ -19,6 +19,4 @@ public sealed class ITPotion : Item, IHealthModifier
         Debug.Log("Taking Potion");
         _healthSystem.SetHealth(nameof(PlayerEntity), ((IHealthModifier)this).HealthBonus, isRelative: true);
     }
-
-    // Congratulations! You created another item.
 }

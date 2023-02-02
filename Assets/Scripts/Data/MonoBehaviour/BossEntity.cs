@@ -50,10 +50,11 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
 
     private Alarm alarm = new(DefaultAlarmSize);
     private AttackDefenseSystem _attackDefenseSystem;
-    private int cap;
 
     void Start()
     {
+        GameManager.ReferenceBoss(this);
+
         _healthSystem ??= GameManager.GetSystem<HealthSystem>();
         _attackDefenseSystem ??= GameManager.GetSystem<AttackDefenseSystem>();
 

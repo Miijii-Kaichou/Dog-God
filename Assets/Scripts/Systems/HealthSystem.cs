@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 #nullable enable
 public class HealthSystem : GameSystem
@@ -33,6 +34,12 @@ public class HealthSystem : GameSystem
             entities[id].AddHealth(value);
         if (!isRelative)
             entities[id].SetHealth(value);
+
+        if (entities[id].HealthValue > entities[id].MaxHealthValue)
+        {
+            entities[id].SetHealth(entities[id].MaxHealthValue);
+        }
+
         onHealthChange?.Invoke(id);
     }
      
