@@ -1,10 +1,13 @@
-﻿using static SharedData.Constants;
+﻿#nullable enable
+
+using static SharedData.Constants;
 
 public interface IHealthModifier
 {
     // Increase Health, Decrease Health, or Enhance Max Health by a set percentage or value
     public float SetHealthBonus { get; }
     public BonusModificationType HealthModificationType { get; }
+    public HealthSystem? HealthSystem { get; set; }
     float HealthBonus
     {
 

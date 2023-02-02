@@ -26,8 +26,10 @@ interface IUseLifeCycle
             OnLifeExpired?.Invoke();
         });
 
+        if (TickDuration == -1) return;
         alarm.SetFor(TickDuration, 1, false, () =>
         {
+
             OnTick?.Invoke();
             if (alarm[0].TimeStarted == false)
                 alarm.SetToZero(1, true);

@@ -22,4 +22,6 @@ namespace SharedData
 	public const int ItemSystemRuntimeID = 1;
 	public const int MadoSystemRuntimeID = 2;
 	public const int DeitySystemRuntimeID = 3;
+	public const float EveryTick = 1f;
+	public const int MaxStatsSize = 7;
 }}

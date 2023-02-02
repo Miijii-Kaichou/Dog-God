@@ -35,7 +35,7 @@ public class LevelingSystem : GameSystem, IRegisterEntity<ILevelProperty>
     const float DefaultMaxExperience = 42;
     private const int Two = 2;
 
-    public ILevelProperty? EntityReference { get; set; }
+    public ILevelProperty? _player { get; set; }
     public Action? OnLevelUp { get; internal set; }
 
     public PlayerHUD? PlayerHUD;

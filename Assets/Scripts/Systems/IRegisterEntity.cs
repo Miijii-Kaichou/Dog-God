@@ -1,6 +1,6 @@
 ﻿#nullable enable
 public interface IRegisterEntity<T> where T : class
 {
-    public T? EntityReference { get; set; }
-    public void RegisterEntity(T target) { EntityReference = target; }
+    public T? _player { get; set; }
+    public void RegisterEntity(T target) { _player = target; }
 }

@@ -168,17 +168,17 @@ public class PlayerHUD : MonoBehaviour
     }
     void UpdateManaMetrics()
     {
-        if (_manaSystem.EntityReference == null) return;
+        if (_manaSystem._player == null) return;
 
-        MPSlider.maxValue = _manaSystem.EntityReference.MaxManaValue;
+        MPSlider.maxValue = _manaSystem._player.MaxManaValue;
         MPSlider.minValue = 0;
-        MPSlider.value = Mathf.SmoothDamp(MPSlider.value, _manaSystem.EntityReference.ManaValue, ref smoothMPVelocity, SmoothTime);
+        MPSlider.value = Mathf.SmoothDamp(MPSlider.value, _manaSystem._player.ManaValue, ref smoothMPVelocity, SmoothTime);
 
-        MPMetrics.text = string.Format(MetricFormat, _manaSystem.EntityReference.ManaValue, _manaSystem.EntityReference.ManaValue);
+        MPMetrics.text = string.Format(MetricFormat, _manaSystem._player.ManaValue, _manaSystem._player.ManaValue);
     }
     void UpdateExperienceMetrics()
     {
-        if (_levelingSystem.EntityReference == null) return;
+        if (_levelingSystem._player == null) return;
 
         EXPSlider.maxValue = 1;
         EXPSlider.minValue = 0;

@@ -19,8 +19,6 @@ public abstract class Deity : MonoBehaviour, IActionableItem
 
     //Deity stats (these states will be added to the players)
     public EntityStats stats;
-    public List<DamageStatVariable> damageProperties;
-
 
     public void UseAction()
     {

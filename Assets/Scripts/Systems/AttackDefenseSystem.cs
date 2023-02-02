@@ -18,7 +18,7 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
         }
     }
 
-    public PlayerEntity EntityReference { get; set; }
+    public PlayerEntity _player { get; set; }
 
     private float leftClickHoldFrames = 0;
     private float rightClickHoldFrames = 0;
@@ -72,13 +72,13 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
     private void CheckAndUpdateStanceStatusIfNoInput()
     {
         if (Input.GetMouseButton(LeftClick + reversalValue) || Input.GetMouseButton(RightClick - reversalValue)) return;
-        ((IEntityStatus)EntityReference).ChangeStanceState(StanceState.Idle);
+        ((IEntityStatus)_player).ChangeStanceState(StanceState.Idle);
     }
 
     #region Attack Input+Logic
     private void ListenForAttackInput()
     {
-        if (EntityReference == null) return;
+        if (_player == null) return;
 
         if (Input.GetMouseButton(LeftClick + reversalValue))
         {
@@ -89,30 +89,30 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
         {
             ExecuteAttack();
             leftClickHoldFrames = Zero;
-            ((IEntityStatus)EntityReference).ChangeOffensiveState(OffensiveState.None);
+            ((IEntityStatus)_player).ChangeOffensiveState(OffensiveState.None);
         }
     }
 
     private void BeInOffensiveStance()
     {
-        ((IEntityStatus)EntityReference).ChangeStanceState(StanceState.Offensive);
+        ((IEntityStatus)_player).ChangeStanceState(StanceState.Offensive);
         leftClickHoldFrames += Time.deltaTime;
     }
 
     private void ExecuteAttack()
     {
-        EntityReference.AddExperience();
+        _player.AddExperience();
 
         healthSystem.SetHealth(BossEntityTag, -952, isRelative: true);
 
         if (leftClickHoldFrames > ChargeAttackTimeThreshold)
         {
-            ((IEntityStatus)EntityReference).ChangeOffensiveState(OffensiveState.ChargeAttack);
+            ((IEntityStatus)_player).ChangeOffensiveState(OffensiveState.ChargeAttack);
             onChargedAttack.Trigger();
             return;
         }
 
-        ((IEntityStatus)EntityReference).ChangeOffensiveState(OffensiveState.Attack);
+        ((IEntityStatus)_player).ChangeOffensiveState(OffensiveState.Attack);
         onAttack.Trigger();
     }
     #endregion
@@ -120,7 +120,7 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
     #region Defense Input+Logic
     private void ListenForDefenseInput()
     {
-        if (EntityReference == null) return;
+        if (_player == null) return;
 
         if (Input.GetMouseButton(RightClick - reversalValue))
         {
@@ -131,17 +131,17 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
         {
             ExecuteDefense();
             rightClickHoldFrames = Zero;
-            ((IEntityStatus)EntityReference).ChangeDefensiveState(DefensiveState.None);
+            ((IEntityStatus)_player).ChangeDefensiveState(DefensiveState.None);
         }
     }
 
     private void BeInDefensiveStance()
     {
-        ((IEntityStatus)EntityReference).ChangeStanceState(StanceState.Defensive);
+        ((IEntityStatus)_player).ChangeStanceState(StanceState.Defensive);
         rightClickHoldFrames += Time.deltaTime;
         if (rightClickHoldFrames > GuardTimeThreshold)
         {
-            ((IEntityStatus)EntityReference).ChangeDefensiveState(DefensiveState.Guard);
+            ((IEntityStatus)_player).ChangeDefensiveState(DefensiveState.Guard);
             onGuard.Trigger();
             return;
         }
@@ -149,7 +149,7 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
 
     private void ExecuteDefense()
     {
-        if (rightClickHoldFrames < GuardTimeThreshold) ((IEntityStatus)EntityReference).ChangeDefensiveState(DefensiveState.Parry);
+        if (rightClickHoldFrames < GuardTimeThreshold) ((IEntityStatus)_player).ChangeDefensiveState(DefensiveState.Parry);
         onParry.Trigger();
     }
 

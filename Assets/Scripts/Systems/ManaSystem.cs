@@ -13,30 +13,30 @@ public class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
 
     public ManaSystemOperation? onManaChange;
 
-    public IManaProperty? EntityReference { get; set; }
+    public IManaProperty? _player { get; set; }
 
 
     internal void SetMana(float value, bool isRelative = false)
     {
         if (isRelative)
-            EntityReference?.AddToMana(value);
+            _player?.AddToMana(value);
         if (!isRelative)
-            EntityReference?.SetMana(value);
+            _player?.SetMana(value);
 
-        if (EntityReference!.ManaValue > EntityReference!.MaxManaValue)
+        if (_player!.ManaValue > _player!.MaxManaValue)
         {
-            EntityReference.SetMana(EntityReference!.MaxManaValue);
+            _player.SetMana(_player!.MaxManaValue);
         }
         onManaChange?.Invoke();
     }
 
     internal void SetMaxMana(float value)
     {
-        EntityReference?.SetMaxMana(value);
+        _player?.SetMaxMana(value);
     }
 
     internal void RestoreAllMana()
     {
-        SetMaxMana(EntityReference!.MaxManaValue);
+        SetMaxMana(_player!.MaxManaValue);
     }
 }

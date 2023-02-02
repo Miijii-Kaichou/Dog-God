@@ -2642,7 +2642,7 @@ GameObject:
   - component: {fileID: 1080531607}
   - component: {fileID: 1080531608}
   m_Layer: 0
-  m_Name: $WeaponSystem
+  m_Name: $MadoSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3431,7 +3431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284017024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.390681, y: -2.6022122, z: 770.3997}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3513,6 +3513,12 @@ MonoBehaviour:
     Type: 0
   - Key: DeitySystemRuntimeID
     Value: 3
+    Type: 0
+  - Key: EveryTick
+    Value: 1
+    Type: 1
+  - Key: MaxStatsSize
+    Value: 7
     Type: 0
 --- !u!1 &1293408400
 GameObject:
@@ -4608,7 +4614,6 @@ MonoBehaviour:
   MaxMPValue: 0
   LevelRankValue: 0
   XPValue: 0
-  stats: {fileID: 0}
 --- !u!1 &1547844025
 GameObject:
   m_ObjectHideFlags: 0
@@ -4678,7 +4683,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598867323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00059933774, y: 5.899781, z: 239.39577}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
