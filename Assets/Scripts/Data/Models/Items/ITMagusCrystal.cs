@@ -9,7 +9,7 @@ using static SharedData.Constants;
 /// A crystal made from aging magic. Use to restore your Mana 2% to 5% every
 /// tick for 1 whole minute;
 /// </summary>
-public class ITMagusCrystal : Item, IManaModifier, IUseLifeCycle
+public sealed class ITMagusCrystal : Item, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Magus Shard";
     public override Type? StaticItemType => typeof(ITMagusCrystal);

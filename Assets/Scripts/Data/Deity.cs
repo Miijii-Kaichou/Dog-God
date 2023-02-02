@@ -4,7 +4,7 @@ using UnityEngine;
 
 #nullable enable
 
-public abstract class Deity : MonoBehaviour, IActionableItem
+public abstract class Deity : IActionableItem
 {
 
     public virtual string? DeityName { get; set; }

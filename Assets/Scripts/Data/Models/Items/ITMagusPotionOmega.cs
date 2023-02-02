@@ -9,7 +9,7 @@ using Random =  UnityEngine.Random;
 /// to assure you gain between 30% and 60%
 /// of your Mana.
 /// </summary>
-public class ITMagusPotionOmega : Item, IManaModifier
+public sealed class ITMagusPotionOmega : Item, IManaModifier
 {
     public override string? ItemName => "Magus Potion Omega";
     public override Type? StaticItemType => typeof(ITMagusPotionOmega);

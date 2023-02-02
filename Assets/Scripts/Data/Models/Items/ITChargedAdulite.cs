@@ -11,7 +11,7 @@ using static SharedData.Constants;
 /// Restores all your Health and Mana, and regenerates them between 8% and 12% every tick
 /// for 1 whole minute!
 /// </summary>
-public class ITChargedAdulite : Item, IHealthModifier, IManaModifier, IUseLifeCycle
+public sealed class ITChargedAdulite : Item, IHealthModifier, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Charged Adulite";
     public override Type? StaticItemType => typeof(ITChargedAdulite);

@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 /// A highly enhanced version of Ether Alpha. Restores
 /// between 25% and 50% of both your Health and Mana
 /// </summary>
-public class ITEtherOmega : Item, IHealthModifier, IManaModifier
+public sealed class ITEtherOmega : Item, IHealthModifier, IManaModifier
 {
     public override string ItemName => "Ether Omega";
     public override Type? StaticItemType => typeof(ITEtherOmega);

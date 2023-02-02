@@ -10,7 +10,7 @@ using static SharedData.Constants;
 /// Use to restore your MP between 2% and 5% every tick (1 second)
 /// for 10 seconds
 /// </summary>
-public class ITMagusShard : Item, IManaModifier, IUseLifeCycle
+public sealed class ITMagusShard : Item, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Magus Shard";
     public override Type? StaticItemType => typeof(ITMagusShard);

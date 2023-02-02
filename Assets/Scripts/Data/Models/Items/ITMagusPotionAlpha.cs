@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 /// An enhanced version of a nomral magus potion. Restores between 10% and 30%
 /// of you Mana.
 /// </summary>
-public class ITMagusPotionAlpha : Item, IManaModifier
+public sealed class ITMagusPotionAlpha : Item, IManaModifier
 {
     public override string? ItemName => "Magus Potion Alpha";
     public override Type? StaticItemType => typeof(ITMagusPotionAlpha);

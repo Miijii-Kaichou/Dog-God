@@ -8,7 +8,7 @@ using static SharedData.Constants;
 /// A magus potion that's has long lasting effect. Regain 5% 
 /// of you mana every second for 30 seconds total
 /// </summary>
-public class ITMagusPotionDelta : Item, IManaModifier, IUseLifeCycle
+public sealed class ITMagusPotionDelta : Item, IManaModifier, IUseLifeCycle
 {
     public override string ItemName => "Magus Potion Delta";
     public override Type? StaticItemType => typeof(ITMagusPotionDelta);
