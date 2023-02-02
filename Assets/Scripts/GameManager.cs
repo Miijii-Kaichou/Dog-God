@@ -138,6 +138,7 @@ public class GameManager : Singleton<GameManager>
         }
         systemInfoList = systemInfoList.OrderBy(sysInfo => sysInfo.systemName).ToList();
         OnSystemRegistrationProcessCompleted?.Invoke();
+        OnSystemRegistrationProcessCompleted = null;
     }
 
     void ReportStartUp()

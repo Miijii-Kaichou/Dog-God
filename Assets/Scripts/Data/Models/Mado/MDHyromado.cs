@@ -1,7 +1,5 @@
 using System;
 
-using static SharedData.ReadOnlyData;
-
 /// <summary>
 /// This is a Holy (Light)-Based Mado. Can be paired with the following skills:
 /// Skill: Fury(becomes Typhoon)
@@ -20,26 +18,15 @@ using static SharedData.ReadOnlyData;
 /// Defense increases by 30%
 /// Item Effectiveness Doubles
 /// </summary>
-public sealed class MDHyromado : Mado, ISkillEffectiveness, IDefenseModifier, IItemEffectiveness
+public sealed class MDHyromado : Mado, IDefenseModifier
 {
     public override string MadoName => "Hyromado";
     public override Type StaticItemType => typeof(MDHyromado);
     public override ItemUseCallaback OnActionUse => Infuse;
 
-    public TargetInfo<Skill>[] TargetSkills => new TargetInfo<Skill>[6]
-    {
-        TargetInfo<SKTyphoon>   .Target(),
-        TargetInfo<SKHolySmite> .Target(),
-        TargetInfo<SKHolyThrust>.Target(),
-        TargetInfo<SKHolyFlare> .Target(),
-        TargetInfo<SKRailgun>   .Target(),
-        TargetInfo<SKHolyPrism> .Target()
-    };
     public float SetDefenseBonus => 30f;
 
     public BonusModificationType DefenseModificationType => BonusModificationType.PercentageOf;
-
-    public TargetInfo<Item>[] TargetItems => TargetAllItems;
 
     private void Infuse()
     {

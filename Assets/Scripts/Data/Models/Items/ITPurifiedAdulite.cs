@@ -9,7 +9,7 @@ using System;
 /* It's Adulite, but completely purified. 
    Gain 3 levels as you restore all your MP and HP,
    whilst regenerating it between 8% and 12% for 3 whole minutes.*/
-public sealed class ITPurifiedAdulite : Item,IHealthModifier, IManaModifier, ILevelModifier, IUseLifeCycle
+public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, ILevelModifier, IUseLifeCycle
 {
     public override string? ItemName => "Purified Adulite";
     public override Type? StaticItemType => typeof(ITPurifiedAdulite);

@@ -12,7 +12,7 @@ using static SharedData.Constants;
 /// </summary>
 public sealed class ITAlhercule : Item, IAttackModifier, IUseLifeCycle
 {
-    public override string? ItemName => "Alguarde";
+    public override string? ItemName => "Alhercule";
     public override Type? StaticItemType => typeof(ITAlhercule);
     public override ItemUseCallaback? OnActionUse => TakeElixir;
 

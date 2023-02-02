@@ -6,8 +6,8 @@ using static SharedData.Constants;
 /// </summary>
 public sealed class SKBlizzard : Skill
 {
-    public override string SkillName => "Heal";
-    public override Type StaticItemType => typeof(SKHeal);
+    public override string SkillName => "Blizzard";
+    public override Type StaticItemType => typeof(SKBlizzard);
     public override ItemUseCallaback OnActionUse => UseSkill;
 
     private void UseSkill()

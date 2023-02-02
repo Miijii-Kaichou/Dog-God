@@ -1,6 +1,8 @@
 #nullable enable
 
 using System;
+using System.Runtime;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// A special kind of potion that rejuvenates the soul.
@@ -23,7 +25,7 @@ public sealed class ITEther : Item, IHealthModifier, IManaModifier
     public BonusModificationType ManaModificationType => BonusModificationType.Whole;
 
     public ManaSystem? ManaSystem { get; set; }
-
+    
     private void TakeEther()
     {
         HealthSystem ??= GameManager.GetSystem<HealthSystem>();

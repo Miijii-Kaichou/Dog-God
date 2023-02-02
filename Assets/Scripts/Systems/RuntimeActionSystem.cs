@@ -1,34 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using static SharedData.Constants;
 
-public class RuntimeActionSystem : GameSystem
+public sealed class RuntimeActionSystem : GameSystem
 {
     // The RuntimeActionSystem has reference to 
     // The SkillSystem, WeaponSystem, DeitySystem, and ItemSystem
     // All it does is passes the request made from the KeyboardInputSystem
 
-    private SkillSystem SkillSystem;
-    private ItemSystem ItemSystem;
-    private MadoSystem MadoSystem;
-    private DeitySystem DeitySystem;
+    public static SkillSystem SkillSystem { get; private set; }
+    public static ItemSystem ItemSystem { get; private set; }
+    public static MadoSystem MadoSystem { get; private set; }
+    public static DeitySystem DeitySystem { get; private set; }
 
-    IActionCategory[] SystemCategories { get; set; }
+    Dictionary<Type, IActionCategory> SystemCategories { get; set; }
 
     private const int MaxSlots = 4;
 
-    public IActionCategory this[int categoryIndex]
+    public IActionCategory this[Type type]
     {
         get {
             if (SystemCategories == null) InitalizeCategories();
-            return SystemCategories[categoryIndex];
+            return SystemCategories[type];
+        }
+    }
+
+    public IActionCategory this[int index]
+    {
+        get
+        {
+            if (SystemCategories == null) InitalizeCategories();
+            Type targetType = index switch
+            {
+                0 => typeof(SkillSystem),
+                1 => typeof(ItemSystem),
+                2 => typeof(MadoSystem),
+                3 => typeof(DeitySystem),
+                _ => throw new NotImplementedException(),
+            };
+            return this[targetType];
         }
     }
 
     protected override void OnInit()
     {
         GetSystems();
-        AddToSlot(ItemSystemRuntimeID, 1, new ITPurifiedAdulite());
+        AddToSlot<ItemSystem>( 1, new ITPurifiedAdulite());
     }
 
     void GetSystems()
@@ -42,22 +62,22 @@ public class RuntimeActionSystem : GameSystem
 
     void InitalizeCategories()
     {
-        SystemCategories = new IActionCategory[MaxSlots]
+        SystemCategories = new Dictionary<Type, IActionCategory>(MaxSlots)
         {
-            SkillSystem,
-            ItemSystem,
-            MadoSystem,
-            DeitySystem
+            { typeof(SkillSystem),  SkillSystem  },
+            { typeof(ItemSystem),   ItemSystem   },
+            { typeof(MadoSystem),   MadoSystem   },
+            { typeof(DeitySystem),   DeitySystem }
         };
     }
 
-    public void AddToSlot(int runtimeID, int slotNumber, IActionableItem item)
+    public void AddToSlot<T>(int slotNumber, IActionableItem item) where T : GameSystem
     {
-        this[runtimeID].AddItemToSlot(slotNumber, item);
+        this[typeof(T)].AddItemToSlot(slotNumber, item);
     }
 
-    public void RemoveFromSlot(int runtimeID, int slotNumber, int count)
+    public void RemoveFromSlot<T>( int slotNumber, int count)
     {
-        this[runtimeID].RemoveFromSlot(slotNumber, count);
+        this[typeof(T)].RemoveFromSlot(slotNumber, count);
     }
 }

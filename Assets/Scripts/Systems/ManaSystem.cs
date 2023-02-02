@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-public class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
+public sealed class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
 {
     /*So, the Mana System takes in all the things that has
     HP. All of this information will be displayed in game, keeping track

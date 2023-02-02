@@ -11,7 +11,7 @@ using static SharedData.Constants;
 /// Restores all your Health and Mana, and restore it between 5% and 10% every
 /// tick for 30 seconds;
 /// </summary>
-public sealed  class ITAdulite : Item, IHealthModifier, IManaModifier, IUseLifeCycle
+public sealed class ITAdulite : Item, IHealthModifier, IManaModifier, IUseLifeCycle
 {
     private PlayerEntity? _player;
 
@@ -41,7 +41,7 @@ public sealed  class ITAdulite : Item, IHealthModifier, IManaModifier, IUseLifeC
 
     private void Rejuvenate()
     {
-        HealthSystem!.SetHealth(nameof(PlayerEntity), _player.MaxHealthValue * ((IHealthModifier)this).HealthBonus);
+        HealthSystem!.SetHealth(nameof(PlayerEntity), _player!.MaxHealthValue * ((IHealthModifier)this).HealthBonus);
         ManaSystem!.SetMana(_player.MaxManaValue * ((IManaModifier)this).ManaBonus);
     }
 

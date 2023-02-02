@@ -321,6 +321,15 @@ namespace Extensions
             return conditionMet;
         }
 
+        public static int IncreaseThisBy(this int _, int value, BonusModificationType type)
+        {
+            if (type == BonusModificationType.Whole)
+                _ += value;
+            if (type == BonusModificationType.PercentageOf)
+                _ += _ * value;
+            return _;
+        }
+
         public static T Get<T>(this T[] _, int index)
         {
             return _[index];

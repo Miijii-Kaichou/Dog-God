@@ -1,4 +1,5 @@
 using System;
+using Random = UnityEngine.Random;
 using static SharedData.Constants;
 
 /// <summary>
@@ -11,15 +12,33 @@ public sealed class SKHeal : Skill, IHealthModifier, IEnhanceWithMado<MDYotsumad
     public override Type StaticItemType => typeof(SKHeal);
     public override ItemUseCallaback OnActionUse => UseSkill;
 
-    public float SetHealthBonus => throw new NotImplementedException();
+    public float SetHealthBonus => Random.Range(10f, 25f);
 
-    public BonusModificationType HealthModificationType => throw new NotImplementedException();
+    public BonusModificationType HealthModificationType => BonusModificationType.PercentageOf;
 
     public HealthSystem HealthSystem { get; set; }
+    public MadoSystem MadoSystem { get; set; }
+
     public MDYotsumado MadoEnhancer { get; set; }
+
+    private PlayerEntity _player;
 
     private void UseSkill()
     {
-        throw new NotImplementedException();
+        _player = GameManager.Player;
+
+        HealthSystem ??= GameManager.GetSystem<HealthSystem>();
+        MadoSystem ??= GameManager.GetSystem<MadoSystem>();
+
+        MadoEnhancer = MadoSystem.GetMado<MDYotsumado>();
+
+        HealthSystem.SetHealth(nameof(PlayerEntity), _player.MaxHealthValue * 
+            ((IHealthModifier)this).HealthBonus * 
+            IncludeMadoEnhancementValues());
+    }
+
+    private float IncludeMadoEnhancementValues()
+    {
+        return MadoEnhancer.MadoEnhancementValue;
     }
 }

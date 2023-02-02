@@ -6,8 +6,8 @@ using static SharedData.Constants;
 /// </summary>
 public sealed class SKFury : Skill
 {
-    public override string SkillName => "Heal";
-    public override Type StaticItemType => typeof(SKHeal);
+    public override string SkillName => "Fury";
+    public override Type StaticItemType => typeof(SKFury);
     public override ItemUseCallaback OnActionUse => UseSkill;
 
     private void UseSkill()
