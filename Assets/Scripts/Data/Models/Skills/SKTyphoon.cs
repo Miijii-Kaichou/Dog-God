@@ -8,7 +8,7 @@ public sealed class SKTyphoon : Skill
 {
     public override string SkillName => "Typhoon";
     public override Type StaticItemType => typeof(SKTyphoon);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

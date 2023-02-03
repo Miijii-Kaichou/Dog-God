@@ -8,7 +8,7 @@ public sealed class SKRailgun : Skill
 {
     public override string SkillName => "Railgun";
     public override Type StaticItemType => typeof(SKRailgun);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

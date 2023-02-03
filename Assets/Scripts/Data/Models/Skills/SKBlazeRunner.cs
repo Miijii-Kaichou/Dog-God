@@ -8,7 +8,7 @@ public sealed class SKBlazeRunner : Skill
 {
     public override string SkillName => "Blaze Runner";
     public override Type StaticItemType => typeof(SKBlazeRunner);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

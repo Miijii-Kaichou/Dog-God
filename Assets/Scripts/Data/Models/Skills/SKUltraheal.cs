@@ -8,7 +8,7 @@ public sealed class SKUltraheal : Skill
 {
     public override string SkillName => "Ultraheal";
     public override Type StaticItemType => typeof(SKUltraheal);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

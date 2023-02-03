@@ -20,12 +20,9 @@ public class BossHUD : MonoBehaviour
     private const float SmoothTime = 0.1f;
     private const float MaxTime = 0.01f;
 
-    private HealthSystem _healthSystem;
-
     // Start is called before the first frame update
     void Start()
     {
-        _healthSystem = GameManager.GetSystem<HealthSystem>();
         StartCoroutine(HPSmoothDampCycle());
     }
 
@@ -33,7 +30,6 @@ public class BossHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            if (_healthSystem == null) return;
             UpdateHPMetrics(BossEntityTag);
         });
     }
@@ -58,12 +54,14 @@ public class BossHUD : MonoBehaviour
 
     void UpdateHPMetrics(string tag)
     {
-        if (_healthSystem.Exists(tag) == false) return;
+        if (HealthSystem.Exists(tag) == false) return;
 
-        HPSlider.maxValue = _healthSystem[tag].MaxHealthValue;
+        var target = HealthSystem.Self[tag];
+
+        HPSlider.maxValue = target.MaxHealthValue;
         HPSlider.minValue = 0;
-        HPSlider.value = Mathf.SmoothDamp(HPSlider.value, _healthSystem[tag].HealthValue, ref smoothHPVelocity, SmoothTime);
+        HPSlider.value = Mathf.SmoothDamp(HPSlider.value, target.HealthValue, ref smoothHPVelocity, SmoothTime);
 
-        HPMetrics.text = string.Format(MetricFormat, _healthSystem[tag].HealthValue, _healthSystem[tag].MaxHealthValue);
+        HPMetrics.text = string.Format(MetricFormat, target.HealthValue, target.MaxHealthValue);
     }
 }

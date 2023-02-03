@@ -8,18 +8,16 @@ public sealed class ITPotion : Item, IHealthModifier
 {
     public override string? ItemName => "Potion";
     public override Type? StaticItemType => typeof(ITPotion);
-    public override ItemUseCallaback? OnActionUse => TakePotion;
+    public override ItemUseCallback? OnActionUse => TakePotion;
 
     public float SetHealthBonus => 5;
 
     public BonusModificationType HealthModificationType => BonusModificationType.Whole;
 
-    public HealthSystem? HealthSystem { get; set; }
-
+    private IHealthModifier HealthModifier => this;
 
     public void TakePotion()
     {
-        HealthSystem ??= GameManager.GetSystem<HealthSystem>();
-        HealthSystem.SetHealth(nameof(PlayerEntity), ((IHealthModifier)this).HealthBonus, isRelative: true);
+        HealthSystem.SetHealth(nameof(PlayerEntity), HealthModifier.HealthBonus, isRelative: true);
     }
 }

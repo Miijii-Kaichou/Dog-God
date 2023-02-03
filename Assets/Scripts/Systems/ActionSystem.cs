@@ -1,16 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActionSystem : GameSystem
+public sealed class ActionSystem : GameSystem
 {
-    private bool _isPerformingAction = false;
-    public bool IsPerformingAction => _isPerformingAction;
-    public bool IsCategorySelected => _selectedPrimarySlot != -1;
+    private static ActionSystem Self => (ActionSystem)Instance;
 
-    private bool _slotUsed = false;
-    private int _previousSelectedPrimary = 0;
-    private int _selectedPrimarySlot = -1;
-    private int _selectedSecondarySlot = -1;
+    public static bool IsPerformingAction = false;
+    public static bool IsCategorySelected => _selectedPrimarySlot != -1;
+
+    private static bool _slotUsed = false;
+    private static int _previousSelectedPrimary = 0;
+    private static int _selectedPrimarySlot = -1;
+    private static int _selectedSecondarySlot = -1;
 
     private const int MaxSlots = 4;
 
@@ -56,10 +57,10 @@ public class ActionSystem : GameSystem
 
     private void CloseActionOptions()
     {
-        if (_isPerformingAction == true)
+        if (IsPerformingAction == true)
         {
             PlayerHUD.ResetActionUi();
-            _isPerformingAction = false;
+            IsPerformingAction = false;
             _previousSelectedPrimary = 0;
             _selectedPrimarySlot = -1;
             _selectedSecondarySlot = -1;
@@ -68,9 +69,9 @@ public class ActionSystem : GameSystem
 
     private void AccessActionOptions()
     {
-        if (_isPerformingAction == false)
+        if (IsPerformingAction == false)
         {
-            _isPerformingAction = true;
+            IsPerformingAction = true;
             PlayerHUD.UpdateSlotIndex(_previousSelectedPrimary);
         }
         ListenForPrimaryInput();
@@ -119,8 +120,8 @@ public class ActionSystem : GameSystem
     }
 
 
-    public void RegisterPlayerHUD(PlayerHUD playerHUD)
+    public static void RegisterPlayerHUD(PlayerHUD playerHUD)
     {
-        PlayerHUD = playerHUD;
+        Self.PlayerHUD = playerHUD;
     }
 }

@@ -8,7 +8,7 @@ public sealed class SKEmbrace : Skill
 {
     public override string SkillName => "Embrace";
     public override Type StaticItemType => typeof(SKEmbrace);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

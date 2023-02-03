@@ -14,7 +14,7 @@ public sealed class ITMagusShard : Item, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Magus Shard";
     public override Type? StaticItemType => typeof(ITMagusShard);
-    public override ItemUseCallaback? OnActionUse => AbsorbShard;
+    public override ItemUseCallback? OnActionUse => AbsorbShard;
 
     public float SetManaBonus => Random.Range(2f, 5f);
 
@@ -30,14 +30,16 @@ public sealed class ITMagusShard : Item, IManaModifier, IUseLifeCycle
 
     public Action? OnTick => RegainMana;
 
+    private IManaModifier ManaModifier => this;
+    private IUseLifeCycle LifeExpectency => this;
+
     private void RegainMana()
     {
-        ManaSystem!.SetMana(GameManager.Player.MaxManaValue * ((IManaModifier)this).ManaBonus, true);
+        ManaSystem.SetMana(Player!.MaxManaValue * ManaModifier.ManaBonus, true);
     }
 
     private void AbsorbShard()
     {
-        ManaSystem ??= GameManager.GetSystem<ManaSystem>();
-        ((IUseLifeCycle)this).BeginLifeCycle();
+        LifeExpectency.Start();
     }
 }

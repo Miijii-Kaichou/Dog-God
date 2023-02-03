@@ -15,7 +15,7 @@ public sealed class MDYotsumado : Mado, IAttackModifier, IDefenseModifier
 {
     public override string MadoName => "Yotsumado";
     public override Type StaticItemType => typeof(MDYotsumado);
-    public override ItemUseCallaback OnActionUse => Infuse;
+    public override ItemUseCallback OnActionUse => Infuse;
     public override int MadoEnhancementValue => 500;
 
     public float SetAttackBonus => 120f;

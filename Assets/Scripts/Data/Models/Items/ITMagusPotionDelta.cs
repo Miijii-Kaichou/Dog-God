@@ -12,13 +12,11 @@ public sealed class ITMagusPotionDelta : Item, IManaModifier, IUseLifeCycle
 {
     public override string ItemName => "Magus Potion Delta";
     public override Type? StaticItemType => typeof(ITMagusPotionDelta);
-    public override ItemUseCallaback? OnActionUse => TakePotion;
+    public override ItemUseCallback? OnActionUse => TakePotion;
 
     public float SetManaBonus => 5f;
 
     public BonusModificationType ManaModificationType => BonusModificationType.PercentageOf;
-
-    public ManaSystem? ManaSystem { get; set; }
 
     public float LifeDuration => 30f;
 
@@ -28,14 +26,16 @@ public sealed class ITMagusPotionDelta : Item, IManaModifier, IUseLifeCycle
 
     public Action? OnTick => RegainMana;
 
+    private IManaModifier ManaModifier => this;
+    private IUseLifeCycle LifeExpectency => this;
+
     private void TakePotion()
     {
-        ManaSystem = GameManager.GetSystem<ManaSystem>();
-        ((IUseLifeCycle)this).BeginLifeCycle();
+        LifeExpectency.Start();
     }
 
     private void RegainMana()
     {
-        ManaSystem!.SetMana(GameManager.Player.MaxManaValue * ((IManaModifier)this).ManaBonus, true);
+        ManaSystem.SetMana(Player!.MaxManaValue * ManaModifier.ManaBonus, true);
     }
 }

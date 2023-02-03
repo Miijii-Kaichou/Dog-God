@@ -8,7 +8,7 @@ public sealed class SKBraceForImpact : Skill
 {
     public override string SkillName => "Brace For Impact";
     public override Type StaticItemType => typeof(SKBraceForImpact);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

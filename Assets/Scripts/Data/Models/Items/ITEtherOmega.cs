@@ -11,26 +11,20 @@ public sealed class ITEtherOmega : Item, IHealthModifier, IManaModifier
 {
     public override string ItemName => "Ether Omega";
     public override Type? StaticItemType => typeof(ITEtherOmega);
-    public override ItemUseCallaback? OnActionUse => TakeEther;
+    public override ItemUseCallback? OnActionUse => TakeEther;
 
     public float SetHealthBonus => Random.Range(25, 50);
-
     public BonusModificationType HealthModificationType => BonusModificationType.PercentageOf;
 
-    public HealthSystem? HealthSystem { get; set; }
-
     public float SetManaBonus => Random.Range(25, 50);
-
     public BonusModificationType ManaModificationType => BonusModificationType.PercentageOf;
 
-    public ManaSystem? ManaSystem { get; set; }
+    IHealthModifier HealthModifier => this;
+    IManaModifier ManaModifier => this;
 
     void TakeEther()
     {
-        HealthSystem ??= GameManager.GetSystem<HealthSystem>();
-        ManaSystem ??= GameManager.GetSystem<ManaSystem>();
-
-        HealthSystem.SetHealth(nameof(PlayerEntity), GameManager.Player.MaxManaValue * ((IHealthModifier)this).SetHealthBonus, true);
-        ManaSystem.SetMana(GameManager.Player.MaxManaValue * ((IManaModifier)this).SetManaBonus, true);
+        HealthSystem.SetHealth(nameof(PlayerEntity), Player!.MaxManaValue * HealthModifier.HealthBonus, true);
+        ManaSystem.SetMana(Player!.MaxManaValue * ManaModifier.ManaBonus, true);
     }
 }

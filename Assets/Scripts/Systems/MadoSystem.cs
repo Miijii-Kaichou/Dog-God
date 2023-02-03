@@ -1,12 +1,16 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
+
 using static SharedData.Constants;
 
 public sealed class MadoSystem : GameSystem, IActionCategory
 {
-    public (IActionableItem[] slots, int[] quantities, int[] capacities, Type[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
+    private static MadoSystem? Self => (MadoSystem?)Instance;
+
+    public (IActionableItem?[] slots, int[] quantities, int[] capacities, Type?[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
     {
         slots = new IActionableItem[MaxSlotSize],
         quantities = new int[MaxSlotSize],
@@ -15,7 +19,7 @@ public sealed class MadoSystem : GameSystem, IActionCategory
         isExpensible = false
     };
 
-    readonly Mado[] MadoList = new Mado[]
+    private readonly static Mado[] MadoList = new Mado[]
     {
         new MDPyromado(),
         new MDCryomado(),
@@ -26,8 +30,10 @@ public sealed class MadoSystem : GameSystem, IActionCategory
         new MDYotsumado(), 
     };
 
-    private BitArray Accessibility;
-    private int _madoRefCount;
+    private static BitArray? Accessibility;
+    private static int _MadoRefCount;
+
+    static IActionCategory? Category => Self;
 
     protected override void OnInit()
     {
@@ -42,39 +48,39 @@ public sealed class MadoSystem : GameSystem, IActionCategory
 
     }
 
-    internal void EquipMadoToSlot(int index, int slotNumber)
+    internal static void EquipMadoToSlot(int index, int slotNumber)
     {
-        if (Accessibility[index] == false) return;
-        ((IActionCategory)this).AddItemToSlot(slotNumber, MadoList[index]);
+        if (Accessibility![index] == false) return;
+        Category!.AddItemToSlot(slotNumber, MadoList[index]);
     }
 
-    internal void UnequipMadoFromSlot(int slotNumber)
+    internal static void UnequipMadoFromSlot(int slotNumber)
     {
-        ((IActionCategory)this).RemoveFromSlot(slotNumber);
+        Category!.RemoveFromSlot(slotNumber);
     }
 
-    internal T GetMado<T>() where T : Mado
+    internal static T? GetMado<T>() where T : Mado
     {
-        return (T)ActionCategoryDetails.slots.Where(item => item.StaticItemType == typeof(T)).Single();
+        return (T?)Self!.ActionCategoryDetails.slots.Where(item => item?.StaticItemType == typeof(T)).Single();
     }
 
-    internal void IncreaseRefCount()
+    internal static void IncreaseRefCount()
     {
-        _madoRefCount++;
+        _MadoRefCount++;
     }
 
-    internal int GetRefCount()
+    internal static int GetRefCount()
     {
-        return _madoRefCount;
+        return _MadoRefCount;
     }
 
-    internal void GainAccess(int index)
+    internal static void GainAccess(int index)
     {
-        Accessibility[index] = true;
+        Accessibility![index] = true;
     }
 
-    internal void Lock(int index)
+    internal static void Lock(int index)
     {
-        Accessibility[index] = false;
+        Accessibility![index] = false;
     }
 }

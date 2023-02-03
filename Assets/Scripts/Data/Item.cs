@@ -1,14 +1,16 @@
 ﻿#nullable enable
+
 using System;
 using UnityEngine;
 
 public abstract class Item : IActionableItem
 {
+    protected PlayerEntity? Player { get; private set; }
     public short? ItemID { get; private set; }
     
     public virtual string? ItemName { get; }
     public virtual Type? StaticItemType { get; }  
-    public virtual ItemUseCallaback? OnActionUse { get; }
+    public virtual ItemUseCallback? OnActionUse { get; }
     public virtual int ItemEfficiency { get; }
 
     public int SlotNumber { get; set; }
@@ -17,10 +19,10 @@ public abstract class Item : IActionableItem
     {
         GameManager.OnSystemRegistrationProcessCompleted += () =>
         {
-            var itemSystem = GameManager.GetSystem<ItemSystem>();
-            ItemID = (short)itemSystem.GetRefCount();
+            Player = GameManager.Player;
+            ItemID = (short)ItemSystem.GetRefCount();
             Debug.Log($"ItemID ({ItemID}) {{{ItemName}}}");
-            itemSystem.IncreaseRefCount();
+            ItemSystem.IncreaseRefCount();
         };
     }
 

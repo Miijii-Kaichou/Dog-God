@@ -13,7 +13,7 @@ public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, IL
 {
     public override string? ItemName => "Purified Adulite";
     public override Type? StaticItemType => typeof(ITPurifiedAdulite);
-    public override ItemUseCallaback? OnActionUse => AbsorbAdulite;
+    public override ItemUseCallback? OnActionUse => AbsorbAdulite;
 
     // We use the SetHealthBonus to know the value we want to work with
     public float SetHealthBonus => Random.Range(8, 12);
@@ -25,8 +25,6 @@ public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, IL
 
     public int LevelGain => 3;
 
-    public PlayerEntity? _player { get; set; }
-
     public float LifeDuration => MinutesInSeconds * 3;
     public Action? OnLifeExpired => null;
 
@@ -34,28 +32,22 @@ public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, IL
     public float TickDuration => EveryTick;
     public Action? OnTick => Rejuvenate;
 
-    public HealthSystem? HealthSystem { get; set; }
-    public ManaSystem? ManaSystem { get; set; }
-    public LevelingSystem? LevelSystem { get; set; }
+    IUseLifeCycle LifeExpectancy => this;
+    IHealthModifier HealthModifier => this;
+    IManaModifier ManaModifier => this;
 
     public void AbsorbAdulite()
     {
-        HealthSystem ??= GameManager.GetSystem<HealthSystem>();
-        ManaSystem ??= GameManager.GetSystem<ManaSystem>();
-        LevelSystem ??= GameManager.GetSystem<LevelingSystem>();
-
-        _player ??= GameManager.Player;
-
         HealthSystem.RestoreAllHealth(nameof(PlayerEntity));
         ManaSystem.RestoreAllMana();
-        LevelSystem.UpTotalLevelsMore(LevelGain);
+        ExperienceSystem.UpTotalLevelsMore(LevelGain);
 
-        ((IUseLifeCycle)this).BeginLifeCycle();
+        LifeExpectancy.Start();
     }
 
     void Rejuvenate()
     {
-        HealthSystem!.SetHealth(nameof(PlayerEntity), _player!.MaxHealthValue * ((IHealthModifier)this).HealthBonus, isRelative: true);
-        ManaSystem!.SetMana(_player!.MaxManaValue * ((IManaModifier)this).ManaBonus, isRelative: true);
+        HealthSystem.SetHealth(nameof(PlayerEntity), Player!.MaxHealthValue * HealthModifier.HealthBonus, isRelative: true);
+        ManaSystem.SetMana(Player.MaxManaValue * ManaModifier.ManaBonus, isRelative: true);
     }
 }

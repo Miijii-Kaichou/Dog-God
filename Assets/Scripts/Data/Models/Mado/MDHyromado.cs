@@ -22,7 +22,7 @@ public sealed class MDHyromado : Mado, IDefenseModifier
 {
     public override string MadoName => "Hyromado";
     public override Type StaticItemType => typeof(MDHyromado);
-    public override ItemUseCallaback OnActionUse => Infuse;
+    public override ItemUseCallback OnActionUse => Infuse;
 
     public float SetDefenseBonus => 30f;
 

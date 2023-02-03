@@ -9,17 +9,15 @@ public sealed class ITMagusPotion : Item, IManaModifier
 {
     public override string? ItemName => "Magus Potion";
     public override Type? StaticItemType => typeof(ITMagusPotion);
-    public override ItemUseCallaback? OnActionUse => TakePotion;
-
-    public ManaSystem? ManaSystem { get; set; }
+    public override ItemUseCallback? OnActionUse => TakePotion;
 
     public float SetManaBonus => 500;
-
     public BonusModificationType ManaModificationType => BonusModificationType.Whole;
     
+    private IManaModifier ManaModifier => this;
+
     private void TakePotion()
     {
-        ManaSystem = GameManager.GetSystem<ManaSystem>();
-        ManaSystem.SetMana(((IManaModifier)this).ManaBonus, true);
+        ManaSystem.SetMana(ManaModifier.ManaBonus, true);
     }
 }

@@ -8,7 +8,7 @@ public sealed class SKBless : Skill
 {
     public override string SkillName => "Bless";
     public override Type StaticItemType => typeof(SKBless);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

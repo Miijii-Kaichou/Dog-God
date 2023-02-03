@@ -8,7 +8,7 @@ public sealed class SKInstinct : Skill
 {
     public override string SkillName => "Instinct";
     public override Type StaticItemType => typeof(SKInstinct);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

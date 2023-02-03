@@ -8,7 +8,7 @@ public sealed class SKYeti : Skill
 {
     public override string SkillName => "Yeti";
     public override Type StaticItemType => typeof(SKYeti);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

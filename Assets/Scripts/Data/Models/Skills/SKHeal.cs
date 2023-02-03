@@ -10,7 +10,7 @@ public sealed class SKHeal : Skill, IHealthModifier, IEnhanceWithMado<MDYotsumad
 {
     public override string SkillName => "Heal";
     public override Type StaticItemType => typeof(SKHeal);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     public float SetHealthBonus => Random.Range(10f, 25f);
 

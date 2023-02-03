@@ -4,47 +4,47 @@ using UnityEngine;
 
 using static SharedData.Constants;
 
-public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
+public class AttackDefenseSystem : GameSystem
 {
+    private static AttackDefenseSystem Self => (AttackDefenseSystem)Instance;
+
     public bool AreInputsReversed
     {
         get
         {
-            return reversalValue == 1;
+            return ReversalValue == 1;
         }
         set
         {
-            reversalValue = value ? 1 : 0;
+            ReversalValue = value ? 1 : 0;
         }
     }
 
-    public PlayerEntity _player { get; set; }
+    private static float LeftClickHoldFrames = 0;
+    private static float RightClickHoldFrames = 0;
 
-    private float leftClickHoldFrames = 0;
-    private float rightClickHoldFrames = 0;
-
-    [SerializeField] private float poise = 100;
-    [SerializeField] private float guardStress = 1;
+    private static float PoiseValue = 100;
+    private static float GuardStress = 1;
     
-    private int reversalValue = 0;
+    private static int ReversalValue = 0;
 
     private const int LeftClick = 0;
     private const int RightClick = 1;
     private const float GuardTimeThreshold = 0.1f;
     private const float ChargeAttackTimeThreshold = 0.5f;
 
-    HealthSystem healthSystem;
+    public static EventCall OnAttack;
+    public static EventCall OnChargedAttack;
+    public static EventCall OnGuard;
+    public static EventCall OnParry;
+    public static EventCall OnParrySuccess;
+    public static EventCall OnPoiseLost;
 
-    public EventCall onGuard;
-    public EventCall onParry;
-    public EventCall onAttack;
-    public EventCall onChargedAttack;
-    public EventCall onParrySuccess;
-    public EventCall onPoiseLost;
+    static ILevelProperty PlayerLevel => Self.Player;
+    static IEntityStatus PlayerStanceState => Self.Player;
 
     protected override void OnInit()
     {
-        healthSystem ??= GameManager.GetSystem<HealthSystem>();
         StartCoroutine(GuardStressCycle());
     }
 
@@ -55,7 +55,7 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
         CheckAndUpdateStanceStatusIfNoInput();
     }
 
-    IEnumerator GuardStressCycle()
+    static IEnumerator GuardStressCycle()
     {
         while(true)
         {
@@ -64,111 +64,111 @@ public class AttackDefenseSystem : GameSystem, IRegisterEntity<PlayerEntity>
         }
     }
 
-    private void ManageGuardStressLevels()
+    private static void ManageGuardStressLevels()
     {
-        guardStress -= guardStress > One ? One : Zero;
+        GuardStress -= GuardStress > One ? One : Zero;
     }
 
-    private void CheckAndUpdateStanceStatusIfNoInput()
+    private static void CheckAndUpdateStanceStatusIfNoInput()
     {
-        if (Input.GetMouseButton(LeftClick + reversalValue) || Input.GetMouseButton(RightClick - reversalValue)) return;
-        ((IEntityStatus)_player).ChangeStanceState(StanceState.Idle);
+        if (Input.GetMouseButton(LeftClick + ReversalValue) || Input.GetMouseButton(RightClick - ReversalValue)) return;
+        PlayerStanceState.ChangeStanceState(StanceState.Idle);
     }
 
     #region Attack Input+Logic
     private void ListenForAttackInput()
     {
-        if (_player == null) return;
+        if (Self.Player == null) return;
 
-        if (Input.GetMouseButton(LeftClick + reversalValue))
+        if (Input.GetMouseButton(LeftClick + ReversalValue))
         {
             BeInOffensiveStance();
         }
 
-        if (Input.GetMouseButtonUp(LeftClick + reversalValue))
+        if (Input.GetMouseButtonUp(LeftClick + ReversalValue))
         {
             ExecuteAttack();
-            leftClickHoldFrames = Zero;
-            ((IEntityStatus)_player).ChangeOffensiveState(OffensiveState.None);
+            LeftClickHoldFrames = Zero;
+            PlayerStanceState.ChangeOffensiveState(OffensiveState.None);
         }
     }
 
     private void BeInOffensiveStance()
     {
-        ((IEntityStatus)_player).ChangeStanceState(StanceState.Offensive);
-        leftClickHoldFrames += Time.deltaTime;
+        PlayerStanceState.ChangeStanceState(StanceState.Offensive);
+        LeftClickHoldFrames += Time.deltaTime;
     }
 
-    private void ExecuteAttack()
+    private static void ExecuteAttack()
     {
-        _player.AddExperience();
+        PlayerLevel.AddExperience();
 
-        healthSystem.SetHealth(BossEntityTag, -952, isRelative: true);
+        HealthSystem.SetHealth(BossEntityTag, -952, isRelative: true);
 
-        if (leftClickHoldFrames > ChargeAttackTimeThreshold)
+        if (LeftClickHoldFrames > ChargeAttackTimeThreshold)
         {
-            ((IEntityStatus)_player).ChangeOffensiveState(OffensiveState.ChargeAttack);
-            onChargedAttack.Trigger();
+            PlayerStanceState.ChangeOffensiveState(OffensiveState.ChargeAttack);
+            OnChargedAttack.Trigger();
             return;
         }
 
-        ((IEntityStatus)_player).ChangeOffensiveState(OffensiveState.Attack);
-        onAttack.Trigger();
+        PlayerStanceState.ChangeOffensiveState(OffensiveState.Attack);
+        OnAttack.Trigger();
     }
     #endregion
 
     #region Defense Input+Logic
-    private void ListenForDefenseInput()
+    private static void ListenForDefenseInput()
     {
-        if (_player == null) return;
+        if (Self.Player == null) return;
 
-        if (Input.GetMouseButton(RightClick - reversalValue))
+        if (Input.GetMouseButton(RightClick - ReversalValue))
         {
             BeInDefensiveStance();
         }
 
-        if (Input.GetMouseButtonUp(RightClick - reversalValue))
+        if (Input.GetMouseButtonUp(RightClick - ReversalValue))
         {
             ExecuteDefense();
-            rightClickHoldFrames = Zero;
-            ((IEntityStatus)_player).ChangeDefensiveState(DefensiveState.None);
+            RightClickHoldFrames = Zero;
+            PlayerStanceState.ChangeDefensiveState(DefensiveState.None);
         }
     }
 
-    private void BeInDefensiveStance()
+    private static void BeInDefensiveStance()
     {
-        ((IEntityStatus)_player).ChangeStanceState(StanceState.Defensive);
-        rightClickHoldFrames += Time.deltaTime;
-        if (rightClickHoldFrames > GuardTimeThreshold)
+        PlayerStanceState.ChangeStanceState(StanceState.Defensive);
+        RightClickHoldFrames += Time.deltaTime;
+        if (RightClickHoldFrames > GuardTimeThreshold)
         {
-            ((IEntityStatus)_player).ChangeDefensiveState(DefensiveState.Guard);
-            onGuard.Trigger();
+            PlayerStanceState.ChangeDefensiveState(DefensiveState.Guard);
+            OnGuard.Trigger();
             return;
         }
     }
 
-    private void ExecuteDefense()
+    private static void ExecuteDefense()
     {
-        if (rightClickHoldFrames < GuardTimeThreshold) ((IEntityStatus)_player).ChangeDefensiveState(DefensiveState.Parry);
-        onParry.Trigger();
+        if (RightClickHoldFrames < GuardTimeThreshold) PlayerStanceState.ChangeDefensiveState(DefensiveState.Parry);
+        OnParry.Trigger();
     }
 
-    internal void LosePoise(float value)
+    internal static void LosePoise(float value)
     {
-        poise -= value * guardStress;
-        poise = Mathf.Clamp(poise, Zero, MaxGuardStress);
+        PoiseValue -= value * GuardStress;
+        PoiseValue = Mathf.Clamp(PoiseValue, Zero, MaxGuardStress);
         AmplifyStress();
-        if (poise == Zero) onPoiseLost.Trigger();
+        if (PoiseValue == Zero) OnPoiseLost.Trigger();
     }
 
-    void AmplifyStress()
+    private static void AmplifyStress()
     {
-        guardStress += guardStress * Two;
+        GuardStress += GuardStress * Two;
     }
 
-    internal void RestorePoise()
+    internal static void RestorePoise()
     {
-        poise = MaxGuardStress;
+        PoiseValue = MaxGuardStress;
     }
     #endregion
 }

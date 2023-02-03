@@ -330,6 +330,11 @@ namespace Extensions
             return _;
         }
 
+        public static int DecreaseThisBy(this int _, int value, BonusModificationType type)
+        {
+            return _.IncreaseThisBy(-value, type);
+        }
+
         public static T Get<T>(this T[] _, int index)
         {
             return _[index];

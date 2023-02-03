@@ -32,12 +32,6 @@ public class PlayerHUD : MonoBehaviour
     [Header("Player Action System UI (Secondary Selection")]
     [SerializeField] private ActionItemUI PlayerActionSystemItemUI;
 
-    // Dependencies
-    private HealthSystem _healthSystem;
-    private ManaSystem _manaSystem;
-    private LevelingSystem _levelingSystem;
-    private ActionSystem _actionSystem;
-
     private string MetricFormat = "{0}/{1}";
     private string LevelFormat = "LV {0}";
     private float targetAngle;
@@ -48,19 +42,17 @@ public class PlayerHUD : MonoBehaviour
     private const float MaxDegrees = 360f;
     private const float RotationUnit = 90f;
 
+    private PlayerEntity Player => GameManager.Player;
+
+
     private void Start()
     {
-        _healthSystem = GameManager.GetSystem<HealthSystem>();
-        _manaSystem = GameManager.GetSystem<ManaSystem>();
-        _levelingSystem = GameManager.GetSystem<LevelingSystem>();
-        _actionSystem = GameManager.GetSystem<ActionSystem>();
-
-        _levelingSystem.onLevelChange = () =>
+        ExperienceSystem.onLevelChange = () =>
         {
             EXPSlider.value = EXPSlider.minValue;
         };
 
-        _actionSystem.RegisterPlayerHUD(this);
+        ActionSystem.RegisterPlayerHUD(this);
 
         StartCoroutine(HPSmoothDampCycle());
         StartCoroutine(MPSmoothDampCycle());
@@ -76,7 +68,6 @@ public class PlayerHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            if (_healthSystem == null) return;
             UpdateHPMetrics(PlayerEntityTag);
         });
     }
@@ -85,7 +76,6 @@ public class PlayerHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            if (_manaSystem == null) return;
             UpdateManaMetrics();
         });
     }
@@ -94,7 +84,6 @@ public class PlayerHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            if (_levelingSystem == null) return;
             UpdateExperienceMetrics();
         });
     }
@@ -103,7 +92,7 @@ public class PlayerHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            if (_actionSystem.IsPerformingAction)
+            if (ActionSystem.IsPerformingAction)
             {
                 PlayerActionSystemCategoryUI.DOColor(actionActiveStateColor, SmoothTime);
                 return;
@@ -117,7 +106,7 @@ public class PlayerHUD : MonoBehaviour
     {
         yield return DelayedCycle(() =>
         {
-            if (_actionSystem.IsCategorySelected)
+            if (ActionSystem.IsCategorySelected)
             {
                 PlayerActionSystemItemUI.Reveal();
                 return;
@@ -158,35 +147,31 @@ public class PlayerHUD : MonoBehaviour
     #region Ui Update Methods
     void UpdateHPMetrics(string tag)
     {
-        if (_healthSystem.Exists(tag) == false) return;
+        var target = HealthSystem.Self[tag];
 
-        HPSlider.maxValue = _healthSystem[tag].MaxHealthValue;
+        HPSlider.maxValue = target.MaxHealthValue;
         HPSlider.minValue = 0;
-        HPSlider.value = Mathf.SmoothDamp(HPSlider.value, _healthSystem[tag].HealthValue, ref smoothHPVelocity, SmoothTime);
+        HPSlider.value = Mathf.SmoothDamp(HPSlider.value, target.HealthValue, ref smoothHPVelocity, SmoothTime);
 
-        HPMetrics.text = string.Format(MetricFormat, _healthSystem[tag].HealthValue, _healthSystem[tag].MaxHealthValue);
+        HPMetrics.text = string.Format(MetricFormat, target.HealthValue, target.MaxHealthValue);
     }
     void UpdateManaMetrics()
     {
-        if (_manaSystem._player == null) return;
-
-        MPSlider.maxValue = _manaSystem._player.MaxManaValue;
+        MPSlider.maxValue = Player.MaxManaValue;
         MPSlider.minValue = 0;
-        MPSlider.value = Mathf.SmoothDamp(MPSlider.value, _manaSystem._player.ManaValue, ref smoothMPVelocity, SmoothTime);
+        MPSlider.value = Mathf.SmoothDamp(MPSlider.value, Player.ManaValue, ref smoothMPVelocity, SmoothTime);
 
-        MPMetrics.text = string.Format(MetricFormat, _manaSystem._player.ManaValue, _manaSystem._player.ManaValue);
+        MPMetrics.text = string.Format(MetricFormat, Player.ManaValue, Player.ManaValue);
     }
     void UpdateExperienceMetrics()
     {
-        if (_levelingSystem._player == null) return;
-
         EXPSlider.maxValue = 1;
         EXPSlider.minValue = 0;
 
-        EXPSlider.value = Mathf.SmoothDamp(EXPSlider.value, _levelingSystem.CurrentExperience % 1, ref smoothEXPVelocity, SmoothTime);
+        EXPSlider.value = Mathf.SmoothDamp(EXPSlider.value, ExperienceSystem.CurrentExperience % 1, ref smoothEXPVelocity, SmoothTime);
 
-        EXPMetrics.text = string.Format(MetricFormat, Mathf.RoundToInt(_levelingSystem.CurrentExperiencePoints), Mathf.RoundToInt(_levelingSystem.ExperienceTilNextLevel));
-        LevelMetrics.text = string.Format(LevelFormat, _levelingSystem.CurrentLevel);
+        EXPMetrics.text = string.Format(MetricFormat, Mathf.RoundToInt(ExperienceSystem.CurrentExperiencePoints), Mathf.RoundToInt(ExperienceSystem.ExperienceTilNextLevel));
+        LevelMetrics.text = string.Format(LevelFormat, ExperienceSystem.CurrentLevel);
     }
     #endregion
 
