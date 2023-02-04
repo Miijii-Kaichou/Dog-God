@@ -34,7 +34,9 @@ public abstract class GameSystem : Singleton<GameSystem>
     SystemStatus status;
     bool isInitialized;
 
-    void Awake()
+    public override Action OnAwake => WakeUp;
+
+    void WakeUp()
     {
         onCheckStatusCallback = CheckStatus;
     }
@@ -42,6 +44,9 @@ public abstract class GameSystem : Singleton<GameSystem>
     void Init()
     {
         if (isInitialized) return;
+
+        Player = GameManager.Player;
+
         status = GameManager.GetSystemStatus(this);
         isInitialized = status != null;
         OnInit();

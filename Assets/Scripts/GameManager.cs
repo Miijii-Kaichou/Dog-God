@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,11 +14,11 @@ using static SharedData.Constants;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField, Header("Sprite Atlas")]
-    SpriteAtlas spriteAtlas;
+    SpriteAtlas? spriteAtlas;
 
-    public static SpriteAtlas SpriteAtlas
+    public static SpriteAtlas? SpriteAtlas
     {
-        get { return Instance.spriteAtlas; }
+        get { return Instance?.spriteAtlas; }
     }
 
     public static Action? OnSystemRegistrationProcessCompleted { get; internal set; }
@@ -24,10 +26,10 @@ public class GameManager : Singleton<GameManager>
     public static Action? OnPlayerRegistered { get; internal set; }
     public static Action? OnBossRegistered { get; internal set; }
 
-    public static T GetSystem<T>() where T : GameSystem => Instance.GetGameSystem<T>();
-    public static SystemStatus GetSystemStatus(GameSystem system) => Instance.GetSystemStatus(system.SystemName);
-    public static SystemInfo[] GetSystemInfo() => Instance.GetAllSystemInfo();
-    public static SystemInfo[] GetSystemInfo(Status _status) => Instance.GetAllSystemInfo(_status);
+    public static T? GetSystem<T>() where T : GameSystem => Instance?.GetGameSystem<T>();
+    public static SystemStatus? GetSystemStatus(GameSystem system) => Instance?.GetSystemStatus(system.SystemName);
+    public static SystemInfo[]? GetSystemInfo() => Instance?.GetAllSystemInfo();
+    public static SystemInfo[]? GetSystemInfo(Status _status) => Instance?.GetAllSystemInfo(_status);
 
 
     public struct Achievement
@@ -74,13 +76,13 @@ public class GameManager : Singleton<GameManager>
     [Header("Game Systems"), ShowAsSystemIndicator]
     public List<SystemInfo> systemInfoList = new List<SystemInfo>();
 
-    DirectoryInfo dirInfo;
+    DirectoryInfo? dirInfo;
 
     [Header("Achievements"), SerializeField]
     private List<Achievement> achievements = new List<Achievement>();
 
-    public static PlayerEntity Player { get; set; }
-    public static BossEntity Boss { get; set; }
+    public static PlayerEntity? Player { get; set; }
+    public static BossEntity? Boss { get; set; }
 
     void Awake()
     {
@@ -170,7 +172,7 @@ public class GameManager : Singleton<GameManager>
         OnSystemStartProcessCompleted?.Invoke();
     }
 
-    internal T WithSystem<T>() where T : GameSystem
+    internal T? WithSystem<T>() where T : GameSystem
     {
         return GetSystem<T>();
     }
@@ -192,13 +194,13 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     /// <param name="_systemName">The name of the system.</param>
     /// <returns>A game system.</returns>
-    private T GetGameSystem<T>() where T : GameSystem
+    private T? GetGameSystem<T>() where T : GameSystem
     {
         var data = from sys in systemInfoList where sys.system.GetType() == typeof(T) select sys;
         if (data.Any() == false)
         {
             Debug.Log(typeof(T) + "isn't an existing system. Why not creating one that derives from 'GameSystem'?");
-            return default;
+            return null;
         }
         return (T)Convert.ChangeType(data.Single().system, typeof(T));
     }
@@ -208,7 +210,7 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     /// <param name="_systemName"></param>
     /// <returns>A status of a specified game system.</returns>
-    private SystemStatus GetSystemStatus(string _systemName)
+    private SystemStatus? GetSystemStatus(string _systemName)
     {
         foreach (SystemInfo info in systemInfoList)
         {
@@ -255,7 +257,7 @@ public class GameManager : Singleton<GameManager>
     {
         try
         {
-            dirInfo.Create();
+            dirInfo?.Create();
         }
         catch (IOException e)
         {
@@ -281,9 +283,9 @@ public class GameManager : Singleton<GameManager>
                 select markedAchievement).ToArray();
     }
 
-    private Achievement[] SortAchievementsBy(SortingOrder sortingOrder, bool _descendingOrder = false)
+    private Achievement[]? SortAchievementsBy(SortingOrder sortingOrder, bool _descendingOrder = false)
     {
-        Achievement[] sortedAchievements = null;
+        Achievement[]? sortedAchievements = null;
         //Sort by a specified SortingOrder
         switch (sortingOrder)
         {
