@@ -20,6 +20,9 @@ public class GameManager : Singleton<GameManager>
     }
 
     public static Action? OnSystemRegistrationProcessCompleted { get; internal set; }
+    public static Action? OnSystemStartProcessCompleted { get; internal set; }
+    public static Action? OnPlayerRegistered { get; internal set; }
+    public static Action? OnBossRegistered { get; internal set; }
 
     public static T GetSystem<T>() where T : GameSystem => Instance.GetGameSystem<T>();
     public static SystemStatus GetSystemStatus(GameSystem system) => Instance.GetSystemStatus(system.SystemName);
@@ -93,22 +96,26 @@ public class GameManager : Singleton<GameManager>
         }
         #endregion  
         RegisterSystems();
+        StartUpAllSystems();
+        ReportStartUp();
+
     }
 
     public static void ReferencePlayer(PlayerEntity player)
     {
         Player = player;
+        OnPlayerRegistered?.Invoke();
     }
 
     public static void ReferenceBoss(BossEntity boss)
     {
         Boss = boss;
+        OnPlayerRegistered?.Invoke();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
         Screen.SetResolution((int)resolutionWidth, (int)resolutionHeight, FullScreenMode.FullScreenWindow, Application.targetFrameRate);
 
         //I want to also create a folder of Profiles if one exists or not.
@@ -117,9 +124,6 @@ public class GameManager : Singleton<GameManager>
 
         if (!dirInfo.Exists)
             CreateProfileDirectory();
-
-        StartUpAllSystems();
-        ReportStartUp();
     }
 
     void RegisterSystems()
@@ -138,7 +142,6 @@ public class GameManager : Singleton<GameManager>
         }
         systemInfoList = systemInfoList.OrderBy(sysInfo => sysInfo.systemName).ToList();
         OnSystemRegistrationProcessCompleted?.Invoke();
-        OnSystemRegistrationProcessCompleted = null;
     }
 
     void ReportStartUp()
@@ -154,7 +157,7 @@ public class GameManager : Singleton<GameManager>
         GetSystem<DeitySystem>().Run();
         GetSystem<HealthSystem>().Run();
         GetSystem<ManaSystem>().Run();
-        GetSystem<LevelingSystem>().Run();
+        GetSystem<ExperienceSystem>().Run();
         GetSystem<ResurrectionSystem>().Run();
         GetSystem<SkillSystem>().Run();
         GetSystem<ItemSystem>().Run();
@@ -163,6 +166,8 @@ public class GameManager : Singleton<GameManager>
         GetSystem<ActionSystem>().Run();
         GetSystem<AttackDefenseSystem>().Run();
         GetSystem<RuntimeActionSystem>().Run();
+
+        OnSystemStartProcessCompleted?.Invoke();
     }
 
     internal T WithSystem<T>() where T : GameSystem

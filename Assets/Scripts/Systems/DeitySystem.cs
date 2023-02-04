@@ -1,11 +1,15 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections;
 using System.Linq;
 using static SharedData.Constants;
 
 public class DeitySystem : GameSystem, IActionCategory
 {
-    public (IActionableItem[] slots, int[] quantities, int[] capacities, Type[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
+    private static DeitySystem? Self;
+
+    public (IActionableItem?[] slots, int[] quantities, int[] capacities, Type?[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
     {
         slots = new IActionableItem[MaxSlotSize],
         quantities = new int[MaxSlotSize],
@@ -14,41 +18,55 @@ public class DeitySystem : GameSystem, IActionCategory
         isExpensible = false
     };
 
-    private readonly Deity[] DeityList =
+    private readonly static Deity[] DeityList = new Deity[]
     {
-
+        new DAzulette(),
+        new DEstere(),
+        new DCharolette(),
+        new DRosa(),
+        new DOthella(),
+        new DPatchouli(),
+        new DKamui(),
+        new DSuisei(),
+        new DRyuga(),
     };
 
-    private BitArray Accessibility;
-    private int _skillRefCount;
+    private static BitArray? _Accessibility;
+    private static int _SkillRefCount;
 
     protected override void OnInit()
     {
-        Accessibility = new BitArray(DeityList.Length);
+        Self ??= GameManager.GetSystem<DeitySystem>();
+        _Accessibility = new BitArray(DeityList.Length);
     }
 
-    internal T GetSkill<T>() where T : Skill
+    internal static T? GetDeity<T>() where T : Skill
     {
-        return (T)ActionCategoryDetails.slots.Where(skill => skill.StaticItemType == typeof(T)).Single();
+        return (T?)Self?.ActionCategoryDetails.slots.Where(skill => skill?.StaticItemType == typeof(T)).Single();
     }
 
-    internal int GetRefCount()
+    internal static int GetRefCount()
     {
-        return _skillRefCount;
+        return _SkillRefCount;
     }
 
-    internal void IncreaseRefCount()
+    internal static void IncreaseRefCount()
     {
-        _skillRefCount++;
+        _SkillRefCount++;
     }
 
-    internal void GainAccess(int index)
+    internal static void GainAccess(int index)
     {
-        Accessibility[index] = true;
+        _Accessibility![index] = true;
     }
 
-    internal void Lock(int index)
+    internal static void Lock(int index)
     {
-        Accessibility[index] = false;
+        _Accessibility![index] = false;
+    }
+
+    internal static Deity? LocateDeity<T>()
+    {
+        return DeityList.Where(deity => deity.StaticItemType == typeof(T)).Single();
     }
 }

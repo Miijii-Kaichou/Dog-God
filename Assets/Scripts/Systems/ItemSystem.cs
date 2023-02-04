@@ -1,11 +1,15 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections;
 using System.Linq;
 using static SharedData.Constants;
 
 public sealed class ItemSystem : GameSystem, IActionCategory
 {
-    public (IActionableItem[] slots, int[] quantities, int[] capacities, Type[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
+    private static ItemSystem? Self;
+
+    public (IActionableItem?[] slots, int[] quantities, int[] capacities, Type?[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
     {
         slots = new IActionableItem[MaxSlotSize],
         quantities = new int[MaxSlotSize],
@@ -19,9 +23,8 @@ public sealed class ItemSystem : GameSystem, IActionCategory
         requiredTypes = new Type[MaxSlotSize],
         isExpensible = true
     };
-    public Type[] RequiredTypes { get; }
 
-    public Item[] ItemList = {
+    public readonly static Item[] ItemList = {
         new ITAdulite(),
         new ITAlguarde(),
         new ITAlhercule(),
@@ -44,9 +47,9 @@ public sealed class ItemSystem : GameSystem, IActionCategory
         new ITStellaLeaf()
     };
 
-    private BitArray Accessibility;
+    private static BitArray? Accessibility;
 
-    private int _itemRefCount;
+    private static int _ItemRefCount;
 
     protected override void OnInit()
     {
@@ -56,28 +59,33 @@ public sealed class ItemSystem : GameSystem, IActionCategory
         // what's unlocked.
     }
 
-    internal T GetItem<T>() where T : Item
+    protected override void Main()
     {
-        return (T)ActionCategoryDetails.slots.Where(item => item.StaticItemType == typeof(T)).Single();
+        Self ??= GameManager.GetSystem<ItemSystem>();
     }
 
-    internal void IncreaseRefCount()
+    internal static T? GetItem<T>() where T : Item
     {
-        _itemRefCount++;
+        return (T?)Self!.ActionCategoryDetails.slots.Where(item => item?.StaticItemType == typeof(T)).Single();
     }
 
-    internal int GetRefCount()
+    internal static void IncreaseRefCount()
     {
-        return _itemRefCount;
+        _ItemRefCount++;
     }
 
-    internal void GainAccess(int id)
+    internal static int GetRefCount()
     {
-        Accessibility[id] = true;
+        return _ItemRefCount;
     }
 
-    internal void Lock(int id)
+    internal static void GainAccess(int id)
     {
-        Accessibility[id] = false;
+        Accessibility![id] = true;
+    }
+
+    internal static void Lock(int id)
+    {
+        Accessibility![id] = false;
     }
 }

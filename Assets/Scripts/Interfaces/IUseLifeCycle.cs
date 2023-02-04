@@ -13,8 +13,9 @@ interface IUseLifeCycle
 
     public Action? OnLifeExpired { get; }
     public Action? OnTick { get; }
+    
 
-    void BeginLifeCycle()
+    void Start()
     {
         Alarm alarm = new(2);
 

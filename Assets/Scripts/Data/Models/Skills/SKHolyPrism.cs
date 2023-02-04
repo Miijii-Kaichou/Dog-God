@@ -8,7 +8,7 @@ public sealed class SKHolyPrism : Skill
 {
     public override string SkillName => "Holy Prism";
     public override Type StaticItemType => typeof(SKHolyPrism);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

@@ -12,16 +12,15 @@ public sealed class ITPotionAlpha : Item, IHealthModifier
 {
     public override string ItemName => "Potion Alpha";
     public override Type? StaticItemType => typeof(ITPotionAlpha);
-    public override ItemUseCallaback? OnActionUse => TakePotion;
-
-    public HealthSystem? HealthSystem { get; set; }
+    public override ItemUseCallback? OnActionUse => TakePotion;
 
     public float SetHealthBonus => Random.Range(10, 15);
     public BonusModificationType HealthModificationType => BonusModificationType.PercentageOf;
 
+    IHealthModifier HealthModifier => this;
+
     private void TakePotion()
     {
-       HealthSystem ??= GameManager.GetSystem<HealthSystem>();
-        HealthSystem.SetHealth(nameof(PlayerEntity), GameManager.Player.MaxHealthValue * ((IHealthModifier)this).HealthBonus, true);
+        HealthSystem.SetHealth(nameof(PlayerEntity), Player!.MaxHealthValue * HealthModifier.HealthBonus, true);
     }
 }

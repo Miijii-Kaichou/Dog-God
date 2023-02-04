@@ -1,9 +1,9 @@
 ﻿#nullable enable
 
-using UnityEngine;
-
-public sealed class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
+public sealed class ManaSystem : GameSystem
 {
+    public static ManaSystem? Self;
+
     /*So, the Mana System takes in all the things that has
     HP. All of this information will be displayed in game, keeping track
     of everyone's health, that includes the Player's MP.
@@ -11,32 +11,35 @@ public sealed class ManaSystem : GameSystem, IRegisterEntity<IManaProperty>
     There will also be a UI portion of the system as well.*/
     public delegate void ManaSystemOperation();
 
-    public ManaSystemOperation? onManaChange;
+    public static ManaSystemOperation? OnManaChange;
 
-    public IManaProperty? _player { get; set; }
+    private static IManaProperty? PlayerManaProp => Self!.Player;
+    protected override void OnInit()
+    {
+        Self ??= GameManager.GetSystem<ManaSystem>();
+    }
 
-
-    internal void SetMana(float value, bool isRelative = false)
+    internal static void SetMana(float value, bool isRelative = false)
     {
         if (isRelative)
-            _player?.AddToMana(value);
+            PlayerManaProp?.AddToMana(value);
         if (!isRelative)
-            _player?.SetMana(value);
+            PlayerManaProp?.SetMana(value);
 
-        if (_player!.ManaValue > _player!.MaxManaValue)
+        if (PlayerManaProp?.ManaValue > PlayerManaProp?.MaxManaValue)
         {
-            _player.SetMana(_player!.MaxManaValue);
+            PlayerManaProp.SetMana(PlayerManaProp.MaxManaValue);
         }
-        onManaChange?.Invoke();
+        OnManaChange?.Invoke();
     }
 
-    internal void SetMaxMana(float value)
+    internal static void SetMaxMana(float value)
     {
-        _player?.SetMaxMana(value);
+        PlayerManaProp?.SetMaxMana(value);
     }
 
-    internal void RestoreAllMana()
+    internal static void RestoreAllMana()
     {
-        SetMaxMana(_player!.MaxManaValue);
+        SetMaxMana(PlayerManaProp!.MaxManaValue);
     }
 }

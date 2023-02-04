@@ -13,23 +13,17 @@ using static SharedData.Constants;
 /// </summary>
 public sealed class ITAdulite : Item, IHealthModifier, IManaModifier, IUseLifeCycle
 {
-    private PlayerEntity? _player;
-
     public override string? ItemName => "Adulite";
     public override Type? StaticItemType => typeof(ITAdulite);
-    public override ItemUseCallaback? OnActionUse => AbsorbAdulite;
+    public override ItemUseCallback? OnActionUse => AbsorbAdulite;
 
     public float SetHealthBonus => Random.Range(5f, 10f);
 
     public BonusModificationType HealthModificationType => BonusModificationType.PercentageOf;
 
-    public HealthSystem? HealthSystem { get; set; }
-
     public float SetManaBonus => Random.Range(5f, 10f);
 
     public BonusModificationType ManaModificationType => BonusModificationType.PercentageOf;
-
-    public ManaSystem? ManaSystem { get; set; }
 
     public float LifeDuration => 30f;
 
@@ -39,21 +33,21 @@ public sealed class ITAdulite : Item, IHealthModifier, IManaModifier, IUseLifeCy
 
     public Action? OnTick => Rejuvenate;
 
+    private IHealthModifier HealthModifier => this;
+    private IManaModifier ManaModifier => this;
+    private IUseLifeCycle LifeExpectency => this;
+
     private void Rejuvenate()
     {
-        HealthSystem!.SetHealth(nameof(PlayerEntity), _player!.MaxHealthValue * ((IHealthModifier)this).HealthBonus);
-        ManaSystem!.SetMana(_player.MaxManaValue * ((IManaModifier)this).ManaBonus);
+        HealthSystem.SetHealth(nameof(PlayerEntity), Player!.MaxHealthValue * HealthModifier.HealthBonus);
+        ManaSystem.SetMana(Player.MaxManaValue * ManaModifier.ManaBonus);
     }
 
     private void AbsorbAdulite()
     {
-        _player = GameManager.Player;
-        HealthSystem ??= GameManager.GetSystem<HealthSystem>();
-        ManaSystem ??= GameManager.GetSystem<ManaSystem>();
-
         HealthSystem.RestoreAllHealth(nameof(PlayerEntity));
         ManaSystem.RestoreAllMana();
 
-        ((IUseLifeCycle)this).BeginLifeCycle();
+        LifeExpectency.Start();
     }
 }

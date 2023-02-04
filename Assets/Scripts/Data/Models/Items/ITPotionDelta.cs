@@ -11,7 +11,7 @@ public sealed class ITPotionDelta : Item, IHealthModifier, IUseLifeCycle
 {
     public override string ItemName => "Potion Delta";
     public override Type? StaticItemType => typeof(ITPotionDelta);
-    public override ItemUseCallaback? OnActionUse => TakePotion;
+    public override ItemUseCallback? OnActionUse => TakePotion;
 
     public HealthSystem? HealthSystem { get; set; }
 
@@ -27,14 +27,16 @@ public sealed class ITPotionDelta : Item, IHealthModifier, IUseLifeCycle
 
     public Action? OnTick => Recover;
 
+    private IHealthModifier HealthModifier => this;
+    private IUseLifeCycle LifeExpectancy => this;
+
     private void Recover()
     {
-        HealthSystem!.SetHealth(nameof(PlayerEntity), GameManager.Player.MaxHealthValue * ((IHealthModifier)this).HealthBonus, true);
+       HealthSystem.SetHealth(nameof(PlayerEntity), Player!.MaxHealthValue * HealthModifier.HealthBonus, true);
     }
 
     private void TakePotion()
     {
-        HealthSystem ??= GameManager.GetSystem<HealthSystem>();
-        ((IUseLifeCycle)this).BeginLifeCycle();
+        LifeExpectancy.Start();
     }
 }

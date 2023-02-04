@@ -1,11 +1,15 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections;
 using System.Linq;
 using static SharedData.Constants;
 
 public class SkillSystem : GameSystem, IActionCategory
 {
-    public (IActionableItem[] slots, int[] quantities, int[] capacities, Type[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
+    private static SkillSystem? Self;
+
+    public (IActionableItem?[] slots, int[] quantities, int[] capacities, Type?[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
     {
         slots = new IActionableItem[MaxSlotSize],
         quantities = new int[MaxSlotSize],
@@ -14,11 +18,11 @@ public class SkillSystem : GameSystem, IActionCategory
         isExpensible = false
     };
 
-    private int _skillRefCount;
+    private static int _SkillRefCount;
 
     // If new skills needs to be added,
     // just initialize it here.
-    public Skill[] SkillsList =
+    public readonly static Skill[] SkillsList =
     {
         new SKBeelzebub(),
         new SKBlazeRunner(),
@@ -46,39 +50,42 @@ public class SkillSystem : GameSystem, IActionCategory
         new SKTrifecta(),
         new SKTyphoon(),
         new SKUltraheal(),
-        new SKYeti()
+        new SKYeti(),
+
+        // Divine Skills
+        new SKAzure()
     };
 
-    private BitArray Accessibility;
+    private static BitArray? _Accessibility;
 
     protected override void OnInit()
     {
-        Accessibility = new BitArray(SkillsList.Length);
-
+        Self ??= GameManager.GetSystem<SkillSystem>();
+        _Accessibility = new BitArray(SkillsList.Length);
     }
 
-    internal T GetSkill<T>() where T : Skill
+    internal static int GetRefCount()
     {
-        return (T)ActionCategoryDetails.slots.Where(skill => skill.StaticItemType == typeof(T)).Single();
+        return _SkillRefCount;
     }
 
-    internal int GetRefCount()
+    internal static void IncreaseRefCount()
     {
-        return _skillRefCount;
+        _SkillRefCount++;
     }
 
-    internal void IncreaseRefCount()
+    internal static void GainAccess(int index)
     {
-        _skillRefCount++;
+        _Accessibility![index] = true;
     }
 
-    internal void GainAccess(int index)
+    internal static void Lock(int index)
     {
-        Accessibility[index] = true;
+        _Accessibility![index] = false;
     }
 
-    internal void Lock(int index)
+    internal static Skill? LocateSkill<T>()
     {
-        Accessibility[index] = false;
+        return  SkillsList.Where(skill => skill.StaticItemType == typeof(T)).Single();
     }
 }

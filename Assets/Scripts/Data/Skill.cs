@@ -6,10 +6,12 @@ using UnityEngine;
 
 public abstract class Skill : IActionableItem
 {
+    protected PlayerEntity? Player { get; private set; }
+    protected BossEntity? Boss { get; private set; }
     protected short? SkillID { get; private set; }
 
     public virtual string? SkillName { get; }
-    public virtual ItemUseCallaback? OnActionUse { get; }
+    public virtual ItemUseCallback? OnActionUse { get; }
     public virtual Type? StaticItemType { get; }
 
     public int SlotNumber { get; set; }
@@ -18,10 +20,11 @@ public abstract class Skill : IActionableItem
     {
         GameManager.OnSystemRegistrationProcessCompleted += () =>
         {
-            var skillSystem = GameManager.GetSystem<SkillSystem>();
-            SkillID = (short)skillSystem.GetRefCount();
+            Player = GameManager.Player;
+            Boss = GameManager.Boss;
+            SkillID = (short)SkillSystem.GetRefCount();
             Debug.Log($"SkillID ({SkillID}) {{{SkillName}}}");
-            skillSystem.IncreaseRefCount();
+            SkillSystem.IncreaseRefCount();
         };
     }
 

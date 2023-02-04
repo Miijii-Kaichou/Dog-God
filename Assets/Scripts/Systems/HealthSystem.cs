@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 #nullable enable
-public class HealthSystem : GameSystem
+public sealed class HealthSystem : GameSystem
 {
+    public static HealthSystem? Self;
+
     /*So, the Health System takes in all the things that has
      HP. All of this information will be displayed in game, keeping track
      of everyone's health, that includes the Player's HP, and the Boss's HP.
@@ -13,49 +13,54 @@ public class HealthSystem : GameSystem
 
     public delegate void HealthSystemOperation(string tag);
 
-    public HealthSystemOperation? onHealthChange;
-    public HealthSystemOperation? onMaxHealthChange;
+    public static HealthSystemOperation? onHealthChange;
+    public static HealthSystemOperation? onMaxHealthChange;
 
-    public Dictionary<string, IHealthProperty> entities = new();
+    public static Dictionary<string, IHealthProperty> Entities = new();
+
+    protected override void OnInit()
+    {
+        Self ??= GameManager.GetSystem<HealthSystem>();
+    }
 
     public IHealthProperty this[string id]
     {
-        get { return entities[id]; }
+        get { return Entities[id]; }
     }
 
-    public void AddNewEntry(string id, IHealthProperty entity)
+    public static void AddNewEntry(string id, IHealthProperty entity)
     {
-        entities.Add(id, entity);
+        Entities.Add(id, entity);
     }
 
-    internal void SetHealth(string id, float value, bool isRelative = false)
+    internal static void SetHealth(string id, float value, bool isRelative = false)
     {
         if (isRelative)
-            entities[id].AddHealth(value);
+            Entities[id].AddHealth(value);
         if (!isRelative)
-            entities[id].SetHealth(value);
+            Entities[id].SetHealth(value);
 
-        if (entities[id].HealthValue > entities[id].MaxHealthValue)
+        if (Entities[id].HealthValue > Entities[id].MaxHealthValue)
         {
-            entities[id].SetHealth(entities[id].MaxHealthValue);
+            Entities[id].SetHealth(Entities[id].MaxHealthValue);
         }
 
         onHealthChange?.Invoke(id);
     }
      
-    internal void SetMaxHealth(string id, float value)
+    internal static void SetMaxHealth(string id, float value)
     {
-        entities[id].SetMaxHealth(value);
+        Entities[id].SetMaxHealth(value);
         onMaxHealthChange?.Invoke(id);
     }
 
-    internal bool Exists(string playerEntityTag)
+    internal static bool Exists(string playerEntityTag)
     {
-        return entities.ContainsKey(playerEntityTag);
+        return Entities.ContainsKey(playerEntityTag);
     }
 
-    internal void RestoreAllHealth(string id)
+    internal static void RestoreAllHealth(string id)
     {
-        entities[id].RestoreAllHealth();
+        Entities[id].RestoreAllHealth();
     }
 }

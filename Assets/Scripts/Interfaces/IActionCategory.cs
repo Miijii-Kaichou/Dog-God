@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IActionCategory
 {
-    public (IActionableItem[] slots, int[] quantities, int[] capacities, Type?[] requiredTypes, bool isExpensible) 
+    public (IActionableItem?[] slots, int[] quantities, int[] capacities, Type?[] requiredTypes, bool isExpensible) 
         ActionCategoryDetails { get; set; }
 
     public const int MaxSlots = 4;
@@ -39,7 +39,7 @@ public interface IActionCategory
 
     void RemoveFromSlot(int slotNumber, int count = 1)
     {
-        ActionCategoryDetails.slots[slotNumber] = default;
+        ActionCategoryDetails.slots[slotNumber] = null;
         ActionCategoryDetails.quantities[slotNumber] -= count;
         ActionCategoryDetails.quantities[slotNumber] = Mathf.Clamp(ActionCategoryDetails.quantities[slotNumber], 0,
             ActionCategoryDetails.capacities[slotNumber]);

@@ -9,7 +9,7 @@ public class SystemException : Exception
     public SystemException(string message, Exception inner) : base(message, inner) { }
 }
 
-[System.Serializable]
+[Serializable]
 public abstract class GameSystem : Singleton<GameSystem>
 {
     /*Game System can be any system that handles a defined part of the game;
@@ -29,8 +29,10 @@ public abstract class GameSystem : Singleton<GameSystem>
     OnCheckStatus onCheckStatusCallback;
     public OnInitCallback onInitCallback;
 
+    public PlayerEntity Player { get; private set; }
+
     SystemStatus status;
-    private bool isInitialized;
+    bool isInitialized;
 
     void Awake()
     {
@@ -110,6 +112,7 @@ public abstract class GameSystem : Singleton<GameSystem>
         //Main Loop
         while (true)
         {
+            Player ??= GameManager.Player;
             try
             {
                 //Try calling main every fram

@@ -8,7 +8,7 @@ public sealed class SKBlizzard : Skill
 {
     public override string SkillName => "Blizzard";
     public override Type StaticItemType => typeof(SKBlizzard);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {

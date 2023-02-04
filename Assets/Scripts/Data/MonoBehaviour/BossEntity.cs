@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,12 +9,15 @@ using Random = UnityEngine.Random;
 
 public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
 {
-    [Header("Target")]
-    [SerializeField] PlayerEntity playerEntity;
+    [SerializeField]
+    private PlayerEntity? Target;
 
     [Header("Viewable Boss Data")]
     [SerializeField] float HPValue;
     [SerializeField] float MaxHPValue;
+
+    // Boss Status
+    public EntityStats? stats;
 
     // Motion percetage of attack.
     [SerializeField]
@@ -30,12 +35,15 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
         set { MaxHPValue = value; }
     }
 
-    private HealthSystem _healthSystem;
+    private HealthSystem? _healthSystem;
 
     public StanceState EntityStanceState { get; set; }
     public OffensiveState EntityOffensiveState { get; set; }
     public DefensiveState EntityDefensiveState { get; set; }
-    public Action OnHealthDown { get; set; }
+    public Action? OnHealthDown { get; set; }
+    public Action? OnHealthNegativeChange {get;set;}
+    public Action? OnHealthPositiveChange { get; set; }
+
     public bool WasParryTimed
     {
         get
@@ -48,34 +56,41 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
 
     private const int BossStartingMaxHealth = 1000000;
 
-    private Alarm alarm = new(DefaultAlarmSize);
-    private AttackDefenseSystem _attackDefenseSystem;
+    private readonly Alarm? alarm = new(DefaultAlarmSize);
+    private AttackDefenseSystem? _attackDefenseSystem;
+
+    private void Awake()
+    {
+        GameManager.OnSystemRegistrationProcessCompleted += () => {
+            GameManager.ReferenceBoss(this);
+            HealthSystem.AddNewEntry(nameof(BossEntity), this);
+        };
+    }
 
     void Start()
     {
-        GameManager.ReferenceBoss(this);
+        Initialize();
+    }
 
-        _healthSystem ??= GameManager.GetSystem<HealthSystem>();
-        _attackDefenseSystem ??= GameManager.GetSystem<AttackDefenseSystem>();
-
-        _healthSystem.AddNewEntry(nameof(BossEntity), this);
-
-        _healthSystem.SetHealth(nameof(BossEntity), BossStartingMaxHealth);
-        _healthSystem.SetMaxHealth(nameof(BossEntity), BossStartingMaxHealth);
+    private void Initialize()
+    {
+        HealthSystem.SetMaxHealth(nameof(BossEntity), BossStartingMaxHealth);
+        HealthSystem.SetHealth(nameof(BossEntity), BossStartingMaxHealth);
 
         // Test
-        _attackDefenseSystem.onParrySuccess = EventManager.AddEvent(101, "GotParriedEvent", () =>
+        AttackDefenseSystem.OnParrySuccess = EventManager.AddEvent(101, "GotParriedEvent", () =>
         {
             Debug.Log("You parried Inugami Koko successfully. Stunned for 5 Seconds");
             EntityStanceState = StanceState.Stunned;
-            alarm.SetFor(5, Two, true, () => {
+            alarm?.SetFor(5, Two, true, () =>
+            {
                 EntityStanceState = StanceState.Idle;
                 Debug.Log("Watch out! Inugami Koko is out of stunned state.");
             });
         });
 
         // We'll now randomize 
-        alarm.SetFor(Random.Range(1, 3), Zero, false, () =>
+        alarm?.SetFor(Random.Range(1, 3), Zero, false, () =>
         {
             if (EntityStanceState == StanceState.Stunned) return;
             StartCoroutine(DoNormalAttack());
@@ -88,7 +103,7 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
     {
         EntityStanceState = StanceState.Offensive;
 
-        alarm.SetFor(Random.Range(0.25f, 1f), One, true, () =>
+        alarm?.SetFor(Random.Range(0.25f, 1f), One, true, () =>
         {
             alarm[One].CurrentTime = 0;
             if (EntityStanceState == StanceState.Stunned) return;
@@ -101,20 +116,19 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
         while(motionPercentage < 0.99f)
         {
             EntityOffensiveState = OffensiveState.Attack;
-            motionPercentage = alarm[One].CurrentTime / alarm[One].SetDuration;
+            motionPercentage = alarm![One].CurrentTime / alarm[One].SetDuration;
             parryPercentageRange = (0.49f, 0.91f);
             yield return new WaitForSeconds(MaxTime);
         }
     }
 
-
     void SendDamageToPlayer(float damageValue)
     {
-        if (playerEntity.EntityDefensiveState == DefensiveState.Guard)
+        if (Target!.EntityDefensiveState == DefensiveState.Guard)
         {
-            _attackDefenseSystem.LosePoise(damageValue);
+            AttackDefenseSystem.LosePoise(damageValue);
             damageValue /= 10;
         }
-        _healthSystem.SetHealth(nameof(PlayerEntity), -damageValue, isRelative: true);
+        HealthSystem.SetHealth(nameof(PlayerEntity), -damageValue, isRelative: true);
     }
 }

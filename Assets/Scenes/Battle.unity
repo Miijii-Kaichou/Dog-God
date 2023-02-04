@@ -1509,7 +1509,7 @@ GameObject:
   - component: {fileID: 729021566}
   - component: {fileID: 729021567}
   m_Layer: 0
-  m_Name: $LevelingSystem
+  m_Name: $ExperienceSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1539,10 +1539,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 729021565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15eebf09d635ef5418725df472999eaa, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd93f19634717a4190acf936f66787d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHUD: {fileID: 0}
 --- !u!1 &736389219
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,8 +1571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28819e417dc686244a7c1a3ff5ba9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poise: 100
-  guardStress: 1
 --- !u!4 &736389221
 Transform:
   m_ObjectHideFlags: 0
@@ -4347,7 +4344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8ec3e8fccddff4d86d3b4e08a85d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEntity: {fileID: 1547530603}
+  Target: {fileID: 1547530603}
   HPValue: 0
   MaxHPValue: 0
   motionPercentage: 0
@@ -4607,7 +4604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5f550aeb7635f47b7502da454cafb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossEntity: {fileID: 1499985786}
+  BossEntity: {fileID: 1499985786}
   HPValue: 0
   MaxHPValue: 0
   MPValue: 0

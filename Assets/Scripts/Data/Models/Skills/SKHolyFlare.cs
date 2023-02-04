@@ -8,7 +8,7 @@ public sealed class SKHolyFlare : Skill
 {
     public override string SkillName => "Holy Flare";
     public override Type StaticItemType => typeof(SKHolyFlare);
-    public override ItemUseCallaback OnActionUse => UseSkill;
+    public override ItemUseCallback OnActionUse => UseSkill;
 
     private void UseSkill()
     {
