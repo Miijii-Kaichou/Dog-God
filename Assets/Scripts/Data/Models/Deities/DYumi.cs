@@ -13,7 +13,7 @@ public class DYumi : Deity
     public override ItemUseCallback? OnActionUse => ActivateSkill;
 
     public override DeityType DeityType => DeityType.Normal;
-    public override Skill? DivineSkill => SkillSystem.LocateSkill<SKAzure>();
+    public override Skill? DivineSkill => SkillSystem.LocateSkill<SKBeastar>();
     public override Skill? DivineBlessing => null;
 
     private void ActivateSkill()

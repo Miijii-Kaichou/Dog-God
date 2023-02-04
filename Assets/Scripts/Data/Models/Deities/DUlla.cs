@@ -13,8 +13,8 @@ public class DUlla : Deity
     public override ItemUseCallback? OnActionUse => ActivateSkill;
 
     public override DeityType DeityType => DeityType.Normal;
-    public override Skill? DivineSkill => SkillSystem.LocateSkill<SKAzure>();
-    public override Skill? DivineBlessing => null;
+    public override Skill? DivineSkill => SkillSystem.LocateSkill<SKJackofaltrade>();
+    public override Skill? DivineBlessing => SkillSystem.LocateSkill<SKProdigy>();
 
     private void ActivateSkill()
     {

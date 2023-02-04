@@ -13,8 +13,8 @@ public class DMaki : Deity
     public override ItemUseCallback? OnActionUse => ActivateSkill;
 
     public override DeityType DeityType => DeityType.Normal;
-    public override Skill? DivineSkill => SkillSystem.LocateSkill<SKAzure>();
-    public override Skill? DivineBlessing => null;
+    public override Skill? DivineSkill => SkillSystem.LocateSkill<SKDevoteYourSoul>();
+    public override Skill? DivineBlessing => SkillSystem.LocateSkill<SKVengence>();
 
     private void ActivateSkill()
     {
