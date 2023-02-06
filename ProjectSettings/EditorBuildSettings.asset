@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Gateway.unity
+    guid: 5b754a8034becb84f99806973bf5d838
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Profile.unity
+    guid: e0bdaf5cff3f6c645a1dd55de9418df6
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: 22481642dc353fc4cbc04a0cd7c5f86d
+  - enabled: 1
+    path: Assets/Scenes/Heaven's Plaza.unity
+    guid: 195af748a0c2a72499434330f0737eca
   m_configObjects: {}

@@ -24,4 +24,8 @@ namespace SharedData
 	public const int DeitySystemRuntimeID = 3;
 	public const float EveryTick = 1f;
 	public const int MaxStatsSize = 7;
+	public const int SI_TitleScreen = 0;
+	public const int SI_Profile = 1;
+	public const int SI_Battle = 2;
+	public const int SI_HeavensPlaza = 3;
 }}
