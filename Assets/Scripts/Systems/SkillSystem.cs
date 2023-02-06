@@ -88,4 +88,9 @@ public class SkillSystem : GameSystem, IActionCategory
     {
         return  SkillsList.Where(skill => skill.StaticItemType == typeof(T)).Single();
     }
+
+    internal static void StackEnhancementForSkill<T>(int percentageAsWhole) where T : Skill
+    {
+        throw new NotImplementedException();
+    }
 }

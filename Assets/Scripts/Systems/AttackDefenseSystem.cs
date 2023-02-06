@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -171,6 +172,11 @@ public class AttackDefenseSystem : GameSystem
     internal static void RestorePoise()
     {
         PoiseValue = MaxGuardStress;
+    }
+
+    internal static void SetSucessfulParryBonus(float? v)
+    {
+        throw new NotImplementedException();
     }
     #endregion
 }

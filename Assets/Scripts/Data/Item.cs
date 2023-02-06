@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Item : IActionableItem
 {
-    protected PlayerEntity? Player { get; private set; }
+    protected PlayerEntity? Player => GameManager.Player;
     public short? ItemID { get; private set; }
     
     public virtual string? ItemName { get; }
@@ -19,7 +19,6 @@ public abstract class Item : IActionableItem
     {
         GameManager.OnSystemRegistrationProcessCompleted += () =>
         {
-            Player = GameManager.Player;
             ItemID = (short)ItemSystem.GetRefCount();
             Debug.Log($"ItemID ({ItemID}) {{{ItemName}}}");
             ItemSystem.IncreaseRefCount();

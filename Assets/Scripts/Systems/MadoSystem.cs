@@ -84,4 +84,9 @@ public sealed class MadoSystem : GameSystem, IActionCategory
     {
         Accessibility![index] = false;
     }
+
+    internal static void FindTraitsOf(MDPyromado madoEnhancer)
+    {
+        throw new NotImplementedException();
+    }
 }

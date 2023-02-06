@@ -32,9 +32,9 @@ public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, IL
     public float TickDuration => EveryTick;
     public Action? OnTick => Rejuvenate;
 
-    IUseLifeCycle LifeExpectancy => this;
-    IHealthModifier HealthModifier => this;
-    IManaModifier ManaModifier => this;
+    IUseLifeCycle? LifeExpectancy => this;
+    IHealthModifier? HealthModifier => this;
+    IManaModifier? ManaModifier => this;
 
     public void AbsorbAdulite()
     {
@@ -42,12 +42,15 @@ public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, IL
         ManaSystem.RestoreAllMana();
         ExperienceSystem.UpTotalLevelsMore(LevelGain);
 
-        LifeExpectancy.Start();
+        LifeExpectancy?.Start();
     }
 
     void Rejuvenate()
     {
-        HealthSystem.SetHealth(nameof(PlayerEntity), Player!.MaxHealthValue * HealthModifier.HealthBonus, isRelative: true);
-        ManaSystem.SetMana(Player.MaxManaValue * ManaModifier.ManaBonus, isRelative: true);
+        HealthSystem.SetHealth(nameof(PlayerEntity), 
+            Player!.MaxHealthValue * 
+            HealthModifier!.HealthBonus, 
+            isRelative: true);
+        ManaSystem.SetMana(Player.MaxManaValue * ManaModifier!.ManaBonus, isRelative: true);
     }
 }

@@ -88,4 +88,9 @@ public sealed class ItemSystem : GameSystem, IActionCategory
     {
         Accessibility![id] = false;
     }
+
+    internal static void StackEnhancementForAllItems(int magnitude)
+    {
+        throw new NotImplementedException();
+    }
 }
