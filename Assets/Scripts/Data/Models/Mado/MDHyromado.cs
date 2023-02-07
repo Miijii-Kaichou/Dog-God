@@ -65,11 +65,11 @@ public sealed class MDHyromado : Mado, IAttackModifier, IDefenseModifier
 
     private void EnhanceSkills()
     {
-        SkillSystem.StackEnhancementForSkill<SKTyphoon>                         (SkillEnhancementPercentage);
-        SkillSystem.StackEnhancementForSkill<SKHolySmite>                       (SkillEnhancementPercentage);
-        SkillSystem.StackEnhancementForSkill<SKHolyThrust>                      (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKTyphoon>                         (30);
+        SkillSystem.StackEnhancementForSkill<SKHolySmite>                       (100);
+        SkillSystem.StackEnhancementForSkill<SKHolyThrust>                      (100);
         SkillSystem.StackEnhancementForSkill<SKHolyFlare>                       (SkillEnhancementPercentage);
-        SkillSystem.StackEnhancementForSkill<SKRailgun>                         (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKRailgun>                         (125);
         SkillSystem.StackEnhancementForSkill<SKHolyPrism>                       (SkillEnhancementPercentage);
         SkillSystem.StackEnhancementForSkill<SKShowerMeInAThousandRosePetals>   (SkillEnhancementPercentage);
         SkillSystem.StackEnhancementForSkill<SKKagami>                          (SkillEnhancementPercentage);
@@ -79,6 +79,6 @@ public sealed class MDHyromado : Mado, IAttackModifier, IDefenseModifier
 
     private void EnhanceItemEffectiveness()
     {
-        ItemSystem.StackEnhancementForAllItems(Two);
+        ItemSystem.EnhanceEffectivenessForAllItems(Two);
     }
 }

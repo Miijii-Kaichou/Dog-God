@@ -1,4 +1,3 @@
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 using static SharedData.Constants;
@@ -9,7 +8,7 @@ using System;
 /* It's Adulite, but completely purified. 
    Gain 3 levels as you restore all your MP and HP,
    whilst regenerating it between 8% and 12% for 3 whole minutes.*/
-public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, ILevelModifier, IUseLifeCycle
+public sealed class ITPurifiedAdulite : Item, IHealthModifier, IManaModifier, ILevelModifier, IUseLifeCycle
 {
     public override string? ItemName => "Purified Adulite";
     public override Type? StaticItemType => typeof(ITPurifiedAdulite);
@@ -51,6 +50,6 @@ public sealed class ITPurifiedAdulite : Item ,IHealthModifier, IManaModifier, IL
             Player!.MaxHealthValue * 
             HealthModifier!.HealthBonus, 
             isRelative: true);
-        ManaSystem.SetMana(Player.MaxManaValue * ManaModifier!.ManaBonus, isRelative: true);
+        ManaSystem.SetMana(Player.MaxManaValue * ManaModifier!.ManaBonus, true);
     }
 }

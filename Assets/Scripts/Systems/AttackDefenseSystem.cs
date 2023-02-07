@@ -178,5 +178,10 @@ public class AttackDefenseSystem : GameSystem
     {
         throw new NotImplementedException();
     }
+
+    internal static void SetInflictAfterParrySuccess(InflictType slowdown, float v)
+    {
+        throw new NotImplementedException();
+    }
     #endregion
 }

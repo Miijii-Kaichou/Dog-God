@@ -30,10 +30,11 @@ public sealed class MDPyromado : Mado, IAttackModifier
     public override ItemUseCallback OnActionUse => Infuse;
 
     public float SetAttackBonus => 10f;
-
     public BonusModificationType AttackModificationType => BonusModificationType.PercentageOf;
 
     IAttackModifier? AttackModifier => this;
+
+    private const int SkillEnhancementPercentage = 50;
 
     private void Infuse()
     {
@@ -44,6 +45,19 @@ public sealed class MDPyromado : Mado, IAttackModifier
     {
         EnhancePlayerAttack();
         EnhancePlayerAttackOnSuccessfulParry();
+        EnhanceSkills();
+    }
+
+    private void EnhanceSkills()
+    {
+        SkillSystem.StackEnhancementForSkill<SKTrifecta>                        (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKTalonite>                        (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKEruption>                        (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKRailgun>                         (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKBlazeRunner>                     (30);
+        SkillSystem.StackEnhancementForSkill<SKShowerMeInAThousandRosePetals>   (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKLastingAmber>                    (SkillEnhancementPercentage);
+        SkillSystem.StackEnhancementForSkill<SKKagami>                          (SkillEnhancementPercentage);
     }
 
     private void EnhancePlayerAttack()

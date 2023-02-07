@@ -1,11 +1,30 @@
 #nullable enable
 
 using Extensions;
+using System;
+using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 using static SharedData.Constants;
 
-public sealed class MDNichimado : Mado, IMadoFusion
+/// <summary>
+/// Can be acquired fusing Pyromado and Yamimado (Tsukimado True)
+/// or Pyromado and Hyromado (Tsukimado Alter).
+/// Skills influenced by Pyromado and Hyromado/Yamimado will be enhanced
+/// ---------------------------------------------------------------------------
+/// <para>Normal Attack increases by 60%</para>
+/// <para>After successful parry, slows down attack rate of enemy (stackable up to 20%)</para>
+/// <para>Defense increased by 30%</para>
+/// <para>Effectiveness of items doubled.</para>
+/// </summary>
+public sealed class MDNichimado : Mado, IMadoFusion, IAttackModifier, IDefenseModifier, IHealthModifier, IManaModifier
 {
+    public override string? MadoName => "Nichimado";
+    public override Type? StaticItemType => typeof(MDNichimado);
+    public override ItemUseCallback? OnActionUse => Infuse;
+    public override int MadoEnhancementValue => 50;
+
     // Need Main Component of 
     // Cryomado
     public MDPyromado? Pyromado { get; private set; }
@@ -20,6 +39,71 @@ public sealed class MDNichimado : Mado, IMadoFusion
     // Yamimado
     public MDHyromado? JointMadoAlternative { get; private set; }
 
+    public bool IsAlternative =>
+    JointMadoTrue == null &&
+    JointMadoAlternative != null;
+
+    public float SetAttackBonus => 90f;
+    public BonusModificationType AttackModificationType => BonusModificationType.PercentageOf;
+    IAttackModifier? AttackModifier => this;
+
+    public float SetDefenseBonus => 30f;
+    public BonusModificationType DefenseModificationType => BonusModificationType.PercentageOf;
+    IDefenseModifier? DefenseModifer => this;
+
+
+    public float SetHealthBonus => Random.Range(1f, 10f);
+    public BonusModificationType HealthModificationType => BonusModificationType.PercentageOf;
+    IHealthModifier? HealthModifier => this;
+
+    public float SetManaBonus => Random.Range(1f, 10f);
+    public BonusModificationType ManaModificationType => BonusModificationType.PercentageOf;
+    IManaModifier? ManaModifier => this;
+    private void Infuse()
+    {
+        EnhancePlayerDefense();
+        ApplySuccessfulParryCondition();
+        ReduceItemEffectiveness();
+        if (IsAlternative)
+        {
+            InfuseAlter();
+            return;
+        }
+        InfuseTrue();
+    }
+
+    private void ReduceItemEffectiveness()
+    {
+        ItemSystem.ReduceEffectivenessForAllItems(Two);
+    }
+
+    private void ApplySuccessfulParryCondition()
+    {
+        AttackDefenseSystem.OnParrySuccess?.AddNewListener(() =>
+        {
+            HealthSystem.SetHealth(nameof(PlayerEntity), HealthModifier!.HealthBonus, true);
+            ManaSystem.SetMana(ManaModifier!.ManaBonus, true);
+            Player!.stats?[StatVariable.Attack].IncreaseThisBy(Mathf.RoundToInt(AttackModifier!.AttackBonus), AttackModificationType);
+        }, true);
+    }
+
+    private void EnhancePlayerDefense()
+    {
+        Player!.stats?[StatVariable.Defense].IncreaseThisBy(Mathf.RoundToInt(DefenseModifer!.DefenseBonus), DefenseModificationType);
+    }
+
+    private void InfuseTrue()
+    {
+        Pyromado?.UseAction();
+        JointMadoTrue?.UseAction();
+    }
+
+    private void InfuseAlter()
+    {
+        Pyromado?.UseAction();
+        JointMadoAlternative?.UseAction();
+    }
+
     // Essential Buffs
     // ...Goes Here...
 
@@ -27,7 +111,7 @@ public sealed class MDNichimado : Mado, IMadoFusion
     {
         // We just need 2 mado for the fusion. Can't take
         // more than that.
-        if (additionalMado.Length > 2) return;
+        if (additionalMado.Length > Two) return;
 
         // Primary 
         var mainMado = additionalMado[Zero];
@@ -37,19 +121,15 @@ public sealed class MDNichimado : Mado, IMadoFusion
         var pairingMado = additionalMado[One];
 
         // If our main mado is not Pyromado, invalid fusion
-        if (mainMado.Is(typeof(MDPyromado)) == false) return;
+        if (mainMado.Is(Pyromado?.StaticItemType) == false) return;
         Pyromado = (MDPyromado)mainMado;
 
         // If our pairing mado isn't a Hyromado or Tsukimado
         // invalidate fusion
-        if (mainMado.Is(typeof(MDYamimado)))
+        if (mainMado.Is(JointMadoTrue?.StaticItemType))
             JointMadoTrue = (MDYamimado)pairingMado;
 
-        if (pairingMado.Is(typeof(MDHyromado)))
+        if (pairingMado.Is(JointMadoAlternative?.StaticItemType))
             JointMadoAlternative = (MDHyromado)pairingMado;
     }
-
-    public bool IsAlternative =>
-        JointMadoTrue == null &&
-        JointMadoAlternative != null;
 }

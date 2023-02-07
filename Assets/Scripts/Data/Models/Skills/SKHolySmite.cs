@@ -12,6 +12,6 @@ public sealed class SKHolySmite : Skill
 
     private void UseSkill()
     {
-        throw new NotImplementedException();
+        
     }
 }

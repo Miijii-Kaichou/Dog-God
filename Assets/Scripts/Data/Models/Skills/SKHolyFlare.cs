@@ -12,6 +12,11 @@ public sealed class SKHolyFlare : Skill
 
     private void UseSkill()
     {
-        throw new NotImplementedException();
+       // On Success, stuns enemy for 15 seconds
+       // while life drains over time
+       // Time doubles if Hyromado equipped
+
+       // Damage is tripled
+       // High Mana Consumption
     }
 }

@@ -1,17 +1,29 @@
+#nullable enable
+
 using System;
+using Random = UnityEngine.Random;
 using static SharedData.Constants;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class SKGluttony : Skill
+public sealed class SKGluttony : Skill, IHealthModifier, IManaModifier
 {
     public override string SkillName => "Heal";
     public override Type StaticItemType => typeof(SKHeal);
     public override ItemUseCallback OnActionUse => UseSkill;
 
+    public float SetHealthBonus => Random.Range(2f, 5f);
+    public BonusModificationType HealthModificationType => BonusModificationType.PercentageOf;
+    private IHealthModifier? HealthModifier => this;
+
+    public float SetManaBonus => Random.Range(2f, 5f);
+    public BonusModificationType ManaModificationType => BonusModificationType.PercentageOf;
+    private IManaModifier? ManaModifier => this;
+
     private void UseSkill()
     {
-        throw new NotImplementedException();
+        HealthSystem.SetHealth(PlayerEntityTag, Player!.HealthValue * HealthModifier!.HealthBonus, true);
+        ManaSystem.SetMana(Player!.ManaValue * ManaModifier!.ManaBonus, true);
     }
 }

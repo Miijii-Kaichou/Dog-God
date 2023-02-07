@@ -6,30 +6,25 @@ using UnityEngine;
 
 using static SharedData.Constants;
 
-
 /// <summary>
-/// This is a Holy (Light)-Based Mado. Can be paired with the following skills:
+/// This is a Ice-Based Mado. Can be paired with the following skills:
 /// <list type="bullet">
-/// <item>Skill: Trifecta</item>
-/// <item>Skill: Talonite</item>
-/// <item>Skill: Eruption</item>
+/// <item>Skill: Yeti</item>
+/// <item>Skill: Blizzard</item>
 /// <item>Skill: Railgun</item>
-/// <item>Skill: Fury (Blaze Runner)</item>
-/// <item>Rosa's Divine Skill: "Shower Me in a Thousand Rose Petals"</item>
-/// <item>Kamui's Divine Blessing: Lasting Amber</item>
-/// <item>Othella's Divine Skill: Kagami</item>
+/// <item>Suisei's Divine Skill: Seven Seas</item>
+/// <item>Suisei's Divine Blessing: Siren's Love</item>
 /// </list>
 /// ---------------------------------------------------------------------------
-/// <para>Normal Attacks increases by 50%</para>
-/// <para>All Skills Listed is Enhanced by 50%</para>
-/// <para>Defense increases by 30%</para>
-/// <para>Item Effectiveness Doubles</para>
+/// <para>Normal Attack increases by 10%</para>
+/// <para>On successful parry, slows down attack rate of enemy (is stackable up to 10% slowdown)</para>
 /// </summary>
 public sealed class MDCryomado : Mado, IAttackModifier
 {
     public override string? MadoName => "Cryomado";
     public override Type? StaticItemType => typeof(MDCryomado);
     public override ItemUseCallback? OnActionUse => Infuse;
+    public override int MadoEnhancementValue => 50;
 
     public float SetAttackBonus => throw new NotImplementedException();
     public BonusModificationType AttackModificationType => throw new NotImplementedException();
@@ -39,7 +34,17 @@ public sealed class MDCryomado : Mado, IAttackModifier
     private void Infuse()
     {
         EnhancePlayerAttack();
+        EnhanceSkills();
         ApplySlowDownInfliction();
+    }
+
+    private void EnhanceSkills()
+    {
+        SkillSystem.StackEnhancementForSkill<SKYeti>        (MadoEnhancementValue);
+        SkillSystem.StackEnhancementForSkill<SKBlizzard>    (30);
+        SkillSystem.StackEnhancementForSkill<SKRailgun>     (MadoEnhancementValue);
+        SkillSystem.StackEnhancementForSkill<SKSeptemmare>  (MadoEnhancementValue);
+        SkillSystem.StackEnhancementForSkill<SKSirensLove>  (MadoEnhancementValue);
     }
 
     private void EnhancePlayerAttack()
@@ -52,6 +57,6 @@ public sealed class MDCryomado : Mado, IAttackModifier
 
     private void ApplySlowDownInfliction()
     {
-        //InflictSystem.SlowDownAttackRate(1)
+        AttackDefenseSystem.SetInflictAfterParrySuccess(InflictType.Slowdown, 0.1f);
     }
 }

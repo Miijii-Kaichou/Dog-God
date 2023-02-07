@@ -12,6 +12,6 @@ public sealed class SKHolyThrust : Skill
 
     private void UseSkill()
     {
-        throw new NotImplementedException();
+        // High miss chance, but devastating blow if successful
     }
 }
