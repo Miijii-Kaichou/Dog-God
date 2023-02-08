@@ -15,6 +15,8 @@ public abstract class Item : IActionableItem
 
     public int SlotNumber { get; set; }
 
+    public bool EnabledIf => true;
+
     public Item()
     {
         GameManager.OnSystemRegistrationProcessCompleted += () =>

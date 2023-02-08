@@ -16,6 +16,8 @@ public abstract class Mado : IActionableItem
     
     public int SlotNumber { get; set; }
 
+    public bool EnabledIf => true;
+
     public Mado()
     {
         GameManager.OnSystemRegistrationProcessCompleted += () =>

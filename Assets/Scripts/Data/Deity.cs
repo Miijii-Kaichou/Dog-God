@@ -18,6 +18,8 @@ public abstract class Deity : IActionableItem
 
     public int SlotNumber { get; set; }
 
+    public bool EnabledIf => true;
+
     public Deity()
     {
         GameManager.OnSystemRegistrationProcessCompleted += () =>

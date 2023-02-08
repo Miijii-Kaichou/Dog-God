@@ -18,8 +18,8 @@ public class PressAnyKey : MonoBehaviour
     [SerializeField, Header("Press Any Key Text")]
     TextMeshProUGUI TMP_PressAnyKey;
 
-    [SerializeField, Header("Profile Selection Object")]
-    VerticalLayoutGroup profileSelectionGroup;
+    [SerializeField, Header("Menu Selection Object")]
+    VerticalLayoutGroup menuSelectionGroup;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class PressAnyKey : MonoBehaviour
         {
             titleImage.Activate();
             TMP_PressAnyKey.gameObject.Disable();
-            profileSelectionGroup.gameObject.Enable();
+            menuSelectionGroup.gameObject.Enable();
             RemoveEvent();
         });
     }

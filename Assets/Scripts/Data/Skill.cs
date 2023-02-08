@@ -20,7 +20,7 @@ public abstract class Skill : IActionableItem
     public virtual string? SkillName { get; }
     public virtual ItemUseCallback? OnActionUse { get; }
     public virtual Type? StaticItemType { get; }
-    public virtual bool EnabledIf => Player?.EntityStanceState == StanceState.Idle;
+    public virtual bool EnabledIf => true;
 
     public int SlotNumber { get; set; }
 
