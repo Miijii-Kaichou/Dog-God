@@ -18,18 +18,28 @@ public class ProfileQuestionnaire : MonoBehaviour
     [SerializeField]
     private GameObject _promptObject;
 
-    [Header("Tweening Effects")]
-    [SerializeField] private FadeInTween fadeInTween;
-    [SerializeField] private FadeOutTween fadeOutTween;
-    [SerializeField] private TranslationTween translationTween;
+    [Header("Tweening Effects (Question)")]
+    [SerializeField] private FadeInTween _fadeInTween;
+    [SerializeField] private FadeOutTween _fadeOutTween;
+    [SerializeField] private TranslationTween _translationTween;
+
+    [Header("Tweening Effects (ProfileInputField)")]
+    [SerializeField] private CanvasGroupFadeInTween _inputFieldFadeInTween;
+    [SerializeField] private CanvasGroupFadeOutTween _inputFieldFadeOutTween;
+    [SerializeField] private TranslationTween _inputFieldTranslationTween;
+
+    [Header("Tweening Effects (Prompt)")]
+    [SerializeField] private CanvasGroupFadeInTween _promptFadeInTween;
+    [SerializeField] private CanvasGroupFadeOutTween _promptFadeOutTween;
+    [SerializeField] private TranslationTween _promptTranslationTween;
 
     private int _questionIndex = -1;
 
-    EventCall _receivePlayerNameCallback;
-    EventCall _receiveNumberCallback;
-    EventCall _receiveFinalResponseCallback;
+    private EventCall _receivePlayerNameCallback;
+    private EventCall _receiveNumberCallback;
+    private EventCall _receiveFinalResponseCallback;
 
-    EventCall[] _events;
+    private EventCall[] _events;
 
     private readonly string[] Questions =
     {
@@ -39,7 +49,6 @@ public class ProfileQuestionnaire : MonoBehaviour
             " even if they've done wrong," +
             " even if it puts you at risk," +
             " would you do it?",
-        "Now Commencing in Spiritual Birth..."
     };
 
     private void Awake()
@@ -62,8 +71,8 @@ public class ProfileQuestionnaire : MonoBehaviour
 
     private void SetupEvents()
     {
-        TMP_InputField.SubmitEvent submitName = new TMP_InputField.SubmitEvent();
-        TMP_InputField.SubmitEvent submitNumber = new TMP_InputField.SubmitEvent();
+        TMP_InputField.SubmitEvent submitName = new();
+        TMP_InputField.SubmitEvent submitNumber = new();
 
         submitName.AddListener(CalculateStateInfluencePercentage);
         submitNumber.AddListener(EnhanceStat);
@@ -82,46 +91,59 @@ public class ProfileQuestionnaire : MonoBehaviour
 
     private void EnableInputField(int maxCharacters, TMP_InputField.SubmitEvent onSubmit)
     {
+        _inputField.gameObject.Enable();
         _inputField.allowNumbers = false;
         _inputField.allowLetters = false;
 
         _inputField.allowLetters = _questionIndex == 0;
         _inputField.allowNumbers = _questionIndex == 1;
 
-        _inputField.gameObject.Enable();
         _inputField.characterLimit = maxCharacters;
         _inputField.onSubmit = onSubmit;
         _inputField.Select();
+        
+        _inputFieldFadeInTween.DoFadeInTweening();
+        _inputFieldTranslationTween.DoTranslationTweeningTo();
     }
 
     private void DisableInputField()
     {
-        _inputField.text = string.Empty;
-        _inputField.onSubmit = null;
-        _inputField.gameObject.Disable();
+        _inputFieldFadeOutTween.DoFadeOutTweening();
+        _inputFieldTranslationTween.DoTranslationTweeningReturn();
+        _inputFieldFadeOutTween.OnEffectComplete = () =>
+        {
+            _inputField.text = string.Empty;
+            _inputField.onSubmit = null;
+            _inputField.gameObject.Disable();
+        };
     }
 
     private void EnablePromptField()
     {
         _promptObject.Enable();
+        _promptFadeInTween.DoFadeInTweening();
+        _promptTranslationTween.DoTranslationTweeningTo();
     }
 
     private void DisablePromptField()
     {
-        _promptObject.Disable();
+        _promptFadeOutTween.DoFadeOutTweening();
+        _promptTranslationTween.DoTranslationTweeningReturn();
+        _promptFadeOutTween.OnEffectComplete = () =>
+        {
+            _promptObject.Disable();
+        };
     }
 
     private void NextQuestion()
     {
         _questionIndex++;
-        translationTween.to = 130;
-        translationTween.Activate();
-        fadeOutTween.DoFadeOutTweening();
-        fadeOutTween.OnEffectComplete = () =>
+        _translationTween.DoTranslationTweeningReturn();
+        _fadeOutTween.DoFadeOutTweening();
+        _fadeOutTween.OnEffectComplete = () =>
         {
-            translationTween.to = 100;
-            translationTween.Activate();
-            fadeInTween.DoFadeInTweening(); 
+            _translationTween.DoTranslationTweeningTo();
+            _fadeInTween.DoFadeInTweening(); 
             Clear();
             if (_questionIndex > Questions.Length - 1) return;
             typeWriter.SetInput(Questions[_questionIndex]);
@@ -160,10 +182,10 @@ public class ProfileQuestionnaire : MonoBehaviour
     public void ApplyTrustAmplifier()
     {
         DisablePromptField();
-        translationTween.to = 130;
-        translationTween.Activate();
-        fadeOutTween.DoFadeOutTweening();
-        fadeOutTween.OnEffectComplete = Clear;
+        _translationTween.to = 130;
+        _translationTween.DoTranslationTweeningTo();
+        _fadeOutTween.DoFadeOutTweening();
+        _fadeOutTween.OnEffectComplete = Clear;
 
         // TODO: Add increase to stat
     } 

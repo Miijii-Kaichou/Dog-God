@@ -30,7 +30,7 @@ public class PressAnyKey : MonoBehaviour
     {
         OnPress = EventManager.AddEvent(900, "PressAnyButtonEvent", () =>
         {
-            titleImage.Activate();
+            titleImage.DoTranslationTweeningTo();
             TMP_PressAnyKey.gameObject.Disable();
             menuSelectionGroup.gameObject.Enable();
             RemoveEvent();

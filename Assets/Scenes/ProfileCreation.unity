@@ -262,9 +262,15 @@ MonoBehaviour:
   typeWriter: {fileID: 1833245152}
   _inputField: {fileID: 1042785485}
   _promptObject: {fileID: 894729935}
-  fadeInTween: {fileID: 1833245155}
-  fadeOutTween: {fileID: 1833245154}
-  translationTween: {fileID: 1833245153}
+  _fadeInTween: {fileID: 1833245155}
+  _fadeOutTween: {fileID: 1833245154}
+  _translationTween: {fileID: 1833245153}
+  _inputFieldFadeInTween: {fileID: 894729940}
+  _inputFieldFadeOutTween: {fileID: 894729938}
+  _inputFieldTranslationTween: {fileID: 894729941}
+  _promptFadeInTween: {fileID: 1042785491}
+  _promptFadeOutTween: {fileID: 1042785490}
+  _promptTranslationTween: {fileID: 1042785488}
 --- !u!1 &83201777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,7 +2049,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 894729936}
+  - component: {fileID: 894729940}
+  - component: {fileID: 894729938}
+  - component: {fileID: 894729941}
   - component: {fileID: 894729937}
+  - component: {fileID: 894729939}
   m_Layer: 5
   m_Name: Prompt
   m_TagString: Untagged
@@ -2070,7 +2080,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -49.999992}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 1300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &894729937
@@ -2099,6 +2109,66 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &894729938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894729935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec621d30b4e2bd48a9fce9ce65edfc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetGroup: {fileID: 894729939}
+  _duration: 1
+  _playOnAwake: 0
+--- !u!225 &894729939
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894729935}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &894729940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894729935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367e55c1548b6034ca1e07a00347a4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetGroup: {fileID: 894729939}
+  _duration: 1
+  _playOnAwake: 0
+--- !u!114 &894729941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894729935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e8fba3f50ef95d479fe46c6d35c4907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: 1
+  from: -80
+  to: -50
+  duration: 1
+  delay: 0
+  doOnAwake: 0
 --- !u!1 &904812455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,8 +2369,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1042785484}
   - component: {fileID: 1042785485}
+  - component: {fileID: 1042785491}
+  - component: {fileID: 1042785490}
+  - component: {fileID: 1042785488}
   - component: {fileID: 1042785487}
   - component: {fileID: 1042785486}
+  - component: {fileID: 1042785489}
   m_Layer: 5
   m_Name: ProfileInputField
   m_TagString: Untagged
@@ -2337,7 +2411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.313226e-10, y: -50}
+  m_AnchoredPosition: {x: 9.313226e-10, y: -80}
   m_SizeDelta: {x: 1200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1042785485
@@ -2352,7 +2426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e181897b9d8109489fce566fb014635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterSlotIndex: 0
 --- !u!114 &1042785486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2393,6 +2466,66 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &1042785488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042785483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e8fba3f50ef95d479fe46c6d35c4907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: 1
+  from: -80
+  to: -50
+  duration: 1
+  delay: 0
+  doOnAwake: 0
+--- !u!225 &1042785489
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042785483}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1042785490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042785483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec621d30b4e2bd48a9fce9ce65edfc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetGroup: {fileID: 1042785489}
+  _duration: 1
+  _playOnAwake: 0
+--- !u!114 &1042785491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042785483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367e55c1548b6034ca1e07a00347a4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetGroup: {fileID: 1042785489}
+  _duration: 1
+  _playOnAwake: 0
 --- !u!1 &1044068230
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,6 +3549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: 1
+  from: 130
   to: 100
   duration: 1
   delay: 0

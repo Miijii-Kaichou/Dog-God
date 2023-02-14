@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FadeInTween : MonoBehaviour
+public sealed class FadeInTween : MonoBehaviour
 {
     [SerializeField, Header("Graphics")]
     private Graphic _targetGraphic;

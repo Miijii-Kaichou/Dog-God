@@ -1,14 +1,13 @@
-#nullable enable
+﻿#nullable enable
 
 using DG.Tweening;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class FadeOutTween : MonoBehaviour
+public class CanvasGroupFadeInTween : MonoBehaviour
 {
     [SerializeField, Header("Graphics")]
-    private Graphic _targetGraphic;
+    private CanvasGroup _targetGroup;
 
     [Header("Configurations")]
     [SerializeField] private float _duration = 0.1f;
@@ -19,13 +18,13 @@ public class FadeOutTween : MonoBehaviour
     private void Awake()
     {
         if (_playOnAwake == false) return;
-        DoFadeOutTweening();
+        DoFadeInTweening();
     }
 
-    public void DoFadeOutTweening()
+    public void DoFadeInTweening()
     {
-        _targetGraphic.
-            DOFade(0, _duration).
+        _targetGroup.
+            DOFade(1, _duration).
             OnComplete(() => OnEffectComplete?.Invoke());
     }
 }
