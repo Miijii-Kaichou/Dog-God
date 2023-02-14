@@ -394,6 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 342503991}
   - component: {fileID: 342503996}
+  - component: {fileID: 342503997}
   - component: {fileID: 342503995}
   - component: {fileID: 342503994}
   - component: {fileID: 342503993}
@@ -469,7 +470,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 342503994}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 342503997}
+        m_TargetAssemblyTypeName: ProfileSlot, Assembly-CSharp
+        m_MethodName: OnSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &342503994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +538,20 @@ MonoBehaviour:
   duration: 0.25
   delay: 0.1
   doOnAwake: 1
+--- !u!114 &342503997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342503990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892ab4f032025d746a9c670a5f8dd31e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _profileSlotButtonComponent: {fileID: 0}
+  _slotStatus: 0
 --- !u!1 &460560545
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,6 +562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 460560546}
   - component: {fileID: 460560551}
+  - component: {fileID: 460560552}
   - component: {fileID: 460560550}
   - component: {fileID: 460560549}
   - component: {fileID: 460560548}
@@ -610,7 +638,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 460560549}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 460560552}
+        m_TargetAssemblyTypeName: ProfileSlot, Assembly-CSharp
+        m_MethodName: OnSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &460560549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,6 +706,20 @@ MonoBehaviour:
   duration: 0.25
   delay: 0
   doOnAwake: 1
+--- !u!114 &460560552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460560545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892ab4f032025d746a9c670a5f8dd31e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _profileSlotButtonComponent: {fileID: 0}
+  _slotStatus: 0
 --- !u!1 &477817566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,6 +1723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1074607820}
   - component: {fileID: 1074607821}
+  - component: {fileID: 1074607822}
   m_Layer: 5
   m_Name: ProfileSelection
   m_TagString: Untagged
@@ -1725,6 +1780,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1074607822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074607819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdca8878be9652541b9646f441faac5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209443239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,6 +2295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1600365624}
   - component: {fileID: 1600365629}
+  - component: {fileID: 1600365630}
   - component: {fileID: 1600365628}
   - component: {fileID: 1600365627}
   - component: {fileID: 1600365626}
@@ -2303,7 +2371,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1600365627}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1600365630}
+        m_TargetAssemblyTypeName: ProfileSlot, Assembly-CSharp
+        m_MethodName: OnSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1600365627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2359,6 +2439,20 @@ MonoBehaviour:
   duration: 0.25
   delay: 0.2
   doOnAwake: 1
+--- !u!114 &1600365630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600365623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892ab4f032025d746a9c670a5f8dd31e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _profileSlotButtonComponent: {fileID: 0}
+  _slotStatus: 0
 --- !u!1 &1603079939
 GameObject:
   m_ObjectHideFlags: 0

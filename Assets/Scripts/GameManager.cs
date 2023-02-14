@@ -31,6 +31,7 @@ public class GameManager : Singleton<GameManager>
     public static SystemInfo[]? GetSystemInfo() => Instance?.GetAllSystemInfo();
     public static SystemInfo[]? GetSystemInfo(Status _status) => Instance?.GetAllSystemInfo(_status);
 
+    public static int ActiveProfileIndex { get; private set; } = -1;
 
     public struct Achievement
     {
@@ -55,6 +56,7 @@ public class GameManager : Singleton<GameManager>
         public DateTime GetReceivalDate() => achievementReceivedDate;
         public double GetDaysSinceAchievement() => GetReceivalDate().TimeOfDay.TotalDays;
     }
+
     public enum SortingOrder
     {
         TITLE,
@@ -80,6 +82,8 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Achievements"), SerializeField]
     private List<Achievement> achievements = new List<Achievement>();
+    internal static PlayerDataState? PlayerDataState;
+    internal static string? PlayerName;
 
     public static PlayerEntity? Player { get; set; }
     public static BossEntity? Boss { get; set; }
@@ -100,7 +104,6 @@ public class GameManager : Singleton<GameManager>
         RegisterSystems();
         StartUpAllSystems();
         ReportStartUp();
-
     }
 
     public static void ReferencePlayer(PlayerEntity player)
@@ -113,6 +116,11 @@ public class GameManager : Singleton<GameManager>
     {
         Boss = boss;
         OnPlayerRegistered?.Invoke();
+    }
+
+    public static void UpdateActivePlayerID(int id)
+    {
+        ActiveProfileIndex = id;
     }
 
     // Start is called before the first frame update
@@ -156,18 +164,18 @@ public class GameManager : Singleton<GameManager>
     {
         //We're going to turn on all systems defined in the game.
         //GetSystem<CurrencySystem>().Run();
-        GetSystem<DeitySystem>().Run();
-        GetSystem<HealthSystem>().Run();
-        GetSystem<ManaSystem>().Run();
-        GetSystem<ExperienceSystem>().Run();
-        GetSystem<ResurrectionSystem>().Run();
-        GetSystem<SkillSystem>().Run();
-        GetSystem<ItemSystem>().Run();
-        GetSystem<MadoSystem>().Run();
-        GetSystem<HeavensPlazaSystem>().Run();
-        GetSystem<ActionSystem>().Run();
-        GetSystem<AttackDefenseSystem>().Run();
-        GetSystem<RuntimeActionSystem>().Run();
+        GetSystem<DeitySystem>()?.Run();
+        GetSystem<HealthSystem>()?.Run();
+        GetSystem<ManaSystem>()?.Run();
+        GetSystem<ExperienceSystem>()?.Run();
+        GetSystem<ResurrectionSystem>()?.Run();
+        GetSystem<SkillSystem>()?.Run();
+        GetSystem<ItemSystem>()?.Run();
+        GetSystem<MadoSystem>()?.Run();
+        GetSystem<HeavensPlazaSystem>()?.Run();
+        GetSystem<ActionSystem>()?.Run();
+        GetSystem<AttackDefenseSystem>()?.Run();
+        GetSystem<RuntimeActionSystem>()?.Run();
 
         OnSystemStartProcessCompleted?.Invoke();
     }
@@ -175,18 +183,6 @@ public class GameManager : Singleton<GameManager>
     internal T? WithSystem<T>() where T : GameSystem
     {
         return GetSystem<T>();
-    }
-
-    public void Goto(string _scene)
-    {
-        try
-        {
-            SceneManager.LoadScene(_scene);
-        }
-        catch (IOException e)
-        {
-            Debug.LogWarning(e.Message);
-        }
     }
 
     /// <summary>
@@ -262,122 +258,6 @@ public class GameManager : Singleton<GameManager>
         catch (IOException e)
         {
             Debug.LogError(e.Message);
-        }
-    }
-
-    private Achievement[] GetAllMarkedAchievements()
-    {
-        //Going to filter out the achievements that has only been completed
-        return (from markedAchievement
-                in achievements
-                where markedAchievement.GetAchievementStatus() == true
-                select markedAchievement).ToArray();
-    }
-
-    private Achievement[] GetAchievementsInASpanOf(double _days)
-    {
-        //Depending on how far you want the days to be, you'll get that total amount of achievements
-        return (from markedAchievement
-                in achievements
-                where markedAchievement.GetDaysSinceAchievement() <= _days
-                select markedAchievement).ToArray();
-    }
-
-    private Achievement[]? SortAchievementsBy(SortingOrder sortingOrder, bool _descendingOrder = false)
-    {
-        Achievement[]? sortedAchievements = null;
-        //Sort by a specified SortingOrder
-        switch (sortingOrder)
-        {
-            #region Sort by Title
-            //Sort Achievemented by Title
-            case SortingOrder.TITLE:
-                sortedAchievements = (from markedAchievement
-                                      in achievements
-                                      orderby markedAchievement.GetTitle()
-                                      select markedAchievement).ToArray();
-
-                //Change sorting if set to true
-                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
-
-            #endregion
-
-            #region Sort by Date
-            //Sort Achievemented by Date
-            case SortingOrder.DATE:
-                sortedAchievements = (from markedAchievement
-                                      in achievements
-                                      orderby markedAchievement.GetReceivalDate()
-                                      select markedAchievement).ToArray();
-
-                //Change sorting if set to true
-                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
-            #endregion
-
-            #region Sort by Total Days
-            //Sort Achievemented by Days
-            case SortingOrder.DAYS:
-                sortedAchievements = (from markedAchievement
-                                      in achievements
-                                      orderby markedAchievement.GetReceivalDate().TimeOfDay.TotalDays
-                                      select markedAchievement).ToArray();
-
-                //Change sorting if set to true
-                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
-            #endregion
-
-            #region Sort by Total Hours
-            //Sort Achievemented by Hours
-            case SortingOrder.HOURS:
-                sortedAchievements = (from markedAchievement
-                                      in achievements
-                                      orderby markedAchievement.GetReceivalDate().TimeOfDay.TotalHours
-                                      select markedAchievement).ToArray();
-
-                //Change sorting if set to true
-                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
-            #endregion
-
-            #region Sort by Total Minutes
-            //Sort Achievemented by Minutes
-            case SortingOrder.MINUTES:
-                sortedAchievements = (from markedAchievement
-                                      in achievements
-                                      orderby markedAchievement.GetReceivalDate().TimeOfDay.TotalMinutes
-                                      select markedAchievement).ToArray();
-
-                //Change sorting if set to true
-                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
-            #endregion
-
-            #region Sort by Total Seconds
-            //Sort Achievemented by Seconds
-            case SortingOrder.SECONDS:
-                sortedAchievements = (from markedAchievement
-                                      in achievements
-                                      orderby markedAchievement.GetReceivalDate().TimeOfDay.TotalSeconds
-                                      select markedAchievement).ToArray();
-
-                //Change sorting if set to true
-                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
-            #endregion
-
-            #region Sort by Rarity
-            //Sort Achievemented by Rarity
-            case SortingOrder.RARITY:
-                sortedAchievements = (from markedAchievement
-                                      in achievements
-                                      orderby markedAchievement.GetAchievementRarity()
-                                      select markedAchievement).ToArray();
-
-                //Change sorting if set to true
-                return _descendingOrder == true ? sortedAchievements.OrderByDescending(newSortedAchievement => sortedAchievements).ToArray() : sortedAchievements;
-            #endregion
-
-            #region Default
-            default: return null;
-                #endregion
-
         }
     }
 }

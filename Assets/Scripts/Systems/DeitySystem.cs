@@ -31,13 +31,18 @@ public class DeitySystem : GameSystem, IActionCategory
         new DRyuga(),
     };
 
-    private static BitArray? _Accessibility;
+    private static (bool madeContract, int slotID)[]? DeityStateData;
     private static int _SkillRefCount;
 
     protected override void OnInit()
     {
         Self ??= GameManager.GetSystem<DeitySystem>();
-        _Accessibility = new BitArray(DeityList.Length);
+        InitializeDeityStateData();
+    }
+
+    private void InitializeDeityStateData()
+    {
+        DeityStateData = new (bool madeContract, int slotID)[DeityList.Length];
     }
 
     internal static T? GetDeity<T>() where T : Skill
@@ -57,12 +62,12 @@ public class DeitySystem : GameSystem, IActionCategory
 
     internal static void GainAccess(int index)
     {
-        _Accessibility![index] = true;
+        DeityStateData![index].madeContract = true;
     }
 
     internal static void Lock(int index)
     {
-        _Accessibility![index] = false;
+        DeityStateData![index].madeContract = false;
     }
 
     internal static Deity? LocateDeity<T>()

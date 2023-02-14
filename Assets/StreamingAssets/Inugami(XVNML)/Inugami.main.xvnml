@@ -1,0 +1,20 @@
+<proxy	name::"Inugami.main"
+		engine::"UnityEngine"
+		target::".."
+		lang::"CSharp">
+	<dialogue src::"IngumaiKoko.dialogue.xvnml"		/>
+	<dialogue src::"HazelAlonoire.dialogue.xvnml"	/>
+	<dialogue src::"Ulla.dialogue.xvnml"			/>
+	<dialogue src::"Meganeta.dialogue.xvnml"		/>
+	<dialogue src::"Maki.dialogue.xvnml"			/>
+	<dialogue src::"Azulette.dialogue.xvnml"		/>
+	<dialogue src::"Yumi.dialogue.xvnml"			/>
+	<dialogue src::"Estere.dialogue.xvnml"			/>
+	<dialogue src::"Charolette.dialogue.xvnml"		/>
+	<dialogue src::"Rosa.dialogue.xvnml"			/>
+	<dialogue src::"Othella.dialogue.xvnml"			/>
+	<dialogue src::"Patchouli.dialogue.xvnml"		/>
+	<dialogue src::"Kamui.dialogue.xvnml"			/>
+	<dialogue src::"Suisei.dialogue.xvnml"			/>
+	<dialogue src::"Ryuga.dialogue.xvnml"			/>
+</proxy>

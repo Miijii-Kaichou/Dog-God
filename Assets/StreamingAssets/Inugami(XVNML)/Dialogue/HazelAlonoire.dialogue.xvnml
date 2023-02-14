@@ -1,0 +1,12 @@
+<source name::"HazelAlonoire.dialogue">
+    <dialogue>
+        ?Hazel What is going on, son?>>
+            ("Nothing")>
+                @Hazel Oh. Okay...<<
+            ("It nacho busy")>
+                @Hazel How rude!<<
+        @ I forgot that the question that Hazel asked needs to be in 
+        an interogative case. Oops...>
+        But anyways, yeah. Pretty easy stuff.<<
+    </dialogue>
+</source>

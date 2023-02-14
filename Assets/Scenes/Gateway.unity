@@ -431,6 +431,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &530446735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530446736}
+  - component: {fileID: 530446737}
+  m_Layer: 0
+  m_Name: $PromptSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &530446736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530446735}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1096642157}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530446737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530446735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482f608f725eaa748a894f9b81fcb198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &818211130
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +559,7 @@ Transform:
   - {fileID: 1695391435}
   - {fileID: 98205140}
   - {fileID: 818211131}
+  - {fileID: 530446736}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -716,6 +761,21 @@ MonoBehaviour:
     Type: 0
   - Key: SI_HeavensPlaza
     Value: 3
+    Type: 0
+  - Key: SI_ProfileCreation
+    Value: 4
+    Type: 0
+  - Key: EVT_CreateProfile
+    Value: 1000
+    Type: 0
+  - Key: EVT_LoadProfile
+    Value: 1001
+    Type: 0
+  - Key: EVT_ResurrectProfile
+    Value: 1002
+    Type: 0
+  - Key: EVT_DeleteProfile
+    Value: 1003
     Type: 0
 --- !u!4 &1200944232
 Transform:

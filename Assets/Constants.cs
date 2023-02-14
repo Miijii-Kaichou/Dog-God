@@ -28,4 +28,9 @@ namespace SharedData
 	public const int SI_Profile = 1;
 	public const int SI_Battle = 2;
 	public const int SI_HeavensPlaza = 3;
+	public const int SI_ProfileCreation = 4;
+	public const int EVT_CreateProfile = 1000;
+	public const int EVT_LoadProfile = 1001;
+	public const int EVT_ResurrectProfile = 1002;
+	public const int EVT_DeleteProfile = 1003;
 }}
