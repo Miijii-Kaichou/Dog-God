@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -44,5 +45,10 @@ public static class PersistentObjectHierarchy
     {
         var _object = from obj in objectIdDictionary where obj.Key.Contains(pObj.gameObject.name) select obj;
         return _object.Count() > 0;
+    }
+
+    internal static GameObject Find(string name)
+    {
+        return objectIdDictionary.Where(k => k.Key.Contains(name)).Select(k => k.Value).FirstOrDefault();
     }
 }

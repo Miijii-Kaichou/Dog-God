@@ -1,7 +1,10 @@
 #nullable enable
 
+using Extensions;
 using System;
 using UnityEngine;
+
+using Array = System.Array;
 
 using static SharedData.Constants;
 
@@ -35,8 +38,12 @@ public sealed class ProfileSelection : MonoBehaviour
 
     private void CreateNewProfile()
     {
-        Debug.Log(GameManager.ActiveProfileIndex);
-        // TODO: Go into Profile Creation Scene
+        var gameObject = PersistentObjectHierarchy.Find("TitleCanvas");
+        if (gameObject == null)
+        {
+            Debug.Log("Test Case Failed...");
+        }
+        gameObject.Disable();
         GameSceneManager.LoadScene(SI_ProfileCreation);
     }
 

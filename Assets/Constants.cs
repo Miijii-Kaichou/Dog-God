@@ -33,4 +33,7 @@ namespace SharedData
 	public const int EVT_LoadProfile = 1001;
 	public const int EVT_ResurrectProfile = 1002;
 	public const int EVT_DeleteProfile = 1003;
+	public const int HUNDRED = 100;
+	public const int ONE = 1;
+	public const int ZERO = 0;
 }}

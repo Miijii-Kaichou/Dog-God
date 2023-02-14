@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Extensions;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,11 @@ public class ProfileQuestionnaire : MonoBehaviour
     [SerializeField]
     private GameObject _promptObject;
 
+    [Header("Tweening Effects")]
+    [SerializeField] private FadeInTween fadeInTween;
+    [SerializeField] private FadeOutTween fadeOutTween;
+    [SerializeField] private TranslationTween translationTween;
+
     private int _questionIndex = -1;
 
     EventCall _receivePlayerNameCallback;
@@ -27,7 +33,7 @@ public class ProfileQuestionnaire : MonoBehaviour
     private readonly string[] Questions =
     {
         "What is your name?",
-        "What's your favorite number? Pick between 1 and 100",
+        "What's your favorite number? Pick between 0 and 99",
         "If you had the chance to change one's faith," +
             " even if they've done wrong," +
             " even if it puts you at risk," +
@@ -60,7 +66,7 @@ public class ProfileQuestionnaire : MonoBehaviour
         submitNumber.AddListener(EnhanceStat);
 
         _receivePlayerNameCallback = EventManager.AddEvent(9000, string.Empty, () => EnableInputField(7, submitName));
-        _receiveNumberCallback = EventManager.AddEvent(9001, string.Empty, () => EnableInputField(3, submitNumber));
+        _receiveNumberCallback = EventManager.AddEvent(9001, string.Empty, () => EnableInputField(2, submitNumber));
         _receiveFinalResponseCallback = EventManager.AddEvent(9002, string.Empty, EnablePromptField);
 
         _events = new EventCall[]
@@ -99,8 +105,19 @@ public class ProfileQuestionnaire : MonoBehaviour
     private void NextQuestion()
     {
         _questionIndex++;
-        typeWriter.SetInput(Questions[_questionIndex]);
-        typeWriter.StartEffect();
+        translationTween.to = 130;
+        translationTween.Activate();
+        fadeOutTween.DoFadeOutTweening();
+        fadeOutTween.OnEffectComplete = () =>
+        {
+            translationTween.to = 100;
+            translationTween.Activate();
+            fadeInTween.DoFadeInTweening(); 
+            Clear();
+            if (_questionIndex > Questions.Length - 1) return;
+            typeWriter.SetInput(Questions[_questionIndex]);
+            typeWriter.StartEffect();
+        };
     }
 
     private void Clear()
@@ -114,7 +131,6 @@ public class ProfileQuestionnaire : MonoBehaviour
     #region Player Stat Modifier Methods
     private void CalculateStateInfluencePercentage(string input)
     {
-        Clear();
         DisableInputField();
         // TODO: Do all the calculation stuff that you are suppose to do.
         NextQuestion();
@@ -122,7 +138,6 @@ public class ProfileQuestionnaire : MonoBehaviour
 
     private void EnhanceStat(string input)
     {
-        Clear();
         DisableInputField();
         // TODO: Parse input (1 - 100) to StatVariable type
         NextQuestion();
@@ -131,8 +146,12 @@ public class ProfileQuestionnaire : MonoBehaviour
     public void ApplyTrustAmplifier()
     {
         DisablePromptField();
+        translationTween.to = 130;
+        translationTween.Activate();
+        fadeOutTween.DoFadeOutTweening();
+        fadeOutTween.OnEffectComplete = Clear;
+
         // TODO: Add increase to stat
-        Clear();
     } 
     #endregion
 }

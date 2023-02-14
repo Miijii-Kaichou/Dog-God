@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Heaven's Plaza.unity
     guid: 195af748a0c2a72499434330f0737eca
+  - enabled: 1
+    path: Assets/Scenes/ProfileCreation.unity
+    guid: caa5e076a258ca6429c645d4988f4284
   m_configObjects: {}
