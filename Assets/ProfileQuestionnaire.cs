@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -37,7 +38,8 @@ public class ProfileQuestionnaire : MonoBehaviour
         "If you had the chance to change one's faith," +
             " even if they've done wrong," +
             " even if it puts you at risk," +
-            " would you do it?"
+            " would you do it?",
+        "Now Commencing in Spiritual Birth..."
     };
 
     private void Awake()
@@ -48,6 +50,7 @@ public class ProfileQuestionnaire : MonoBehaviour
     private void OnEnable()
     {
         typeWriter.onEffectComplete = OnComplete;
+        
         NextQuestion();
     }
 
@@ -79,6 +82,12 @@ public class ProfileQuestionnaire : MonoBehaviour
 
     private void EnableInputField(int maxCharacters, TMP_InputField.SubmitEvent onSubmit)
     {
+        _inputField.allowNumbers = false;
+        _inputField.allowLetters = false;
+
+        _inputField.allowLetters = _questionIndex == 0;
+        _inputField.allowNumbers = _questionIndex == 1;
+
         _inputField.gameObject.Enable();
         _inputField.characterLimit = maxCharacters;
         _inputField.onSubmit = onSubmit;
@@ -133,6 +142,10 @@ public class ProfileQuestionnaire : MonoBehaviour
     {
         DisableInputField();
         // TODO: Do all the calculation stuff that you are suppose to do.
+        GameManager.PlayerName = input;
+
+
+
         NextQuestion();
     }
 
@@ -140,6 +153,7 @@ public class ProfileQuestionnaire : MonoBehaviour
     {
         DisableInputField();
         // TODO: Parse input (1 - 100) to StatVariable type
+        var number = Convert.ToInt32(input);
         NextQuestion();
     }
 

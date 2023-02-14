@@ -8,12 +8,14 @@ using UnityEngine;
 
 public class ProfileInputField : MonoBehaviour
 {
+    internal bool allowLetters;
+    internal bool allowNumbers;
     internal int characterLimit;
     internal TMP_InputField.SubmitEvent onSubmit;
     internal string text;
 
     private int _previousCharacterSlotIndex = 0;
-    [SerializeField] private int _characterSlotIndex = 0;
+    private int _characterSlotIndex = 0;
     private CharacterSlot[] characterSlots;
     private const int MaxCharacters = 12;
 
@@ -120,7 +122,7 @@ public class ProfileInputField : MonoBehaviour
 
     private void FeedAndGo(char input)
     {
-        characterSlots[_characterSlotIndex].Enter(input, out bool result);
+        characterSlots[_characterSlotIndex].Enter(input, allowLetters, allowNumbers, out bool result);
         if (result == false) return;
         NextCharacter();
     }
