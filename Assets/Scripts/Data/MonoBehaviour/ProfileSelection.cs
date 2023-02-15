@@ -13,10 +13,13 @@ public sealed class ProfileSelection : MonoBehaviour
     //All referenced ProfileSlots
     private ProfileSlot[] _profileSlots;
 
+    GameObject titleCanvas;
+
     private void Start()
     {
         SetupEvents();
         InitalizedSlots();
+        titleCanvas = PersistentObjectHierarchy.Find("TitleCanvas");
     }
 
     private void InitalizedSlots()
@@ -38,20 +41,16 @@ public sealed class ProfileSelection : MonoBehaviour
 
     private void CreateNewProfile()
     {
-        var gameObject = PersistentObjectHierarchy.Find("TitleCanvas");
-        if (gameObject == null)
-        {
-            Debug.Log("Test Case Failed...");
-        }
-        gameObject.Disable();
+        titleCanvas.Disable();
         GameSceneManager.LoadScene(SI_ProfileCreation);
     }
 
     private void ContinueWithProfile()
     {
+        titleCanvas.Disable();
         // Load Player Data
-        PlayerDataSerializationSystem.LoadPlayerDataState(GameManager.ActiveProfileIndex, out GameManager.PlayerDataState);
-        //PlayerDataSerializationSystem.OnLoadDone = LoadLastSavedScene;
+        GameManager.Load();
+        GameSceneManager.LoadScene(SI_HeavensPlaza);
     }
 
     private void ResurrectProfile()

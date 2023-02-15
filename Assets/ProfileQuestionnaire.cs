@@ -206,6 +206,7 @@ public sealed class ProfileQuestionnaire : MonoBehaviour
         MadoSystem.Save();
         DeitySystem.Save();
         StatsSystem.Save();
+        GameManager.Save();
 
         // Mark Player as Alive
         PlayerDataSerializationSystem.PlayerDataStateSet[activeIndex].UpdateProfileStatus(ProfileStatus.Alive);

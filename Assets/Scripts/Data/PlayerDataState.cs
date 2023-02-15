@@ -5,6 +5,8 @@ public sealed class PlayerDataState
 {
     public int dataID = 0;
 
+    public UniversalGameState gameState;
+
     public PlayerEntityState playerEntity;
     public StatsSystemState statSystem;
     public ItemSystemState itemSystem;
@@ -22,6 +24,7 @@ public sealed class PlayerDataState
         };
     }
 
+    public void UpdateUniversalGameState(UniversalGameState universalGameState) => gameState = universalGameState;
     public void UpdateProfileStatus(ProfileStatus status) => Status = status;
     public void UpdatePlayerEntityStateData(PlayerEntityState instance) => playerEntity = instance;
     public void UpdateStatStateData(StatsSystemState instance) => statSystem = instance;
@@ -30,10 +33,12 @@ public sealed class PlayerDataState
     public void UpdateMadoStateData(MadoSystemState instance) => madoSystem = instance;
     public void UpdateDeityStateData(DeitySystemState instance) => deitySystem = instance;
 
+    public UniversalGameState GetUniversalGameState() => gameState;
     public PlayerEntityState GetPlayerEntityStateData() => playerEntity;
     public StatsSystemState GetStatsSystemStateData() => statSystem;
     public ItemSystemState GetItemSystemStateData() => itemSystem;
     public SkillSystemState GetSkillSystemStateData() => skillSystem;
     public MadoSystemState GetMadoSystemStateData() => madoSystem;
     public DeitySystemState GetDeitySystemStateData() => deitySystem;
+
 }

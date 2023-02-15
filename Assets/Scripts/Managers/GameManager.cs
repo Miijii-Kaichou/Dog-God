@@ -11,7 +11,7 @@ using UnityEngine.U2D;
 
 using static SharedData.Constants;
 
-public class GameManager : Singleton<GameManager>
+public sealed class GameManager : Singleton<GameManager>
 {
     [SerializeField, Header("Sprite Atlas")]
     SpriteAtlas? spriteAtlas;
@@ -20,6 +20,8 @@ public class GameManager : Singleton<GameManager>
     {
         get { return Instance?.spriteAtlas; }
     }
+
+    public static UniversalGameState GameState;
 
     public static Action? OnSystemRegistrationProcessCompleted { get; internal set; }
     public static Action? OnSystemStartProcessCompleted { get; internal set; }
@@ -261,5 +263,16 @@ public class GameManager : Singleton<GameManager>
         {
             Debug.LogError(e.Message);
         }
+    }
+
+    public static void Save()
+    {
+        GameState ??= new(0);
+        PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfileIndex].UpdateUniversalGameState(GameState);
+    }
+
+    public static void Load()
+    {
+        GameState = PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfileIndex].GetUniversalGameState();
     }
 }
