@@ -274,4 +274,9 @@ public static class EventManager
         if (Events.Where(evt => evt.UniqueID.Equals(_randomNum)).Any()) return GetAnyFreeID();
         return _randomNum;
     }
+
+    internal static EventCall AddEvent(int v, string empty, object completeProfileCreationProcess)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 using static SharedData.Constants;
 
-public class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILevelProperty, IEntityStatus
+public sealed class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty, ILevelProperty, IEntityStatus
 {
     [SerializeField]
     BossEntity? BossEntity;

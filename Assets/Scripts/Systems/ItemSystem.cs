@@ -47,13 +47,13 @@ public sealed class ItemSystem : GameSystem, IActionCategory
         new ITStellaLeaf()
     };
 
-    private static BitArray? Accessibility;
+    private static ItemSystemState? _SystemState;
 
     private static int _ItemRefCount;
 
     protected override void OnInit()
     {
-        Accessibility = new BitArray(ItemList.Length);
+        _SystemState = new ItemSystemState(ItemList.Length);
 
         //TODO: Read Player Data, and figure out what's locked and
         // what's unlocked.
@@ -79,15 +79,17 @@ public sealed class ItemSystem : GameSystem, IActionCategory
         return _ItemRefCount;
     }
 
-    internal static void GainAccess(int id)
-    {
-        Accessibility![id] = true;
-    }
+    // We'll have to change these methods to 
+    // allocate an amount to the player and so on.
+    //internal static void GainAccess(int id)
+    //{
+    //    _SystemState!.[id] = true;
+    //}
 
-    internal static void Lock(int id)
-    {
-        Accessibility![id] = false;
-    }
+    //internal static void Lock(int id)
+    //{
+    //    _SystemState![id] = false;
+    //}
 
     internal static void EnhanceEffectivenessForAllItems(int magnitude)
     {
@@ -97,5 +99,10 @@ public sealed class ItemSystem : GameSystem, IActionCategory
     internal static void ReduceEffectivenessForAllItems(int two)
     {
         throw new NotImplementedException();
+    }
+
+    internal static void Save()
+    {
+        PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].UpdateItemStateData(_SystemState);
     }
 }

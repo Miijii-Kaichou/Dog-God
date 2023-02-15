@@ -259,18 +259,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fcd9d999abc8d438f5f692270c0f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeWriter: {fileID: 1833245152}
+  _typeWriter: {fileID: 1833245152}
   _inputField: {fileID: 1042785485}
   _promptObject: {fileID: 894729935}
   _fadeInTween: {fileID: 1833245155}
   _fadeOutTween: {fileID: 1833245154}
   _translationTween: {fileID: 1833245153}
-  _inputFieldFadeInTween: {fileID: 894729940}
-  _inputFieldFadeOutTween: {fileID: 894729938}
-  _inputFieldTranslationTween: {fileID: 894729941}
-  _promptFadeInTween: {fileID: 1042785491}
-  _promptFadeOutTween: {fileID: 1042785490}
-  _promptTranslationTween: {fileID: 1042785488}
+  _inputFieldFadeInTween: {fileID: 1042785491}
+  _inputFieldFadeOutTween: {fileID: 1042785490}
+  _inputFieldTranslationTween: {fileID: 1042785488}
+  _promptFadeInTween: {fileID: 894729940}
+  _promptFadeOutTween: {fileID: 894729938}
+  _promptTranslationTween: {fileID: 894729941}
 --- !u!1 &83201777
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2132,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894729935}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2492,7 +2492,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042785483}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

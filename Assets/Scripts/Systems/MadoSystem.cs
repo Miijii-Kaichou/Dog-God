@@ -14,7 +14,7 @@ public sealed class MadoSystem : GameSystem, IActionCategory
     {
         slots = new IActionableItem[MaxSlotSize],
         quantities = new int[MaxSlotSize],
-        capacities = new int[MaxSlotSize]{One, One, One, One},
+        capacities = new int[MaxSlotSize] { One, One, One, One },
         requiredTypes = new Type[MaxSlotSize],
         isExpensible = false
     };
@@ -23,14 +23,14 @@ public sealed class MadoSystem : GameSystem, IActionCategory
     {
         new MDPyromado(),
         new MDCryomado(),
-        new MDHyromado(), 
-        new MDYamimado(), 
+        new MDHyromado(),
+        new MDYamimado(),
         new MDNichimado(),
         new MDTsukimado(),
-        new MDYotsumado(), 
+        new MDYotsumado(),
     };
 
-    private static BitArray? Accessibility;
+    private static MadoSystemState? _SystemState;
     private static int _MadoRefCount;
 
     static IActionCategory? Category => Self;
@@ -38,7 +38,7 @@ public sealed class MadoSystem : GameSystem, IActionCategory
     protected override void OnInit()
     {
         Self ??= GameManager.GetSystem<MadoSystem>();
-        Accessibility = new BitArray(MadoList.Length);
+        _SystemState = new MadoSystemState(MadoList.Length);
 
         //ToDO: Read Palyer data, and figure out what's unlocked
     }
@@ -51,7 +51,7 @@ public sealed class MadoSystem : GameSystem, IActionCategory
 
     internal static void EquipMadoToSlot(int index, int slotNumber)
     {
-        if (Accessibility![index] == false) return;
+        if (_SystemState!.accessibility[index] == false) return;
         Category!.AddItemToSlot(slotNumber, MadoList[index]);
     }
 
@@ -77,16 +77,26 @@ public sealed class MadoSystem : GameSystem, IActionCategory
 
     internal static void GainAccess(int index)
     {
-        Accessibility![index] = true;
+        _SystemState!.accessibility[index] = true;
     }
 
     internal static void Lock(int index)
     {
-        Accessibility![index] = false;
+        _SystemState!.accessibility[index] = false;
     }
 
     internal static void FindTraitsOf(MDPyromado madoEnhancer)
     {
         throw new NotImplementedException();
+    }
+
+    internal static void Save()
+    {
+        PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].UpdateMadoStateData(_SystemState);
+    }
+
+    internal static void Load()
+    {
+        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetMadoSystemStateData();
     }
 }

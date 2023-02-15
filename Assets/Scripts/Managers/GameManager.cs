@@ -164,7 +164,9 @@ public class GameManager : Singleton<GameManager>
     {
         //We're going to turn on all systems defined in the game.
         //GetSystem<CurrencySystem>().Run();
+        GetSystem<PlayerDataSerializationSystem>()?.Run();
         GetSystem<DeitySystem>()?.Run();
+        GetSystem<StatsSystem>()?.Run();
         GetSystem<HealthSystem>()?.Run();
         GetSystem<ManaSystem>()?.Run();
         GetSystem<ExperienceSystem>()?.Run();

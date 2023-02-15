@@ -1,7 +1,7 @@
+#nullable enable
+
 using System;
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -17,19 +17,30 @@ public sealed class PlayerDataSerializationSystem : GameSystem
         new PlayerDataState()
     };
 
-    static string _DataStateDirectory = Application.persistentDataPath + @"/Data";
+    static string _DataStateDirectory;
 
-    internal static void LoadPlayerDataState(int profileIndex,out PlayerDataState deserializedState)
+    private void Awake()
     {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine(_DataStateDirectory);
-        stringBuilder.AppendLine(@"/state");
-        stringBuilder.AppendLine(profileIndex.ToString());
-        stringBuilder.AppendLine(".dat");
-        using (FileStream stream = new(stringBuilder.ToString(), FileMode.Open))
+        _DataStateDirectory = Application.persistentDataPath + @"/Profiles";
+    }
+
+    internal static void CheckIfStateFileExists(int profileIndex, out StringBuilder? result)
+    {
+        var path = GenerateProfilePath(profileIndex);
+        result = File.Exists(path.ToString()) ? path : null;
+    }
+
+    internal static void LoadPlayerDataState(int profileIndex, out PlayerDataState? deserializedState)
+    {
+        deserializedState = null;
+        CheckIfStateFileExists(profileIndex, out StringBuilder? stringBuilder);
+
+        if (stringBuilder == null) return;
+
+        using (FileStream stream = new(stringBuilder!.ToString(), FileMode.Open))
         {
             BinaryFormatter formatter = new();
-            PlayerDataStateSet[profileIndex] = formatter.Deserialize(new BufferedStream(stream)) as PlayerDataState;
+            PlayerDataStateSet[profileIndex] = (formatter!.Deserialize(new BufferedStream(stream)) as PlayerDataState)!;
         }
 
         deserializedState = PlayerDataStateSet[profileIndex];
@@ -43,53 +54,28 @@ public sealed class PlayerDataSerializationSystem : GameSystem
         }
         try
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine(_DataStateDirectory);
-            stringBuilder.AppendLine(@"/state");
-            stringBuilder.AppendLine(profileIndex.ToString());
-            stringBuilder.AppendLine(".dat");
-            using (FileStream stream = new FileStream(stringBuilder.ToString(), FileMode.OpenOrCreate))
-            {
-                BinaryFormatter formatter = new();
-                formatter.Serialize(new BufferedStream(stream), PlayerDataStateSet[profileIndex]);
-            }
-        } 
-        catch
+            StringBuilder stringBuilder = GenerateProfilePath(profileIndex);
+            using FileStream stream = new(stringBuilder.ToString(), FileMode.OpenOrCreate);
+            BinaryFormatter formatter = new();
+            formatter.Serialize(new BufferedStream(stream), PlayerDataStateSet[profileIndex]);
+        }
+        catch (Exception e)
         {
-            Debug.LogError($"Failed to save to state{profileIndex}.dat");
+            Debug.LogError($"Failed to save to state{profileIndex}.dat\n " +
+                $"Reason: {e.Message}");
+            return;
         }
 
         Debug.Log($"state{profileIndex}.dat Sucessfully Saved");
     }
-}
 
-public sealed class PlayerDataState
-{
-    public int DataID { get; private set; } = 0;
-
-    PlayerEntity _playerEntity;
-    StatsSystem _statSystem;
-    ItemSystem _itemSystem;
-    SkillSystem _skillSystem;
-    MadoSystem _madoSystem;
-    DeitySystem _deitySystem;
-
-    public PlayerDataState()
+    private static StringBuilder GenerateProfilePath(int profileIndex)
     {
-        DataID = PlayerDataSerializationSystem.PlayerDataStateSet.Length;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.Append(_DataStateDirectory);
+        stringBuilder.Append(@"/state");
+        stringBuilder.Append(profileIndex.ToString());
+        stringBuilder.Append(".dat");
+        return stringBuilder;
     }
-
-    public void UpdatePlayerEntityStateData(PlayerEntity instance) => _playerEntity = instance;
-    public void UpdateStatStateData(StatsSystem instance) => _statSystem = instance;
-    public void UpdateItemStateData(ItemSystem instance) => _itemSystem = instance;
-    public void UpdateSkillStateData(SkillSystem instance) => _skillSystem = instance;
-    public void UpdateMadoStateData(MadoSystem instance) => _madoSystem = instance;
-    public void UpdateDeityStateData(DeitySystem instance) => _deitySystem = instance;
-
-    public PlayerEntity GetPlayerEntityStateData() => _playerEntity;
-    public StatsSystem GetStatsSystemStateData() => _statSystem;
-    public ItemSystem GetItemSystemStateData() => _itemSystem;
-    public SkillSystem GetSkillSystemStateData() => _skillSystem;
-    public MadoSystem GetMadoSystemStateData() => _madoSystem;
-    public DeitySystem GetDeitySystemStateData() => _deitySystem;
 }

@@ -5,7 +5,7 @@ using System.Collections;
 using System.Linq;
 using static SharedData.Constants;
 
-public class SkillSystem : GameSystem, IActionCategory
+public sealed class SkillSystem : GameSystem, IActionCategory
 {
     private static SkillSystem? Self;
 
@@ -56,12 +56,12 @@ public class SkillSystem : GameSystem, IActionCategory
         new SKAzure()
     };
 
-    private static BitArray? _Accessibility;
+    private static SkillSystemState? _SystemState;
 
     protected override void OnInit()
     {
         Self ??= GameManager.GetSystem<SkillSystem>();
-        _Accessibility = new BitArray(SkillsList.Length);
+        _SystemState = new SkillSystemState(SkillsList.Length);
     }
 
     internal static int GetRefCount()
@@ -76,12 +76,12 @@ public class SkillSystem : GameSystem, IActionCategory
 
     internal static void GainAccess(int index)
     {
-        _Accessibility![index] = true;
+        _SystemState!.skillAcquired[index] = true;
     }
 
     internal static void Lock(int index)
     {
-        _Accessibility![index] = false;
+        _SystemState!.skillAcquired[index] = false;
     }
 
     internal static Skill? LocateSkill<T>()
@@ -92,5 +92,10 @@ public class SkillSystem : GameSystem, IActionCategory
     internal static void StackEnhancementForSkill<T>(int percentageAsWhole) where T : Skill
     {
         throw new NotImplementedException();
+    }
+
+    internal static void Save()
+    {
+        PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].UpdateSkillStateData(_SystemState);
     }
 }

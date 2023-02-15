@@ -24,6 +24,7 @@ public sealed class TypeWriter : MonoBehaviour
 
     private bool _active = false;
     private int _textIndex = -1;
+    internal int delay;
 
     private bool IsComplete => _targetOutput.text == _textInput;
 
@@ -33,6 +34,17 @@ public sealed class TypeWriter : MonoBehaviour
     }
 
     internal void StartEffect()
+    {
+        if (delay != 0)
+        {
+            var alarm = new Alarm(1);
+            alarm.SetFor(delay, 0, true, DoTypeWriterEffect);
+            return;
+        }
+        DoTypeWriterEffect();
+    }
+
+    private void DoTypeWriterEffect()
     {
         _active = true;
 
@@ -105,5 +117,10 @@ public sealed class TypeWriter : MonoBehaviour
         _textIndex = -1;
         _textInput = string.Empty;
         _targetOutput.text = _textInput;
+    }
+
+    internal void ChangeFontSize(int size)
+    {
+        _targetOutput.fontSize = size;
     }
 }

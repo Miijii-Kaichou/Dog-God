@@ -43,7 +43,7 @@ public class CharacterSlot : MonoBehaviour
 
     internal void Enter(char input, bool allowLetter, bool allowNumber, out bool result)
     {
-        result = ((char.IsLetter(input) && allowLetter ) || (char.IsDigit(input) && allowNumber)) || input == ' ';
+        result = ((char.IsLetter(input) || input == ' ') && allowLetter) || (char.IsDigit(input) && allowNumber);
         if (result == false) return;
         _character.text = input.ToString();
     }

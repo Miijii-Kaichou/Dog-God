@@ -24,7 +24,7 @@ public sealed class ProfileSelection : MonoBehaviour
         _profileSlots = GetComponentsInChildren<ProfileSlot>();
         foreach (var slot in _profileSlots)
         {
-            slot.id = Array.IndexOf(_profileSlots, slot);
+            slot.ID = Array.IndexOf(_profileSlots, slot);
         }
     }
 

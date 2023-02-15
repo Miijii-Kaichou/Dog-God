@@ -1,6 +1,6 @@
-﻿internal enum ProfileStatus
+﻿public enum ProfileStatus : sbyte
 {
-    Unknown = -1,
+    Unknown,
     Empty,
     Alive,
     PassedOn

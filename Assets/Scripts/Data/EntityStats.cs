@@ -17,4 +17,6 @@ public sealed class EntityStats
             _stats[(int)statVariable] = value;
         }
     }
+
+    public int Size => _stats.Length;
 }

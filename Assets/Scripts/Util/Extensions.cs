@@ -321,18 +321,28 @@ namespace Extensions
             return conditionMet;
         }
 
-        public static int IncreaseThisBy(this int _, int value, BonusModificationType type)
+        public static float IncreaseThisBy(this float _, float value, BonusModificationType type)
         {
             if (type == BonusModificationType.Whole)
                 _ += value;
             if (type == BonusModificationType.PercentageOf)
-                _ += _ * value;
+                _ += _ * (value/100f);
             return _;
+        }
+
+        public static float DecreaseThisBy(this float _, float value, BonusModificationType type)
+        {
+            return _.IncreaseThisBy(-value, type);
+        }
+
+        public static int IncreaseThisBy(this int _, int value, BonusModificationType type)
+        {
+            return (int)((float)_).IncreaseThisBy(value, type);
         }
 
         public static int DecreaseThisBy(this int _, int value, BonusModificationType type)
         {
-            return _.IncreaseThisBy(-value, type);
+            return (int)((float)_).IncreaseThisBy(-value, type);
         }
 
         public static T Get<T>(this T[] _, int index)

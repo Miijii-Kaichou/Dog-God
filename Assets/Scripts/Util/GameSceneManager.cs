@@ -108,9 +108,15 @@ public static class GameSceneManager
 
     public static void ChangeLoadingMode(LoadSceneMode loadingMode) => LoadingMode = loadingMode;
 
-    internal static void PrepareToLoad(int index) => StagePrepped = index;
+    /// <summary>
+    /// Get a scene ready to load before hand
+    /// </summary>
+    /// <param name="distance"></param>
+    internal static void Prepare(int index) => StagePrepped = index;
 
-
+    /// <summary>
+    /// To load a scene that you've prepared.
+    /// </summary>
     internal static void Deploy() => LoadScene(StagePrepped ?? SI_TitleScreen);
 
 }

@@ -12,26 +12,39 @@ public sealed class ProfileSlot : MonoBehaviour
 
     [SerializeField]
     private ProfileStatus _slotStatus = ProfileStatus.Empty;
-    internal int id;
+    
+    private int _id;
+    public int ID
+    {
+        get
+        {
+            return _id;
+        }
+        set
+        {
+            _id = value;
+            if (_playerState != null) return;
+            PlayerDataSerializationSystem.LoadPlayerDataState(ID, out _playerState);
+            SetUpButtonStatus();
+        }
+    }
+
+    private PlayerDataState? _playerState;
 
     private void Awake()
     {
         _profileSlotButtonComponent ??= GetComponent<Button>();
     }
 
-    private void Start()
-    {
-        SetUpButtonStatus();
-    }
-
     private void SetUpButtonStatus()
     {
+        _slotStatus = _playerState == null ? ProfileStatus.Empty : _playerState.Status;
         _profileSlotButtonComponent.interactable = !(_slotStatus == ProfileStatus.Unknown || _slotStatus == ProfileStatus.PassedOn);
     }
 
     public void OnSelect()
     {
-        GameManager.UpdateActivePlayerID(id);
+        GameManager.UpdateActivePlayerID(ID);
         int eventId = _slotStatus switch
         {
             ProfileStatus.Unknown => -One,

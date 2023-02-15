@@ -31,7 +31,7 @@ public class DeitySystem : GameSystem, IActionCategory
         new DRyuga(),
     };
 
-    private static (bool madeContract, int slotID)[]? DeityStateData;
+    private static DeitySystemState? _SystemState;
     private static int _SkillRefCount;
 
     protected override void OnInit()
@@ -42,7 +42,7 @@ public class DeitySystem : GameSystem, IActionCategory
 
     private void InitializeDeityStateData()
     {
-        DeityStateData = new (bool madeContract, int slotID)[DeityList.Length];
+        _SystemState = new DeitySystemState(DeityList.Length);
     }
 
     internal static T? GetDeity<T>() where T : Skill
@@ -62,16 +62,21 @@ public class DeitySystem : GameSystem, IActionCategory
 
     internal static void GainAccess(int index)
     {
-        DeityStateData![index].madeContract = true;
+        _SystemState.madeContract[index] = true;
     }
 
     internal static void Lock(int index)
     {
-        DeityStateData![index].madeContract = false;
+        _SystemState.madeContract[index] = false;
     }
 
     internal static Deity? LocateDeity<T>()
     {
         return DeityList.Where(deity => deity.StaticItemType == typeof(T)).Single();
+    }
+
+    internal static void Save()
+    {
+        PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].UpdateDeityStateData(_SystemState);
     }
 }
