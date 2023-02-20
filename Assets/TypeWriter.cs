@@ -6,11 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(TextMeshProUGUI))]
 public sealed class TypeWriter : MonoBehaviour
 {
     internal Action? onEffectComplete;
     
-    [SerializeField, Header("Text Input")]
+    [SerializeField, Header("Text Input"), TextArea(2, 4)]
     private string _textInput;
 
     [SerializeField, Header("Text Output")]
@@ -27,6 +28,12 @@ public sealed class TypeWriter : MonoBehaviour
     internal int delay;
 
     private bool IsComplete => _targetOutput.text == _textInput;
+
+    private void OnValidate()
+    {
+        _targetOutput ??= GetComponent<TextMeshProUGUI>();
+        _targetOutput.text = _textInput;
+    }
 
     internal void SetInput(string input)
     {

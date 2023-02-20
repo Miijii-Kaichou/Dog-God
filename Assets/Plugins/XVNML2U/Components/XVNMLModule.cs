@@ -14,6 +14,8 @@ public class XVNMLModule : MonoBehaviour
 
     public void Awake()
     {
+        if (xvnmlFile == null) return;
+        if (xvnmlFile.filePath == string.Empty) return;
         GenerateXVNMLDocumentData();
     }
 
