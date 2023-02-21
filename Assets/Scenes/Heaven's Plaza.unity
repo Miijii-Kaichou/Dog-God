@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 418345798}
   - component: {fileID: 418345797}
   - component: {fileID: 418345796}
+  - component: {fileID: 418345799}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -424,6 +425,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &418345799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418345794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1662159b9722f48b14d74196339a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &690422652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,7 +1473,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1991056089}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 418345799}
+        m_TargetAssemblyTypeName: ShopMenu, Assembly-CSharp
+        m_MethodName: GoIntoItemShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1991056089
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -607,4 +607,19 @@ namespace Extensions
             }
         }
     }
+
+    public static class ItemEntry
+    {
+        #nullable enable
+        public static void New(this ref ItemEntryModel model, string? name, int? price, Sprite? texture)
+        {
+            model = new ItemEntryModel()
+            {
+                itemName = name,
+                itemPrice = price,
+                texture = texture
+            };
+        }
+        #nullable disable
+    }
 }

@@ -97,6 +97,7 @@ public sealed class ProfileQuestionnaire : MonoBehaviour
             _profileCreationCompleteionCallback
         };
     }
+
     private void EnableInputField(int maxCharacters, TMP_InputField.SubmitEvent onSubmit)
     {
         _inputField.gameObject.Enable();

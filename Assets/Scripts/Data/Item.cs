@@ -9,6 +9,9 @@ public abstract class Item : IActionableItem
     public short? ItemID { get; private set; }
     
     public virtual string? ItemName { get; }
+    public virtual int ItemValue { get; } = 0;
+    public virtual Sprite? ItemImage { get; }
+
     public virtual Type? StaticItemType { get; }  
     public virtual ItemUseCallback? OnActionUse { get; }
     public virtual int ItemEfficiency { get; }

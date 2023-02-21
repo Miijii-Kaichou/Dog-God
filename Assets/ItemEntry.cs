@@ -9,11 +9,18 @@ public class ItemEntry : MonoBehaviour
     [SerializeField] private TextMeshProUGUI? itemNameText;
     [SerializeField] private Image? itemImage;
     [SerializeField] private TextMeshProUGUI? itemPriceText;
+    [SerializeField] private string? itemDescription;
 
-    public void SetEntry(string itemName, string itemPrice, Sprite? texture)
+    public void SetEntry(ItemEntryModel model)
     { 
-        itemNameText!.text = itemName; ;
-        itemPriceText!.text = itemPrice;
-        itemImage!.sprite = texture;
+        itemNameText!.text = model.itemName; ;
+        itemPriceText!.text = model.itemPrice.ToString();
+        itemImage!.sprite = model.texture;
+    }
+
+    void DescribeEntry()
+    {
+        //TODO: Have the Shopkeeper describe the item
+        
     }
 }

@@ -16,6 +16,9 @@ public sealed class GameManager : Singleton<GameManager>
     [SerializeField, Header("Sprite Atlas")]
     SpriteAtlas? spriteAtlas;
 
+    [SerializeField, Header("System Dialogue File")]
+    XVNMLAsset mainXVNML;
+
     public static SpriteAtlas? SpriteAtlas
     {
         get { return Instance?.spriteAtlas; }

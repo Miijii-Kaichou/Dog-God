@@ -947,6 +947,9 @@ MonoBehaviour:
   - Key: ZERO
     Value: 0
     Type: 0
+  - Key: ShopBaseIndex
+    Value: 5
+    Type: 0
 --- !u!4 &1200944232
 Transform:
   m_ObjectHideFlags: 0

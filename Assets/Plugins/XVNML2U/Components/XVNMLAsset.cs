@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XVNML.XVNMLUtility;
 
 [CreateAssetMenu(fileName = "New XVNML Asset", menuName = "XVNML/XVNML Asset")]
 public sealed class XVNMLAsset : ScriptableObject
@@ -29,4 +30,8 @@ public sealed class XVNMLAsset : ScriptableObject
     public string filePath;
 
     public Object asset;
+
+    public XVNMLObj root;
+
+    public string content;
 }

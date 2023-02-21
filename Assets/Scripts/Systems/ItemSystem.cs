@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Extensions;
 using static SharedData.Constants;
 
 public sealed class ItemSystem : GameSystem, IActionCategory
@@ -54,9 +55,19 @@ public sealed class ItemSystem : GameSystem, IActionCategory
     protected override void OnInit()
     {
         _SystemState = new ItemSystemState(ItemList.Length);
-
+        SetUpCatalog(_SystemState);
         //TODO: Read Player Data, and figure out what's locked and
         // what's unlocked.
+    }
+
+    private void SetUpCatalog(ItemSystemState systemState)
+    {
+        // Create shop catalog stuff here.
+        for (int index = 0; index < ItemList.Length; index++)
+        {
+            var item = ItemList[index];
+            systemState.shopEntries[index].New(item.ItemName, item.ItemValue, item.ItemImage);
+        } 
     }
 
     protected override void Main()
@@ -99,6 +110,11 @@ public sealed class ItemSystem : GameSystem, IActionCategory
     internal static void ReduceEffectivenessForAllItems(int two)
     {
         throw new NotImplementedException();
+    }
+
+    internal static void Load()
+    {
+       _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetItemSystemStateData();
     }
 
     internal static void Save()
