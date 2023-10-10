@@ -15,7 +15,7 @@ public class ItemEntry : MonoBehaviour
     { 
         itemNameText!.text = model.itemName; ;
         itemPriceText!.text = model.itemPrice.ToString();
-        itemImage!.sprite = model.texture;
+        //itemImage!.sprite = model.texture;
     }
 
     void DescribeEntry()

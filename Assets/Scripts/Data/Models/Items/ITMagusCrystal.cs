@@ -4,6 +4,7 @@ using System;
 using Random = UnityEngine.Random;
 
 using static SharedData.Constants;
+using UnityEngine;
 
 /// <summary>
 /// A crystal made from aging magic. Use to restore your Mana 2% to 5% every
@@ -12,6 +13,9 @@ using static SharedData.Constants;
 public sealed class ITMagusCrystal : Item, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Magus Shard";
+    public override int ItemValue => 30000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITMagusCrystal);
     public override ItemUseCallback? OnActionUse => AbsorbCrystal;
 

@@ -142,6 +142,7 @@ public class AttackDefenseSystem : GameSystem
     {
         PlayerStanceState?.ChangeStanceState(StanceState.Defensive);
         RightClickHoldFrames += Time.deltaTime;
+
         if (RightClickHoldFrames > GuardTimeThreshold)
         {
             PlayerStanceState?.ChangeDefensiveState(DefensiveState.Guard);
@@ -160,7 +161,9 @@ public class AttackDefenseSystem : GameSystem
     {
         PoiseValue -= value * GuardStress;
         PoiseValue = Mathf.Clamp(PoiseValue, Zero, MaxGuardStress);
+
         AmplifyStress();
+
         if (PoiseValue == Zero) OnPoiseLost?.Trigger();
     }
 

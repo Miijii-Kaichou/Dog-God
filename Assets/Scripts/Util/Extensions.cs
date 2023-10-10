@@ -154,7 +154,7 @@ namespace Extensions
         /// <returns></returns>
         public static bool ToBool(this int value)
         {
-            return value == 1 ? true : false;
+            return value == 1;
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="_"></param>
         /// <returns></returns>
-        public static T[] GrabComponents<T>(this UnityEngine.Component[] _)
+        public static T[] GrabComponents<T>(this T[] _) where T : UnityEngine.Component
         {
             try
             {
@@ -255,7 +255,7 @@ namespace Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="_"></param>
         /// <returns></returns>
-        public static T[] GrabComponents<T>(this UnityEngine.GameObject[] _)
+        public static T[] GrabComponents<T>(this GameObject[] _) where T: UnityEngine.Component
         {
             try
             {
@@ -534,7 +534,7 @@ namespace Extensions
     {
         public static string TryConcat(this string _, params string[] strings)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
             try
             {
                 foreach (string _string in strings)
@@ -617,7 +617,7 @@ namespace Extensions
             {
                 itemName = name,
                 itemPrice = price,
-                texture = texture
+                //texture = texture
             };
         }
         #nullable disable

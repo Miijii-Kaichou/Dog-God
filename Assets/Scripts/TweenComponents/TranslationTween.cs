@@ -1,3 +1,5 @@
+#nullable enable
+
 using UnityEngine;
 
 using DG.Tweening;
@@ -52,13 +54,13 @@ public class TranslationTween : MonoBehaviour
         switch (axis)
         {
             case TranslationAxis.X:
-                transform.DOLocalMoveX(target, duration);
+                transform?.DOLocalMoveX(target, duration);
                 break;
             case TranslationAxis.Y:
-                transform.DOLocalMoveY(target, duration);
+                transform?.DOLocalMoveY(target, duration);
                 break;
             case TranslationAxis.Z:
-                transform.DOLocalMoveZ(target, duration);
+                transform?.DOLocalMoveZ(target, duration);
                 break;
         }
     }

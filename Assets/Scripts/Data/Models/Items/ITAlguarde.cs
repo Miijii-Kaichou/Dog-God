@@ -14,6 +14,9 @@ using Extensions;
 public sealed class ITAlguarde : Item, IDefenseModifier, IUseLifeCycle
 {
     public override string? ItemName => "Alguarde";
+    public override int ItemValue => 10000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITAlguarde);
     public override ItemUseCallback? OnActionUse => TakeElixir;
 

@@ -14,6 +14,9 @@ using static SharedData.Constants;
 public sealed class ITChargedAdulite : Item, IHealthModifier, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Charged Adulite";
+    public override int ItemValue => 25000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITChargedAdulite);
     public override ItemUseCallback? OnActionUse => AbsorbAdulite;
 

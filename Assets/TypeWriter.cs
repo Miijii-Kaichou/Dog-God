@@ -23,6 +23,8 @@ public sealed class TypeWriter : MonoBehaviour
     [SerializeField] private float _rate = 0.1f;
     [SerializeField] private string _typeAudioName;
 
+    [SerializeField] private AudioSource _source;
+
     private bool _active = false;
     private int _textIndex = -1;
     internal int delay;
@@ -90,6 +92,7 @@ public sealed class TypeWriter : MonoBehaviour
     private void PlayAudio()
     {
         if (_typeAudioName == null) return;
+        _source.PlayOneShot(_source.clip);
     }
 
     IEnumerator TypeWriterCycle()

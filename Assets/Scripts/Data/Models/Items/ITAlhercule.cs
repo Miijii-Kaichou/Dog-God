@@ -14,6 +14,9 @@ using Extensions;
 public sealed class ITAlhercule : Item, IAttackModifier, IUseLifeCycle
 {
     public override string? ItemName => "Alhercule";
+    public override int ItemValue => 10000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITAlhercule);
     public override ItemUseCallback? OnActionUse => TakeElixir;
 

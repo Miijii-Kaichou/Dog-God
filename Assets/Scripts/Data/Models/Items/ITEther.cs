@@ -3,6 +3,7 @@
 using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 /// <summary>
 /// A special kind of potion that rejuvenates the soul.
@@ -11,6 +12,9 @@ using System.Runtime.CompilerServices;
 public sealed class ITEther : Item, IHealthModifier, IManaModifier
 {
     public override string? ItemName => "Ether";
+    public override int ItemValue => 1000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITEther);
     public override ItemUseCallback? OnActionUse => TakeEther;
 

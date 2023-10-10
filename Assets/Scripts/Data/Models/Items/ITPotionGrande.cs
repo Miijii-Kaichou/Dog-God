@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using UnityEngine;
 
 /// <summary>
 /// A larger sized potion (still not very potent). Restores 1000 HP
@@ -8,6 +9,9 @@ using System;
 public sealed class ITPotionGrande : Item, IHealthModifier
 {
     public override string ItemName => "Potion Grande";
+    public override int ItemValue => 1000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITPotionGrande);
     public override ItemUseCallback? OnActionUse => TakePotion;
 

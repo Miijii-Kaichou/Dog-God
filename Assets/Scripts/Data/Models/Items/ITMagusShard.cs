@@ -4,6 +4,7 @@ using System;
 using Random = UnityEngine.Random;
 
 using static SharedData.Constants;
+using UnityEngine;
 
 /// <summary>
 /// A small fragment of a crystal made from aging magic.
@@ -13,6 +14,9 @@ using static SharedData.Constants;
 public sealed class ITMagusShard : Item, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Magus Shard";
+    public override int ItemValue => 10000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITMagusShard);
     public override ItemUseCallback? OnActionUse => AbsorbShard;
 

@@ -16,9 +16,6 @@ public sealed class GameManager : Singleton<GameManager>
     [SerializeField, Header("Sprite Atlas")]
     SpriteAtlas? spriteAtlas;
 
-    [SerializeField, Header("System Dialogue File")]
-    XVNMLAsset mainXVNML;
-
     public static SpriteAtlas? SpriteAtlas
     {
         get { return Instance?.spriteAtlas; }
@@ -131,7 +128,7 @@ public sealed class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution((int)resolutionWidth, (int)resolutionHeight, FullScreenMode.FullScreenWindow, Application.targetFrameRate);
+        Screen.SetResolution((int)resolutionWidth, (int)resolutionHeight, FullScreenMode.FullScreenWindow);
 
         //I want to also create a folder of Profiles if one exists or not.
 
@@ -167,7 +164,6 @@ public sealed class GameManager : Singleton<GameManager>
 
     void StartUpAllSystems()
     {
-        //We're going to turn on all systems defined in the game.
         //GetSystem<CurrencySystem>().Run();
         GetSystem<PlayerDataSerializationSystem>()?.Run();
         GetSystem<DeitySystem>()?.Run();
@@ -180,9 +176,12 @@ public sealed class GameManager : Singleton<GameManager>
         GetSystem<ItemSystem>()?.Run();
         GetSystem<MadoSystem>()?.Run();
         GetSystem<HeavensPlazaSystem>()?.Run();
-        GetSystem<ActionSystem>()?.Run();
-        GetSystem<AttackDefenseSystem>()?.Run();
-        GetSystem<RuntimeActionSystem>()?.Run();
+
+        // Move these to a seperate script that initialized
+        // necessary battle-dependent systems.
+        //GetSystem<ActionSystem>()?.Run();
+        //GetSystem<AttackDefenseSystem>()?.Run();
+        //GetSystem<RuntimeActionSystem>()?.Run();
 
         OnSystemStartProcessCompleted?.Invoke();
     }

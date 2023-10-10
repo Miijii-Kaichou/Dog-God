@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using UnityEngine;
 
 /// <summary>
 /// A normal potion specifically made from magus shards. Restores 500 MP.
@@ -8,6 +9,9 @@ using System;
 public sealed class ITMagusPotion : Item, IManaModifier
 {
     public override string? ItemName => "Magus Potion";
+    public override int ItemValue => 500;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITMagusPotion);
     public override ItemUseCallback? OnActionUse => TakePotion;
 

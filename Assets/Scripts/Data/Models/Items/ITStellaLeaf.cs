@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using UnityEngine;
 /// <summary>
 /// An exceedingly rare leaf conjured by the very stars themselves.
 /// Restores all your Health and Mana
@@ -8,6 +9,9 @@ using System;
 public sealed class ITStellaLeaf : Item, IHealthModifier, IManaModifier
 {
     public override string? ItemName => "Stella Leaf";
+    public override int ItemValue => 10000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITStellaLeaf);
     public override ItemUseCallback? OnActionUse => ConsumeLeaf;
 

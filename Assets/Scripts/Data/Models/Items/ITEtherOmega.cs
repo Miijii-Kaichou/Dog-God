@@ -1,6 +1,6 @@
 #nullable enable
 using System;
-
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -10,6 +10,9 @@ using Random = UnityEngine.Random;
 public sealed class ITEtherOmega : Item, IHealthModifier, IManaModifier
 {
     public override string ItemName => "Ether Omega";
+    public override int ItemValue => 5000;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITEtherOmega);
     public override ItemUseCallback? OnActionUse => TakeEther;
 

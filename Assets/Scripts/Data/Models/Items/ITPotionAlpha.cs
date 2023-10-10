@@ -1,7 +1,7 @@
 #nullable enable
 
 using System;
-
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -11,6 +11,9 @@ using Random = UnityEngine.Random;
 public sealed class ITPotionAlpha : Item, IHealthModifier
 {
     public override string ItemName => "Potion Alpha";
+    public override int ItemValue => 2500;
+    public override Sprite? ItemImage => null;
+
     public override Type? StaticItemType => typeof(ITPotionAlpha);
     public override ItemUseCallback? OnActionUse => TakePotion;
 

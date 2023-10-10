@@ -51,10 +51,10 @@ public sealed class ProfileQuestionnaire : MonoBehaviour
     {
         "What is your name?",
         "What's your favorite number? Pick between 0 and 99",
-        "If you had the chance to change one's faith," +
-            " even if they've done wrong," +
-            " even if it puts you at risk," +
-            " would you do it?",
+        "If you had the chance to alter one's fate," +
+            " notwithstanding their wrongdoings," +
+            " admitting there may be no guarantees," +
+            " would you take it?",
         "Your Existance Has Been Acknowledged"
     };
 
