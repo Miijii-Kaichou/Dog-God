@@ -19,7 +19,7 @@ public sealed class MadoSystem : GameSystem, IActionCategory
         isExpensible = false
     };
 
-    private readonly static Mado[] MadoList = new Mado[]
+    public readonly static Mado[] MadoList = new Mado[]
     {
         new MDPyromado(),
         new MDCryomado(),

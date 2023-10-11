@@ -31,6 +31,11 @@ public class HeavensPlazaSystem : GameSystem
         GameSceneManager.LoadScene(buildIndex, true);
     }
 
+    public static void ExitShop()
+    {
+        GameSceneManager.LoadPrevious();
+    }
+
     public static void SetShopIndex(int targetIndex)
     {
         if (Self == null) return;

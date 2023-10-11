@@ -15,6 +15,8 @@ using static SharedData.Constants;
 public sealed class SKChatter : Skill, IAttackModifier, IDefenseModifier
 {
     public override string SkillName => "Chatter";
+    public override int ShopValue => 199999;
+    public override Sprite? ShopImage => null;
     public override Type StaticItemType => typeof(SKChatter);
     public override ItemUseCallback OnActionUse => UseSkill;
 

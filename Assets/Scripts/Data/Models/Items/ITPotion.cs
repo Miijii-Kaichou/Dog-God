@@ -7,8 +7,8 @@ using UnityEngine;
 public sealed class ITPotion : Item, IHealthModifier
 {
     public override string? ItemName => "Potion";
-    public override int ItemValue => 500;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 500;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITPotion);
     public override ItemUseCallback? OnActionUse => TakePotion;

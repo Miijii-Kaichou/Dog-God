@@ -3,11 +3,14 @@
 using System;
 using UnityEngine;
 
-public abstract class Deity : IActionableItem
+public abstract class Deity : IActionableItem, IShop
 {
     protected short? DeityID { get; private set; }
 
     public virtual string? DeityName { get; set; }
+    public virtual int ShopValue { get; } = 0;
+    public virtual Sprite? ShopImage { get; }
+
     public virtual ItemUseCallback? OnActionUse { get; }
     public virtual Type? StaticItemType { get; }
     public virtual DeityType DeityType { get; }

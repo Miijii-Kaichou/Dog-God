@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using UnityEngine;
 using static SharedData.Constants;
 
 /// <summary>
@@ -9,6 +10,7 @@ using static SharedData.Constants;
 public sealed class DAzulette : Deity
 {
     public override string? DeityName => "Azulette";
+
     public override Type? StaticItemType => typeof(DAzulette);
     public override ItemUseCallback? OnActionUse => ActivateSkill;
 

@@ -15,6 +15,8 @@ using static SharedData.Constants;
 public sealed class SKComfort : Skill, IAttackModifier, IDefenseModifier
 {
     public override string SkillName => "Comfort";
+    public override int ShopValue => 1999999;
+    public override Sprite? ShopImage => null;
     public override Type StaticItemType => typeof(SKComfort);
     public override ItemUseCallback OnActionUse => UseSkill;
 

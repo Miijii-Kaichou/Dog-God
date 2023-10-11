@@ -14,8 +14,8 @@ using UnityEngine;
 public sealed class ITMagusShard : Item, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Magus Shard";
-    public override int ItemValue => 10000;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 10000;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITMagusShard);
     public override ItemUseCallback? OnActionUse => AbsorbShard;

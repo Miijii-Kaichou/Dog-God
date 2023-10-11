@@ -12,8 +12,8 @@ using UnityEngine;
 public sealed class ITPurifiedAdulite : Item, IHealthModifier, IManaModifier, ILevelModifier, IUseLifeCycle
 {
     public override string? ItemName => "Purified Adulite";
-    public override int ItemValue => 50000;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 50000;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITPurifiedAdulite);
     public override ItemUseCallback? OnActionUse => AbsorbAdulite;

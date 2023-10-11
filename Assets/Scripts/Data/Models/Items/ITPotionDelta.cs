@@ -10,8 +10,8 @@ using static SharedData.Constants;
 public sealed class ITPotionDelta : Item, IHealthModifier, IUseLifeCycle
 {
     public override string ItemName => "Potion Delta";
-    public override int ItemValue => 2500;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 2500;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITPotionDelta);
     public override ItemUseCallback? OnActionUse => TakePotion;

@@ -66,7 +66,7 @@ public sealed class ItemSystem : GameSystem, IActionCategory
         for (int index = 0; index < ItemList.Length; index++)
         {
             var item = ItemList[index];
-            systemState.shopEntries[index].New(item.ItemName, item.ItemValue, item.ItemImage);
+            systemState.shopEntries[index].New(item.ItemName, item.ShopValue, item.ShopImage);
         } 
     }
 

@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using UnityEngine;
 using static SharedData.Constants;
 
 /// <summary>
@@ -9,6 +10,8 @@ using static SharedData.Constants;
 public sealed class SKInstinct : Skill, IUseLifeCycle
 {
     public override string SkillName => "Instinct";
+    public override int ShopValue => 46000;
+    public override Sprite? ShopImage => null;
     public override Type StaticItemType => typeof(SKInstinct);
     public override ItemUseCallback OnActionUse => UseSkill;
     public override bool EnabledIf => Player.EntityStanceState == StanceState.Defensive;

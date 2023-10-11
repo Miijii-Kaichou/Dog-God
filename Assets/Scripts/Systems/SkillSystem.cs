@@ -51,9 +51,36 @@ public sealed class SkillSystem : GameSystem, IActionCategory
         new SKTyphoon(),
         new SKUltraheal(),
         new SKYeti(),
+    };
 
-        // Divine Skills
-        new SKAzure()
+    public readonly static Skill[] DivineSkillsList =
+    {
+        new SKAzure(),
+        new SKBeastar(),
+        new SKBringForthTheGrandInferno(),
+        new SKCatastrophicCalamityStream(),
+        new SKDevoteYourSoul(),
+        new SKJackofaltrade(),
+        new SKKagami(),
+        new SKPandoraPandora(),
+        new SKRoaringThunder(),
+        new SKSeptemmare(),
+        new SKShowerMeInAThousandRosePetals(),
+        new SKSweetDream(),
+        new SKYouAreNotAlone()
+    };
+
+    public readonly static Skill[] DivineBlessingsList =
+    {
+        new SKDamselinrede(),
+        new SKICanNotImagineAWorldWithoutYou(),
+        new SKLastingAmber(),
+        new SKOthello(),
+        new SKProdigy(),
+        new SKShallWeDance(),
+        new SKSirensLove(),
+        new SKSterling(),
+        new SKVengence()
     };
 
     private static SkillSystemState? _SystemState;
@@ -84,9 +111,21 @@ public sealed class SkillSystem : GameSystem, IActionCategory
         _SystemState!.skillAcquired[index] = false;
     }
 
-    internal static Skill? LocateSkill<T>()
+    internal static Skill? LocateSkill<T>(SkillCategory category = SkillCategory.Standard)
     {
-        return  SkillsList.Where(skill => skill.StaticItemType == typeof(T)).Single();
+        switch (category)
+        {
+            case SkillCategory.Standard:
+                return SkillsList.Where(skill => skill.StaticItemType == typeof(T)).Single();
+
+            case SkillCategory.Divine:
+                return  DivineSkillsList.Where(skill => skill.StaticItemType == typeof(T)).Single();
+
+            case SkillCategory.Blessing:
+                return  DivineBlessingsList.Where(skill => skill.StaticItemType == typeof(T)).Single();
+
+            default: return null;
+        }
     }
 
     internal static void StackEnhancementForSkill<T>(int percentageAsWhole) where T : Skill

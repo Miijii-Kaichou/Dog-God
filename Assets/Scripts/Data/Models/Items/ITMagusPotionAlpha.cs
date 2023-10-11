@@ -11,8 +11,8 @@ using Random = UnityEngine.Random;
 public sealed class ITMagusPotionAlpha : Item, IManaModifier
 {
     public override string? ItemName => "Magus Potion Alpha";
-    public override int ItemValue => 2500;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 2500;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITMagusPotionAlpha);
     public override ItemUseCallback? OnActionUse => TakePotion;

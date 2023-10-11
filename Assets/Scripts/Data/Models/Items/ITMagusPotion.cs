@@ -9,8 +9,8 @@ using UnityEngine;
 public sealed class ITMagusPotion : Item, IManaModifier
 {
     public override string? ItemName => "Magus Potion";
-    public override int ItemValue => 500;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 500;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITMagusPotion);
     public override ItemUseCallback? OnActionUse => TakePotion;

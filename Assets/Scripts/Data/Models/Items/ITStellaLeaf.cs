@@ -9,8 +9,8 @@ using UnityEngine;
 public sealed class ITStellaLeaf : Item, IHealthModifier, IManaModifier
 {
     public override string? ItemName => "Stella Leaf";
-    public override int ItemValue => 10000;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 10000;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITStellaLeaf);
     public override ItemUseCallback? OnActionUse => ConsumeLeaf;

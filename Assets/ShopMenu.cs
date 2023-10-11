@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+#nullable enable
+
 using UnityEngine;
+using DG.Tweening;
 
 public class ShopMenu : MonoBehaviour
 {
-    GameObject hazelAlonoireObj;
+    [SerializeField]
+    CurtainController _curtainController;
 
     private const int ItemShopIndex = 0;
     private const int SkillShopIndex = 1;
@@ -17,6 +19,8 @@ public class ShopMenu : MonoBehaviour
         // Immediately on start up, register this object
         // to the Heaven's Plaza System
         HeavensPlazaSystem.Register(this);
+
+        _curtainController.Open(null);
     }
 
     public void GoIntoItemShop()
@@ -41,7 +45,11 @@ public class ShopMenu : MonoBehaviour
 
     void EnterShop(int index)
     {
-        HeavensPlazaSystem.SetShopIndex(index);
-        HeavensPlazaSystem.OpenShop();
+        _curtainController.Close(() =>
+        {
+            Debug.Log("WHAT DA FAKKK?!");
+            HeavensPlazaSystem.SetShopIndex(index);
+            HeavensPlazaSystem.OpenShop();
+        });
     }
 }

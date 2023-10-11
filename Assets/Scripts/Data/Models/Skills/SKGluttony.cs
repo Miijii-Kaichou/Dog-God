@@ -3,13 +3,16 @@
 using System;
 using Random = UnityEngine.Random;
 using static SharedData.Constants;
+using UnityEngine;
 
 /// <summary>
 /// 
 /// </summary>
 public sealed class SKGluttony : Skill, IHealthModifier, IManaModifier
 {
-    public override string SkillName => "Heal";
+    public override string SkillName => "Gluttony";
+    public override int ShopValue => 50000;
+    public override Sprite? ShopImage => null;
     public override Type StaticItemType => typeof(SKHeal);
     public override ItemUseCallback OnActionUse => UseSkill;
 

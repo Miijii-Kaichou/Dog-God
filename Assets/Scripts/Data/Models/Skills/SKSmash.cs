@@ -11,6 +11,8 @@ using UnityEngine;
 public sealed class SKSmash : Skill, IAttackModifier
 {
     public override string SkillName => "Smash";
+    public override int ShopValue => 10000;
+    public override Sprite? ShopImage => null;
     public override Type StaticItemType => typeof(SKSmash);
     public override ItemUseCallback OnActionUse => UseSkill;
 

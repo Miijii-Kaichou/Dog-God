@@ -11,8 +11,8 @@ using static SharedData.Constants;
 public sealed class ITMagusPotionDelta : Item, IManaModifier, IUseLifeCycle
 {
     public override string ItemName => "Magus Potion Delta";
-    public override int ItemValue => 2500;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 2500;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITMagusPotionDelta);
     public override ItemUseCallback? OnActionUse => TakePotion;

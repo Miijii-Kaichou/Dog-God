@@ -12,8 +12,8 @@ using UnityEngine;
 public sealed class ITEther : Item, IHealthModifier, IManaModifier
 {
     public override string? ItemName => "Ether";
-    public override int ItemValue => 1000;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 1000;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITEther);
     public override ItemUseCallback? OnActionUse => TakeEther;

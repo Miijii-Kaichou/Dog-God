@@ -3,14 +3,14 @@
 using System;
 using UnityEngine;
 
-public abstract class Item : IActionableItem
+public abstract class Item : IActionableItem, IShop
 {
     protected PlayerEntity? Player => GameManager.Player;
     public short? ItemID { get; private set; }
     
     public virtual string? ItemName { get; }
-    public virtual int ItemValue { get; } = 0;
-    public virtual Sprite? ItemImage { get; }
+    public virtual int ShopValue { get; } = 0;
+    public virtual Sprite? ShopImage { get; }
 
     public virtual Type? StaticItemType { get; }  
     public virtual ItemUseCallback? OnActionUse { get; }

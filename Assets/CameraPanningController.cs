@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraPanningController : MonoBehaviour
+public sealed class CameraPanningController : MonoBehaviour
 {
     [SerializeField, Header("Camera")]
     private Camera _targetCamera;
@@ -14,19 +12,22 @@ public class CameraPanningController : MonoBehaviour
     private Transform[] _controlPoints;
 
     [Header("Centre Distance")]
-    [SerializeField] private float _centreXDistance = 0.5f;
-    [SerializeField] private float _centreYDistance = 0.5f;
+    public float centreXDistance = 0.5f;
+    public float centreYDistance = 0.5f;
 
     [SerializeField, Header("Smooth Damping")]
     private float _smoothDamping = 0.5f;
 
+    public bool controlWithCursor;
+
     private Vector2 _velocity;
+    private Vector3 _viewportVector;
 
     // Update is called once per frame
     void Update()
     {
         Vector2 mouseVector = new(Input.mousePosition.x, Input.mousePosition.y);
-        Vector2 viewportVector = _targetCamera.ScreenToViewportPoint(mouseVector);
+        _viewportVector = _targetCamera.ScreenToViewportPoint(mouseVector);
 
         int i = 0;
 
@@ -35,20 +36,27 @@ public class CameraPanningController : MonoBehaviour
         float right = _controlPoints[i++].position.x;
         float down = _controlPoints[i].position.y;
 
-        Vector4 bounds = new(left, top, right, down);
-        Vector2 finalPosition = GetFinalCoordinates(bounds, viewportVector);
+        Rect bounds = new(left, top, right, down);
+        Vector2 finalPosition = GetFinalCoordinates(bounds, _viewportVector);
 
         _targetCamera.transform.position = Vector2.SmoothDamp(_targetCamera.transform.position, finalPosition, ref _velocity, _smoothDamping);
     }
 
-    private Vector2 GetFinalCoordinates(Vector4 bounds, Vector2 viewport)
+    public void SetViewportVector(Vector2 viewportVector)
     {
-        float thresholdValueX = _centreXDistance / 2;
-        float thresholdValueY = _centreYDistance / 2;
+        _viewportVector = viewportVector;
+    }
 
-        float finalPosX = Mathf.Lerp(bounds.x, bounds.z, Mathf.Clamp(viewport.x, thresholdValueX, 1 - thresholdValueX));
-        float finalPosY = Mathf.Lerp(bounds.w, bounds.y, Mathf.Clamp(viewport.y, thresholdValueY, 1 - thresholdValueY));
+    Vector2 GetFinalCoordinates(Rect bounds, Vector2 viewport)
+    {
+        float thresholdValueX = centreXDistance / 2;
+        float thresholdValueY = centreYDistance / 2;
+
+        float finalPosX = Mathf.Lerp(bounds.x, bounds.width, Mathf.Clamp(viewport.x, thresholdValueX, 1 - thresholdValueX));
+        float finalPosY = Mathf.Lerp(bounds.height, bounds.y, Mathf.Clamp(viewport.y, thresholdValueY, 1 - thresholdValueY));
 
         return new(finalPosX, finalPosY);
     }
+
+    public Camera GetCamera() => _targetCamera;
 }

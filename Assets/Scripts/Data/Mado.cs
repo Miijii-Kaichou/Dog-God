@@ -4,12 +4,15 @@ using static SharedData.Constants;
 
 #nullable enable
 
-public abstract class Mado : IActionableItem
+public abstract class Mado : IActionableItem, IShop
 {
     protected PlayerEntity? Player { get; private set; }
     public short? MadoID { get; private set; }
 
     public virtual string? MadoName { get; }
+    public virtual int ShopValue { get; }
+    public virtual Sprite? ShopImage { get; }
+
     public virtual Type? StaticItemType { get; }
     public virtual ItemUseCallback? OnActionUse { get; }
     public virtual int MadoEnhancementValue { get; }

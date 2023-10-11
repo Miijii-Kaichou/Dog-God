@@ -1,11 +1,9 @@
 #nullable enable
 
 using Extensions;
-using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public sealed class ShopObject : MonoBehaviour
 {
@@ -24,6 +22,9 @@ public sealed class ShopObject : MonoBehaviour
     private Image shopKeeper;
 
     [SerializeField]
+    private CurtainController _curtainController;
+
+    [SerializeField]
     private ObjectPooler itemEntryPool;
 
     private ItemEntry[] itemEntries;
@@ -31,24 +32,42 @@ public sealed class ShopObject : MonoBehaviour
 
     private void Start()
     {
+        _curtainController.Open(null);
+
         itemEntries ??= itemEntryPool.GetPooledObjects()
             .Select(po => po.GetComponent<ItemEntry>())
             .ToArray();
 
-        var content = type switch
+        ItemEntryModel[]? content = type switch
         {
             ShopType.Item => ItemSystem.ItemList.Select(item => new ItemEntryModel(
                 item.ItemName,
-                item.ItemValue,
-                item.ItemImage
+                item.ShopValue,
+                item.ShopImage
                 )).ToArray(),
-            ShopType.Skill => throw new NotImplementedException(),
-            ShopType.Mado => throw new NotImplementedException(),
-            ShopType.Deity => throw new NotImplementedException(),
-            _ => throw new NotImplementedException()
+
+            ShopType.Skill => SkillSystem.SkillsList.Select(item => new ItemEntryModel(
+                item.SkillName,
+                item.ShopValue,
+                item.ShopImage
+                )).ToArray(),
+
+            ShopType.Mado => MadoSystem.MadoList.Select(item => new ItemEntryModel(
+                item.MadoName,
+                item.ShopValue,
+                item.ShopImage
+                )).ToArray(),
+
+            ShopType.Deity => DeitySystem.DeityList.Select(item => new ItemEntryModel(
+                item.DeityName,
+                item.ShopValue,
+                item.ShopImage
+                )).ToArray(),
+
+            _ => null
         };
 
-        ShowItemEntries(content);
+        ShowItemEntries(content!);
     }
 
     public void ShowItemEntries(ItemEntryModel[] entries)
@@ -69,5 +88,14 @@ public sealed class ShopObject : MonoBehaviour
             itemEntries[i].gameObject.Disable();
             i.Next();
         }
+    }
+
+    public void ReturnToPlaza()
+    {
+        _curtainController.Close(() =>
+        {
+            // Go back to plaza;
+            HeavensPlazaSystem.ExitShop();
+        });
     }
 }

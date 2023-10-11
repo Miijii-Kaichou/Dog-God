@@ -18,7 +18,7 @@ public class DeitySystem : GameSystem, IActionCategory
         isExpensible = false
     };
 
-    private readonly static Deity[] DeityList = new Deity[]
+    public readonly static Deity[] DeityList = new Deity[]
     {
         new DAzulette(),
         new DEstere(),

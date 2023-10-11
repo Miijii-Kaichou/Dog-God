@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 
 
-public abstract class Skill : IActionableItem
+public abstract class Skill : IActionableItem, IShop
 {
     private Stack<float> EnhancementValueStack = new();
     
@@ -18,6 +18,9 @@ public abstract class Skill : IActionableItem
         EnhancementValueStack.Sum(x => x);
 
     public virtual string? SkillName { get; }
+    public virtual int ShopValue { get; } = 0;
+    public virtual Sprite? ShopImage { get; }
+
     public virtual ItemUseCallback? OnActionUse { get; }
     public virtual Type? StaticItemType { get; }
     public virtual bool EnabledIf => true;

@@ -10,6 +10,8 @@ using static SharedData.Constants;
 public sealed class SKTrifecta : Skill
 {
     public override string SkillName => "Trifecta";
+    public override int ShopValue => 35000;
+    public override Sprite? ShopImage => null;
     public override Type StaticItemType => typeof(SKTrifecta);
     public override ItemUseCallback OnActionUse => UseSkill;
 

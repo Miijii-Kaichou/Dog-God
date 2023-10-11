@@ -13,8 +13,8 @@ using UnityEngine;
 public sealed class ITMagusCrystal : Item, IManaModifier, IUseLifeCycle
 {
     public override string? ItemName => "Magus Shard";
-    public override int ItemValue => 30000;
-    public override Sprite? ItemImage => null;
+    public override int ShopValue => 30000;
+    public override Sprite? ShopImage => null;
 
     public override Type? StaticItemType => typeof(ITMagusCrystal);
     public override ItemUseCallback? OnActionUse => AbsorbCrystal;
