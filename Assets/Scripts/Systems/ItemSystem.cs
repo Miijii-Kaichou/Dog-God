@@ -1,13 +1,13 @@
 ﻿#nullable enable
 
 using System;
-using System.Collections;
 using System.Linq;
 using Extensions;
 using static SharedData.Constants;
 
 public sealed class ItemSystem : GameSystem, IActionCategory
 {
+    private static ItemSystemState? _SystemState;
     private static ItemSystem? Self;
 
     public (IActionableItem?[] slots, int[] quantities, int[] capacities, Type?[] requiredTypes, bool isExpensible) ActionCategoryDetails { get; set; } = new()
@@ -48,7 +48,6 @@ public sealed class ItemSystem : GameSystem, IActionCategory
         new ITStellaLeaf()
     };
 
-    private static ItemSystemState? _SystemState;
 
     private static int _ItemRefCount;
 
@@ -114,7 +113,7 @@ public sealed class ItemSystem : GameSystem, IActionCategory
 
     internal static void Load()
     {
-       _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetItemSystemStateData();
+       _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetItemStateData();
     }
 
     internal static void Save()

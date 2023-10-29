@@ -1,7 +1,6 @@
 #nullable enable
 
 using UnityEngine;
-using DG.Tweening;
 
 public class ShopMenu : MonoBehaviour
 {
@@ -47,7 +46,6 @@ public class ShopMenu : MonoBehaviour
     {
         _curtainController.Close(() =>
         {
-            Debug.Log("WHAT DA FAKKK?!");
             HeavensPlazaSystem.SetShopIndex(index);
             HeavensPlazaSystem.OpenShop();
         });

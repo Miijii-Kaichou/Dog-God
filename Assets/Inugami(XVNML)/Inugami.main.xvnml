@@ -1,0 +1,146 @@
+<proxy	name::"Inugami.main" engine::UnityEngine target::".." lang::CSharp>
+	$> <configurations>
+	$> 	<sourceMapping>
+	$> 		<keyValuePair key::"Audio"        value::"/Audio"/>
+	$> 		<keyValuePair key::"Cast"         value::"/Cast"/>
+	$> 		<keyValuePair key::"Dependencies" value::"/Dependencies"/>
+	$> 		<keyValuePair key::"Dialogue"     value::"/Dialogue"/>
+	$> 		<keyValuePair key::"Images"       value::"/Images"/>
+	$> 	</sourceMapping>
+	$> 	<vscodeWorkspacePath src::"/Inugami(XVNML).code-workspace"/>
+	$> </configurations>
+
+	<metadata>
+		<title name::"Inugami"/>
+		<author name::"Miijii"/>
+	</metadata>
+
+	<keycodeDefinitions>
+		<keycode name::"RightClick" vkey::LeftMouse purpose::PROCEED/>
+	</keycodeDefinitions>
+
+	<castDefinitions>
+		<cast name::"Hazel"      src::$nil/>
+		<cast name::"Koko"       src::$nil/>
+		<cast name::"Amari"      src::$nil/>
+		<cast name::"Ulla"       src::$nil/>
+		<cast name::"Mako"       src::$nil/>
+		<cast name::"Satou"      src::$nil/>
+		<cast name::"Azulette"   src::$nil/>
+		<cast name::"Charolette" src::$nil/>
+		<cast name::"Estere"     src::$nil/>
+		<cast name::"Kamui"      src::$nil/>
+		<cast name::"Othella"    src::$nil/>
+		<cast name::"Patchouli"  src::$nil/>
+		<cast name::"Rosa"       src::$nil/>
+		<cast name::"Ryuga"      src::$nil/>
+		<cast name::"Suisei"     src::$nil/>
+		<cast name::"Yumi"       src::$nil/>
+	</castDefinitions>
+
+	<macroCache>
+		<macro symbol::"sts" arg::20 name::"_default_text_speed"/>
+		<macro symbol::"sts" arg::5 name::"_slow_down_text"/>
+		<macro symbol::"del" arg::1000 name::"_delay1s"/>
+		<macro name::"_think">
+			<macro symbol::"ins" arg::"."/>
+			<macro symbol::"del" arg::500/>
+			<macro symbol::"ins" arg::"."/>
+			<macro symbol::"del" arg::500/>
+			<macro symbol::"ins" arg::"."/>
+			<macro symbol::"del" arg::1000/>
+		</macro>
+	</macroCache>
+
+	$> Questionaire questions when creating
+	$> a new profile.
+	<dialogueGroup name::"Questionaire">
+		<dialogue>
+			@ What is your name?{enable_input::7}<
+			@ What's your favorite number?{delay::500} Pick between 0 and 99.{enable_input::2}<
+			@ If you had the change to change one's fate...{delay::500}{clear}
+			Even with their mistakes...{delay::500}{clear}
+			Even if it meaning risking your life...{delay::500}{clear}
+			would you do it?{enable_prompt}<
+			@ Your existance has been acknowledged...<<
+		</dialogue>
+	</dialogueGroup>
+	
+	$> System text and dialogue goes into main.
+	<dialogueGroup name::"SystemDialogue">
+		$> Don't know what to put for this one, but just in case we have any system-specific dialogue, I'll put them in here.
+	</dialogueGroup>
+
+	<dialogueGroup name::"Introduction">
+		<dialogue name::"Beginning">
+			$> I don't know how I want the game introduction to work, but I'll just come up with something just
+			$> to have something in the game. Now that I got XVNML to work for the game, I can go WILD with it.
+			$> There needs to be a macro where instead of inserting into a line to be immediately prints, but append to the overall 
+			$> dialogue that needs to be printed.
+			$> So, there will be the "insert" macro, and then there's an "append" method, which will insert something to the entire dialogue.
+			$> This will then allow it to print out what's been inserted as opposed to printing it as it is.
+			$> Or maybe have a boolean that says to insert it to the final dialogue as opposed to where it is right now...
+			$> I'll think about it later.
+			@ {$_think}<
+			@ {$_default_text_speed}Where{$_think|$_delay1s|$_default_text_speed} am I?<
+			@ I feel so cold{$_think}<
+			@ Last I remember was{$_think}<
+			@ {$_think|$_delay1s|$_default_text_speed} nothing{$_think}<
+			@ I can't remember anything.<
+			@ Everything's so hazy{$_think}<
+			@ Who am I?<
+			@ Where am I?<
+			@ Why am I here?<
+			@ I say I would want to go home{$_slow_down_text|$_think}<
+			@ {$_default_text_speed}But{$_think}> What is home?<
+			@ Where is home?<
+			@ I can't even remember my own name.<
+			@ Or perhaps{$_slow_down_text}{$_think}> Maybe I do know my name{$_think}<
+			
+			$> This is supposed to be Hazel talking.
+			@??? {$_default_text_speed|style::"title"}You must be it{$_think}<
+
+			@ Who{$_think}> was that{$_think}<
+			@ Who are you?<
+
+			$> Using the style "title" should enlarge the text
+			$> as welll as center it.
+			@??? {style::"title"}We need you.<
+
+			@ Me? But what for{$_think}<
+			@ I don't even know who I am{$_think}<
+
+			@??? {style::"title"}You are you{$_think}<
+			@??? {style::"title"}And you will be the one to save us.<
+
+			@ I{$_think} {pause}Don't get it.<
+			
+			@??? {$_slow_down_text|style::"title"}Come now{$_think}<
+			@??? {style::"title"}And soon, your eyes will be open{$_think}<
+			@??? {style::"title"}All will be answered{$_think}<
+			@??? {style::"title"}Come to the light{$_think}<<
+
+			$> TODO - Add a macro that makes the screen go white.
+		</dialogue>
+	</dialogueGroup>
+
+	$> Character-specific dialogue goes here.
+	<dialogueGroup name::"CharacterDialogues">
+		<dialogue name::"HazelDialogue"        src::"HazelAlonoire.dialogue.xvnml" pathMode::Relative/>
+		<dialogue name::"KokoDialogue"         src::$nil pathMode::Relative/>
+		<dialogue name::"SatouDialogue"		   src::$nil pathMode::Relative/>
+		<dialogue name::"AmariDialogue"        src::$nil pathMode::Relative/>
+		<dialogue name::"AzuletteDialogue"     src::$nil pathMode::Relative/>
+		<dialogue name::"CharoletteDialogue"   src::$nil pathMode::Relative/>
+		<dialogue name::"EstereDialogue"       src::$nil pathMode::Relative/>
+		<dialogue name::"KamuiDialogue"        src::$nil pathMode::Relative/>
+		<dialogue name::"MakoDialogue"         src::$nil pathMode::Relative/>
+		<dialogue name::"OthellaDialogue"      src::$nil pathMode::Relative/>
+		<dialogue name::"PatchouliDialogue"    src::$nil pathMode::Relative/>
+		<dialogue name::"RosaDialogue"         src::$nil pathMode::Relative/>
+		<dialogue name::"RyugaDialogue"        src::$nil pathMode::Relative/>
+		<dialogue name::"SuiseiDialogue"       src::$nil pathMode::Relative/>
+		<dialogue name::"UllaDialogue"         src::$nil pathMode::Relative/>
+		<dialogue name::"YumiDialogue"         src::$nil pathMode::Relative/>
+	</dialogueGroup>
+</proxy>

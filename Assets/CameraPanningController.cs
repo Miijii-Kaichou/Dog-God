@@ -5,9 +5,6 @@ public sealed class CameraPanningController : MonoBehaviour
     [SerializeField, Header("Camera")]
     private Camera _targetCamera;
 
-    [SerializeField, Header("Centre Point")]
-    private Transform _centrePoint;
-
     [SerializeField, Header("Control Points")]
     private Transform[] _controlPoints;
 

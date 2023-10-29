@@ -1,12 +1,13 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using UnityEngine;
 
 using static SharedData.Constants;
 
-#nullable enable
-
-public class ExperienceSystem : GameSystem
-{   
+public sealed class ExperienceSystem : GameSystem
+{
+    private static ExperienceSystemState? _SystemState;
     public static ExperienceSystem? Self;
     /*So, the Leveling System takes in all the things that has
     LV. All of this information will be displayed in game, keeping track
@@ -95,5 +96,24 @@ public class ExperienceSystem : GameSystem
         // level up until it hits 0 again.
         // BTW. this stacks (it sort of needs to be).
         TargetLevel += levelGain;
+    }
+
+    public static void Save()
+    {
+        if (Self == null) return;
+
+        _SystemState = new(Self.currentLevel, Self.currentExperience, Self.experienceTilNextLevel);
+        PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].UpdateExperienceStateData(_SystemState);
+    }
+
+    public static void Load()
+    {
+        if (Self == null) return;
+
+        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetExperienceStateData();
+        
+        Self.currentLevel = _SystemState.CurrentLevel;
+        Self.currentExperience = _SystemState.CurrentExperience;
+        Self.experienceTilNextLevel = _SystemState.ExperienceTilNextLevel;
     }
 }

@@ -6,9 +6,8 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.U2D;
-
+using XVNML2U.Mono;
 using static SharedData.Constants;
 
 public sealed class GameManager : Singleton<GameManager>
@@ -16,12 +15,17 @@ public sealed class GameManager : Singleton<GameManager>
     [SerializeField, Header("Sprite Atlas")]
     SpriteAtlas? spriteAtlas;
 
+    [SerializeField, Header("Main Module")]
+    XVNMLModule _mainModule;
+
+    public static XVNMLModule MainXVNMLModule => Instance._mainModule;
+    
     public static SpriteAtlas? SpriteAtlas
     {
         get { return Instance?.spriteAtlas; }
     }
 
-    public static UniversalGameState GameState;
+    public static UniversalGameState? GameState;
 
     public static Action? OnSystemRegistrationProcessCompleted { get; internal set; }
     public static Action? OnSystemStartProcessCompleted { get; internal set; }
@@ -84,6 +88,7 @@ public sealed class GameManager : Singleton<GameManager>
 
     [Header("Achievements"), SerializeField]
     private List<Achievement> achievements = new List<Achievement>();
+
     internal static PlayerDataState? PlayerDataState;
     internal static string? PlayerName;
 
@@ -164,18 +169,21 @@ public sealed class GameManager : Singleton<GameManager>
 
     void StartUpAllSystems()
     {
-        //GetSystem<CurrencySystem>().Run();
         GetSystem<PlayerDataSerializationSystem>()?.Run();
-        GetSystem<DeitySystem>()?.Run();
+
         GetSystem<StatsSystem>()?.Run();
         GetSystem<HealthSystem>()?.Run();
         GetSystem<ManaSystem>()?.Run();
         GetSystem<ExperienceSystem>()?.Run();
+
+        GetSystem<CurrencySystem>()?.Run();
         GetSystem<ResurrectionSystem>()?.Run();
-        GetSystem<SkillSystem>()?.Run();
-        GetSystem<ItemSystem>()?.Run();
-        GetSystem<MadoSystem>()?.Run();
+        
         GetSystem<HeavensPlazaSystem>()?.Run();
+        GetSystem<ItemSystem>()?.Run();
+        GetSystem<SkillSystem>()?.Run();
+        GetSystem<MadoSystem>()?.Run();
+        GetSystem<DeitySystem>()?.Run();
 
         // Move these to a seperate script that initialized
         // necessary battle-dependent systems.
@@ -270,11 +278,13 @@ public sealed class GameManager : Singleton<GameManager>
     public static void Save()
     {
         GameState ??= new(0);
+        GameState.identifier = PlayerName;
         PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfileIndex].UpdateUniversalGameState(GameState);
     }
 
     public static void Load()
     {
         GameState = PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfileIndex].GetUniversalGameState();
+        PlayerName = GameState.identifier;
     }
 }

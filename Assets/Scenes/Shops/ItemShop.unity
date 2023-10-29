@@ -1341,7 +1341,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetCamera: {fileID: 937974311}
-  _centrePoint: {fileID: 412245981}
   _controlPoints:
   - {fileID: 822102814}
   - {fileID: 1566690303}
@@ -1748,7 +1747,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: b2a3e083f98de0f4faa71d34afe88281, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 531bd842fbe6830478ff2862e3ab5679, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1767,7 +1766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526906613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: -5, z: 10}
+  m_LocalPosition: {x: -3.5, y: -5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1832,7 +1831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hazel
+  m_text: Amari
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2108,8 +2107,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I'll just be a placeholder for now until we can get someone to shopkeeper
-    this story. I believe her name is Amari.
+  m_text: ...Could you refrain from staring at me too long? We're still working on
+    my outfit design...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2198,8 +2197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38561629f8ff10642885c672d32df738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textInput: I'll just be a placeholder for now until we can get someone to shopkeeper
-    this story. I believe her name is Amari.
+  _textInput: ...Could you refrain from staring at me too long? We're still working
+    on my outfit design...
   _targetOutput: {fileID: 2142321445}
   _playOnAwake: 0
   _allowSkipOnInput: 0

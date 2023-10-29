@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -605,6 +606,19 @@ namespace Extensions
                 Debug.Log(string.Format("Failed to Copy File Info: {0}", e.Message));
                 return;
             }
+        }
+    }
+
+    public static class PropertyInfoExt
+    {
+        public static PropertyInfo FindProperty(this object target, string propertyName)
+        {
+            return target.GetType().GetProperty(propertyName);
+        }
+
+        public static void UpdateWith(this PropertyInfo target, object value)
+        {
+            target.SetValue(target, value, null);
         }
     }
 

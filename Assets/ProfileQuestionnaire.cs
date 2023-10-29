@@ -180,7 +180,11 @@ public sealed class ProfileQuestionnaire : MonoBehaviour
     private void CompleteProfileCreationProcess()
     {
         var alarm = new Alarm(1);
-        GameSceneManager.Prepare(SI_HeavensPlaza);
+
+        // We're going to have a Intro Sequence, and then it's going to take you to the actual "Longest Boss Fight Ever!"
+        //GameSceneManager.Prepare(SI_HeavensPlaza);
+        GameSceneManager.Prepare(9);
+
         alarm.SetFor(5f, 0, true, () =>
         {
             _translationTween.DoTranslationTweeningReturn();
@@ -201,7 +205,14 @@ public sealed class ProfileQuestionnaire : MonoBehaviour
     {
         var activeIndex = GameManager.ActiveProfileIndex;
         Clear();
+        
         StatsSystem.SetPlayerStatsState(_createdStats);
+
+        HealthSystem.Save();
+        ManaSystem.Save();
+        ExperienceSystem.Save();
+        ResurrectionSystem.Save();
+        CurrencySystem.Save();
         ItemSystem.Save();
         SkillSystem.Save();
         MadoSystem.Save();

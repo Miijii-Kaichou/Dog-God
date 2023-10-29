@@ -1,0 +1,102 @@
+<source name::"Amari.dialogue">
+    <dialogueGroup name::"CharacterDialogue">
+        <dialogue id::0 name::"AmariDialogue">
+            @Amari Welcome to the Item Shop. Feel free to look around and see what you like.<<
+        </dialogue>
+    </dialogueGroup>
+
+    $> All Item Descriptions
+    $> When talking to Amari!
+    <dialogueGroup name::"ItemDescriptions">
+        <dialogue name::"Adulite">
+            @Amari The holiest material there is.
+                Perhaps more valuable than a Stella Leaf.
+                Restores all your Health and Mana, 
+                and restores them between 5% and 10% every tick for 30 seconds.<<
+        </dialogue>
+        <dialogue name::"Alguarde">
+            @Amari An elixir that enhances your defense between
+                5% and 20% for 30 seconds.<<
+        </dialogue>
+        <dialogue name::"Alhercule">
+            @Amari An elixir that enhances your attack between
+                5% and 20% for 30 seconds.<<
+        </dialogue>
+        <dialogue name::"Charged Adulite">
+            @Amari It's Adulite, but has immense concentrations of energy.
+                Very close to it's purest state.
+                Restores all your Health and Mana, and regenerates them between
+                8% and 12% for 1 whole minute!<<
+        </dialogue>
+        <dialogue name::"Ether">
+            @Amari A special kind of potion that rejuvenates the soul.
+                Restores 500 HP and MP.<<
+        </dialogue>
+        <dialogue name::"Ether Alpha">
+            @Amari An even better kind of potion that really gets your spirits lifted.
+                Restores 1000 HP and MP.<<
+        </dialogue>
+        <dialogue name::"Ether Omega">
+            @Amari A highly enhanced version of Ether Alpha.
+                Restores between 25% and 50% of both your HP and 
+                MP.<<
+        </dialogue>
+        <dialogue name::"Magus Crystal">
+            @Amari A crystal made from aging magic. Use to restore you MP between 2% and 5%
+                every tick for 1 whole minute.<<
+        </dialogue>
+        <dialogue name::"Magus Potion">
+            @Amari A normal potion specifically made from magus shards.
+                Restores 500 MP.<<
+        </dialogue>
+        <dialogue name::"Magus Potion Alpha">
+            @Amari An enhanced version of a normal magus portion.
+                Restores between 10% and 30% of your MP.<<
+        </dialogue>
+        <dialogue name::"Magus Potion Delta">
+            @Amari A magus potion that has a long lasting effect.
+                Regain 5% of MP every tick for 30 seconds.<<
+        </dialogue>
+        <dialogue name::"Magus Potion Omega">
+            @Amari An enhanced version of Magus Potion Alpha.
+                Magus Crystals are polished and embued with the purest of magic
+                during the production cycle, ensuring that the client gains
+                between 30% and 60% of their mana.<<
+        </dialogue>
+        <dialogue name::"Magus Shard">
+            @Amari A small fragment of a crystal made from aging magic.
+                Used to restore ones MP between 2% and 5% every tick for
+                10 seconds.<<
+        </dialogue>
+        <dialogue name::"Potion">
+            @Amari A normal potion that's not very potent. Restores 500 HP.<<
+        </dialogue>
+        <dialogue name::"Potion Alpha">
+            @Amari An enhanced version of a normal potion. Potent enough to 
+                restore between 10% and 15% of HP.<<
+        </dialogue>
+        <dialogue name::"Potion Delta">
+            @Amari A potion that has a long lasting effect.
+                Regain 2% of your health every tick for 30 seconds total.<<
+        </dialogue>
+        <dialogue name::"Potion Grande">
+            @Amari A larget sized potion (stilll not very potent).
+                Restores 1000 HP.<<
+        </dialogue>
+        <dialogue name::"Potion Omega">
+            @Amari An enhanced version of the Alpha version of a normal potion.
+                Very potent. So much in fact that it'll restore between
+                25% to 50% of HP.<<
+        </dialogue>
+        <dialogue name::"Purified Adulite">
+            @Amari It's Adulite, but in it's puriest state.
+                Gain 3 levels as you restore all your MP and HP,
+                whilseregenerating it between 8% and 12% for 3 whole
+                minutes!<<
+        </dialogue>
+        <dialogue name::"Stella Leaf">
+            @Amari An exceedingly rare and beautiful leaf conjured by the
+                very stars themselves. Restores all HP and MP.<<
+        </dialogue>
+    </dialogueGroup>
+</source>

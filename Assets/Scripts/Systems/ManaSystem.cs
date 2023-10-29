@@ -1,7 +1,9 @@
 ﻿#nullable enable
 
+
 public sealed class ManaSystem : GameSystem
 {
+    private static ManaSystemState? _SystemState;
     public static ManaSystem? Self;
 
     /*So, the Mana System takes in all the things that has
@@ -41,5 +43,21 @@ public sealed class ManaSystem : GameSystem
     internal static void RestoreAllMana()
     {
         SetMaxMana(PlayerManaProp!.MaxManaValue);
+    }
+
+    public static void Save()
+    {
+        if (PlayerManaProp == null) return;
+        IManaProperty manaProperty = PlayerManaProp!;
+        _SystemState = new(manaProperty.ManaValue, manaProperty.MaxManaValue);
+        PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].UpdateManaStateData(_SystemState);
+    }
+
+    public static void Load()
+    {
+        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetManaStateData();
+        
+        PlayerManaProp?.SetMana(_SystemState.CurrentMana);
+        PlayerManaProp?.SetMaxMana(_SystemState.MaxMana);
     }
 }

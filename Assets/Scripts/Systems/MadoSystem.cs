@@ -97,6 +97,6 @@ public sealed class MadoSystem : GameSystem, IActionCategory
 
     internal static void Load()
     {
-        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetMadoSystemStateData();
+        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetMadoStateData();
     }
 }

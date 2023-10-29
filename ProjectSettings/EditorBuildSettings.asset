@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shops/DeityCenter.unity
     guid: e51d7ef7f8a5a464db2bfc070296dd18
+  - enabled: 1
+    path: Assets/Scenes/GameIntroduction.unity
+    guid: a421d23600d664e40a40c4ab3042a223
   m_configObjects: {}

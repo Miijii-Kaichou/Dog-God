@@ -30,20 +30,20 @@ public sealed class PlayerDataSerializationSystem : GameSystem
         result = File.Exists(path.ToString()) ? path : null;
     }
 
-    internal static void LoadPlayerDataState(int profileIndex, out PlayerDataState? deserializedState)
+    internal static void LoadPlayerDataState(int profileIndex, Action<PlayerDataState?> onLoadCallback)
     {
-        deserializedState = null;
         CheckIfStateFileExists(profileIndex, out StringBuilder? stringBuilder);
 
         if (stringBuilder == null) return;
 
         using (FileStream stream = new(stringBuilder!.ToString(), FileMode.Open))
         {
+            // Replace this trash!
             BinaryFormatter formatter = new();
             PlayerDataStateSet[profileIndex] = (formatter!.Deserialize(new BufferedStream(stream)) as PlayerDataState)!;
         }
 
-        deserializedState = PlayerDataStateSet[profileIndex];
+        onLoadCallback.Invoke(PlayerDataStateSet[profileIndex]);
     }
 
     internal static void SavePlayerDataState(int profileIndex)
@@ -56,6 +56,8 @@ public sealed class PlayerDataSerializationSystem : GameSystem
         {
             StringBuilder stringBuilder = GenerateProfilePath(profileIndex);
             using FileStream stream = new(stringBuilder.ToString(), FileMode.OpenOrCreate);
+            
+            // Also replace this trash!
             BinaryFormatter formatter = new();
             formatter.Serialize(new BufferedStream(stream), PlayerDataStateSet[profileIndex]);
         }

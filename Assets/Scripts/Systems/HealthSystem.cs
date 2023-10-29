@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
 
-#nullable enable
+using System.Collections.Generic;
+
 public sealed class HealthSystem : GameSystem
 {
+    private static HealthSystemState? _SystemState;
+
     public static HealthSystem? Self;
 
     /*So, the Health System takes in all the things that has
@@ -62,5 +65,28 @@ public sealed class HealthSystem : GameSystem
     internal static void RestoreAllHealth(string id)
     {
         Entities[id].RestoreAllHealth();
+    }
+
+    public static void Save()
+    {
+        var data = Entities;
+        _SystemState = new(data);
+        PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].UpdateHealthStateData(_SystemState);
+    }
+
+    public static void Load()
+    {
+        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[GameManager.ActiveProfileIndex].GetHealthStateData();
+
+        var data = _SystemState.Data;
+
+        foreach (var set in data)
+        {
+            float health = set.Value.health;
+            float maxHealth = set.Value.maxHealth;
+
+            Entities[set.Key].SetHealth(health);
+            Entities[set.Key].SetMaxHealth(maxHealth);
+        }
     }
 }

@@ -33,8 +33,14 @@ namespace SharedData
 	public const int EVT_LoadProfile = 1001;
 	public const int EVT_ResurrectProfile = 1002;
 	public const int EVT_DeleteProfile = 1003;
+	public const int EVT_OnCurrencyTake = 1005;
+	public const int EVT_OnCurrencyAdd = 1004;
+	public const int EVT_OnDeath = 1005;
+	public const int EVT_OnCease = 1006;
+	public const int EVT_OnRestore = 1007;
 	public const int HUNDRED = 100;
 	public const int ONE = 1;
 	public const int ZERO = 0;
 	public const int ShopBaseIndex = 5;
+	public const int DefaultResurrectionCount = 3;
 }}

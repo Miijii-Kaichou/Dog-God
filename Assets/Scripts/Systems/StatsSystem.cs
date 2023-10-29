@@ -9,9 +9,10 @@ public sealed class StatsSystemState
 {
     public StatsSystemState(EntityStats stats)
     {
-        this.stats = stats;
+        Stats = stats;
     }
-    public EntityStats? stats;
+
+    public EntityStats Stats { get; }
 }
 
 public sealed class StatsSystem : GameSystem
@@ -32,7 +33,7 @@ public sealed class StatsSystem : GameSystem
 
     public static void Load()
     {
-        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfile].GetStatsSystemStateData();
+        _SystemState = PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfile].GetStatsStateData();
     }
 
     public static void SetPlayerStatsState(EntityStats newState)
@@ -48,11 +49,11 @@ public sealed class StatsSystem : GameSystem
     private static void DoPrint()
     {
         StringBuilder statReport = new();
-        for(int i = 0; i < _SystemState!.stats!.Size; i++)
+        for(int i = 0; i < _SystemState!.Stats!.Size; i++)
         {
-            var stat = _SystemState.stats[(StatVariable)i];
+            var stat = _SystemState.Stats[(StatVariable)i];
             statReport.Append($"Stat {(StatVariable)i} => {stat}");
-            if (i >= _SystemState.stats.Size - 1) continue;
+            if (i >= _SystemState.Stats.Size - 1) continue;
             statReport.Append('\n');
         }
         Debug.Log(statReport.ToString());

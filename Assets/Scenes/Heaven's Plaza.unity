@@ -1595,7 +1595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetCamera: {fileID: 56140453}
-  _centrePoint: {fileID: 1093268837}
   _controlPoints:
   - {fileID: 2142960345}
   - {fileID: 1849491133}

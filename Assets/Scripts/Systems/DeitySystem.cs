@@ -21,6 +21,7 @@ public class DeitySystem : GameSystem, IActionCategory
     public readonly static Deity[] DeityList = new Deity[]
     {
         new DAzulette(),
+        new DYumi(),
         new DEstere(),
         new DCharolette(),
         new DRosa(),
@@ -29,6 +30,14 @@ public class DeitySystem : GameSystem, IActionCategory
         new DKamui(),
         new DSuisei(),
         new DRyuga(),
+    };
+
+    public readonly static Deity[] SpecialDeityList = new Deity[]
+    {
+        new DHazel(),
+        new DAmari(),
+        new DUlla(),
+        new DMaki()
     };
 
     private static DeitySystemState? _SystemState;
@@ -62,12 +71,12 @@ public class DeitySystem : GameSystem, IActionCategory
 
     internal static void GainAccess(int index)
     {
-        _SystemState.madeContract[index] = true;
+        _SystemState!.MadeContract[index] = true;
     }
 
     internal static void Lock(int index)
     {
-        _SystemState.madeContract[index] = false;
+        _SystemState!.MadeContract[index] = false;
     }
 
     internal static Deity? LocateDeity<T>()

@@ -1,5 +1,6 @@
 #nullable enable
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,16 @@ public sealed class ProfileSlot : MonoBehaviour
 
     [SerializeField]
     private ProfileStatus _slotStatus = ProfileStatus.Empty;
-    
+
+    [Space, Header("Profile Information Objects")]
+    [SerializeField] private TextMeshProUGUI _profileName;
+    [SerializeField] private TextMeshProUGUI _lastRecordedHealth;
+    [SerializeField] private TextMeshProUGUI _currentLevel;
+
+    [Space, Header("Profile Colors")]
+    [SerializeField] private Color _colorBrandNew;
+    [SerializeField] private Color _colorActive;
+
     private int _id;
     public int ID
     {
@@ -24,9 +34,21 @@ public sealed class ProfileSlot : MonoBehaviour
         {
             _id = value;
             if (_playerState != null) return;
-            PlayerDataSerializationSystem.LoadPlayerDataState(ID, out _playerState);
-            SetUpButtonStatus();
+            PlayerDataSerializationSystem.LoadPlayerDataState(ID, OnPlayerDataLoaded);
         }
+    }
+
+    private void OnPlayerDataLoaded(PlayerDataState? state)
+    {
+        _playerState = state;
+
+        UpdateProfileName();
+        SetUpButtonStatus();
+    }
+
+    private void UpdateProfileName()
+    {
+        _profileName.text = _playerState?.gameState.identifier;
     }
 
     private PlayerDataState? _playerState;
@@ -39,7 +61,24 @@ public sealed class ProfileSlot : MonoBehaviour
     private void SetUpButtonStatus()
     {
         _slotStatus = _playerState == null ? ProfileStatus.Empty : _playerState.Status;
+        Debug.Log(_playerState);
         _profileSlotButtonComponent.interactable = !(_slotStatus == ProfileStatus.Unknown || _slotStatus == ProfileStatus.PassedOn);
+
+        ColorBlock buttonColorBlock = _profileSlotButtonComponent.colors;
+
+        if (_slotStatus == ProfileStatus.Alive)
+        {
+            buttonColorBlock.normalColor = _colorActive;
+            _profileSlotButtonComponent.colors = buttonColorBlock;
+            return;
+        }
+
+        if (_slotStatus == ProfileStatus.Empty)
+        {
+            buttonColorBlock.normalColor = _colorBrandNew;
+            _profileSlotButtonComponent.colors = buttonColorBlock;
+            return;
+        }
     }
 
     public void OnSelect()
@@ -51,7 +90,7 @@ public sealed class ProfileSlot : MonoBehaviour
             ProfileStatus.Empty => EVT_CreateProfile,
             ProfileStatus.Alive => EVT_LoadProfile,
             ProfileStatus.PassedOn => EVT_ResurrectProfile,
-            _ => throw new System.NotImplementedException()
+            _ => -1
         };
         EventManager.TriggerEvent(eventId);
     }

@@ -33,10 +33,10 @@ public sealed class ProfileSelection : MonoBehaviour
 
     private void SetupEvents()
     {
-        EventManager.AddEvent(EVT_CreateProfile, string.Empty, CreateNewProfile);
-        EventManager.AddEvent(EVT_LoadProfile, string.Empty, ContinueWithProfile);
+        EventManager.AddEvent(EVT_CreateProfile,    string.Empty, CreateNewProfile);
+        EventManager.AddEvent(EVT_LoadProfile,      string.Empty, ContinueWithProfile);
         EventManager.AddEvent(EVT_ResurrectProfile, string.Empty, ResurrectProfile);
-        EventManager.AddEvent(EVT_DeleteProfile, string.Empty, DeleteProfile);
+        EventManager.AddEvent(EVT_DeleteProfile,    string.Empty, DeleteProfile);
     }
 
     private void CreateNewProfile()
@@ -48,8 +48,10 @@ public sealed class ProfileSelection : MonoBehaviour
     private void ContinueWithProfile()
     {
         titleCanvas.Disable();
+
         // Load Player Data
         GameManager.Load();
+
         GameSceneManager.LoadScene(SI_HeavensPlaza);
     }
 
