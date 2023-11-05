@@ -52,7 +52,15 @@ public sealed class ProfileSelection : MonoBehaviour
         // Load Player Data
         GameManager.Load();
 
-        GameSceneManager.LoadScene(SI_HeavensPlaza);
+        // Check Game State
+        // If we are on a 1, we never finished the Game Intro
+        // Other than that, go to Heaven's Plaza
+        GameManager.GameState?.ExecuteAtState(1, () => GameSceneManager.LoadScene(9));
+
+        if (GameManager.GameState?.flag > 1)
+        {
+            GameSceneManager.LoadScene(SI_HeavensPlaza);
+        }
     }
 
     private void ResurrectProfile()

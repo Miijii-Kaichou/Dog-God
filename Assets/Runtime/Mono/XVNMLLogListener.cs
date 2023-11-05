@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEditor;
@@ -14,23 +15,25 @@ namespace XVNML2U.Mono
         private bool _receiveLogs = false;
 
         [Header("Log Configurations")]
-        [SerializeField] 
+        [SerializeField]
         private bool _enableVerbose = true;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private bool _enableWarning = true;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private bool _enableError = true;
 
         [SerializeField]
         private bool _pauseGamePlayOnError = false;
+
 
         private IEnumerator? _coroutine;
 
         private void OnValidate()
         {
             if (_receiveLogs == false) return;
+
             if (!FindObjectsOfType<XVNMLModule>().Any())
             {
                 Debug.LogWarning("There needs to at least be 1 XVNMLModule object to receive logs.");
@@ -72,9 +75,9 @@ namespace XVNML2U.Mono
                         break;
                     case XVNMLLogLevel.Error:
                         if (_enableError) Debug.LogError(msg.Message);
-                        #if UNITY_EDITOR
+#if UNITY_EDITOR
                         if (_pauseGamePlayOnError) EditorApplication.isPaused = true;
-                        #endif
+#endif
                         break;
                     default: break;
                 }

@@ -36,7 +36,7 @@ namespace XVNML2U.FileSupport
         /// </summary>A
         [HideInInspector] public string? filePath;
 
-        [HideInInspector] public XVNMLObj? top;
+        [HideInInspector] public XVNMLObj? objectDOM;
 
         [HideInInspector] public string? content;
 
@@ -60,7 +60,7 @@ namespace XVNML2U.FileSupport
             {
                 XVNMLObj.Create(filePath!, top =>
                 {
-                    this.top = top;
+                    this.objectDOM = top;
                     onBuildFinished?.Invoke(top!);
                 }, allowCacheUsageAndGeneration);
                 return;
@@ -68,7 +68,7 @@ namespace XVNML2U.FileSupport
 
             XVNMLObj.UseOrCreate(filePath!, top =>
             {
-                this.top = top;
+                this.objectDOM = top;
                 onBuildFinished?.Invoke(top!);
             });
         }

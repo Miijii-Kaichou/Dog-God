@@ -8,13 +8,13 @@
         ? Are you going to take that from a literal dog?>>
         (
             ("Yes")>
-                @ "You let it go. It's not worth it to be honest...<<
+                @ {em}You let it go. It's not worth it to be honest...<<
             ("Maybe")>
-                @ You shrugged it off...<<
+                @ {em}You shrugged it off...<<
             ("No")>
-                @ You punched the dog.<<
+                @ {em}You punched the dog.<<
             ("Hell no!")>
-                @ You REALLY punched the dog... Like forreals...<<
+                @ {em}You REALLY punched the dog... Like forreals...<<
         )
     </dialogue>
 </source>

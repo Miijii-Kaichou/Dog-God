@@ -28,7 +28,7 @@ namespace XVNML2U.Mono
         [Header("Automatic Module Detection")]
         [SerializeField, Tooltip("Allows for automatic module detection. " +
             "Please note that this can be an intensive operation. " +
-            "Also note it'll reference the first component it comes across")] 
+            "Also note it'll reference the first component it comes across")]
         private bool allowAutomaticDetection;
 
         // This is just going to be a normal object,
@@ -178,7 +178,7 @@ namespace XVNML2U.Mono
                 if (dialogueGroupReferenceType == ElementReferenceValueType.ID)
                 {
                     int id = Convert.ToInt32(dialogueGroupReferenceValue);
-                    
+
                     group = module.Get<DialogueGroup>(id);
                     if (group == null) return;
 
@@ -272,19 +272,28 @@ namespace XVNML2U.Mono
         {
             if (module == null) return;
 
+            Dialogue? dialogueTarget;
+
             if (dialogueReferenceType == ElementReferenceValueType.ID)
             {
                 int index = dialogueReferenceValue.ToInt();
-                RunDialogue(module.Get<Dialogue>(index), processChannel);
+
+                dialogueTarget = module.Get<Dialogue>(index);
+                if (dialogueTarget == null) return;
+
+                RunDialogue(dialogueTarget, processChannel);
                 return;
             }
 
-            RunDialogue(module.Get<Dialogue>(dialogueReferenceValue.ToString()), processChannel);
+            dialogueTarget = module.Get<Dialogue>(dialogueReferenceValue.ToString());
+            if (dialogueTarget == null) return;
+
+            RunDialogue(dialogueTarget, processChannel);
         }
 
         private void RunDialogue(Dialogue? dialogue, int channel)
         {
-            
+
             if (dialogue == null)
             {
                 Debug.LogError($"Failed to run dialogue for channel {channel}");
@@ -322,7 +331,7 @@ namespace XVNML2U.Mono
             DialogueWriter.Write(script, channel);
 
             _onPlay?.Invoke();
-            
+
             IsActive = true;
         }
 
@@ -430,7 +439,7 @@ namespace XVNML2U.Mono
                 }
 
                 if (tickSound == null) return WCResult.Ok();
-                if (_voiceAudioSource == null) return WCResult.Ok(); 
+                if (_voiceAudioSource == null) return WCResult.Ok();
 
                 _voiceAudioSource.PlayOneShot(tickSound);
                 return WCResult.Ok();
@@ -471,7 +480,7 @@ namespace XVNML2U.Mono
 
 
                 _castInfo = sender.CurrentCastInfo.Value;
-                
+
                 Stage!.ChangeExpression(_castInfo);
 
                 return WCResult.Ok();
@@ -573,6 +582,9 @@ namespace XVNML2U.Mono
 
         private void RunDialogueInGroup(DialogueGroup group)
         {
+            Dialogue? dialogueTarget = group[dialogueReferenceValue];
+            if (dialogueTarget == null) return;
+
             RunDialogue(group[dialogueReferenceValue], processChannel);
         }
 

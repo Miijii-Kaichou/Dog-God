@@ -39,16 +39,17 @@
 	</castDefinitions>
 
 	<macroCache>
-		<macro symbol::"sts" arg::20 name::"_default_text_speed"/>
-		<macro symbol::"sts" arg::5 name::"_slow_down_text"/>
-		<macro symbol::"del" arg::1000 name::"_delay1s"/>
+		<macro symbol::"set_text_speed" arg::20 	name::"_default_text_speed"/>
+		<macro symbol::"set_text_speed" arg::5 		name::"_slow_down_text"/>
+		<macro symbol::"delay" 			arg::1000 	name::"_delay1s"/>
 		<macro name::"_think">
-			<macro symbol::"ins" arg::"."/>
-			<macro symbol::"del" arg::500/>
-			<macro symbol::"ins" arg::"."/>
-			<macro symbol::"del" arg::500/>
-			<macro symbol::"ins" arg::"."/>
-			<macro symbol::"del" arg::1000/>
+			<macro symbol::"delay" 	arg::500/>
+			<macro symbol::"insert" arg::"."/>
+			<macro symbol::"delay" 	arg::500/>
+			<macro symbol::"insert" arg::"."/>
+			<macro symbol::"delay" 	arg::500/>
+			<macro symbol::"insert" arg::"."/>
+			<macro symbol::"delay" 	arg::1000/>
 		</macro>
 	</macroCache>
 
@@ -62,7 +63,7 @@
 			Even with their mistakes...{delay::500}{clear}
 			Even if it meaning risking your life...{delay::500}{clear}
 			would you do it?{enable_prompt}<
-			@ Your existance has been acknowledged...<<
+			@ {raise_game_state}Your existance has been acknowledged...<<
 		</dialogue>
 	</dialogueGroup>
 	
@@ -81,7 +82,7 @@
 			$> This will then allow it to print out what's been inserted as opposed to printing it as it is.
 			$> Or maybe have a boolean that says to insert it to the final dialogue as opposed to where it is right now...
 			$> I'll think about it later.
-			@ {$_think}<
+			@ {set_game_state::1|$_think}<
 			@ {$_default_text_speed}Where{$_think|$_delay1s|$_default_text_speed} am I?<
 			@ I feel so cold{$_think}<
 			@ Last I remember was{$_think}<
@@ -95,10 +96,10 @@
 			@ {$_default_text_speed}But{$_think}> What is home?<
 			@ Where is home?<
 			@ I can't even remember my own name.<
-			@ Or perhaps{$_slow_down_text}{$_think}> Maybe I do know my name{$_think}<
+			@ Or perhaps{$_slow_down_text}{$_think}> {$_default_text_speed}Maybe I do know my name.<
 			
 			$> This is supposed to be Hazel talking.
-			@??? {$_default_text_speed|style::"title"}You must be it{$_think}<
+			@??? {style::"title"}You must be it{$_think}<
 
 			@ Who{$_think}> was that{$_think}<
 			@ Who are you?<
@@ -115,32 +116,33 @@
 
 			@ I{$_think} {pause}Don't get it.<
 			
-			@??? {$_slow_down_text|style::"title"}Come now{$_think}<
+			@??? {style::"title"}Come now{$_think}<
 			@??? {style::"title"}And soon, your eyes will be open{$_think}<
 			@??? {style::"title"}All will be answered{$_think}<
-			@??? {style::"title"}Come to the light{$_think}<<
+			@??? {do_fade_screen_to_white|style::"title"}Come to the light{$_think|pause|delay::2500|pass}<
+			@??? {color::"black"|style::"title"|insd::$PlayerName}, our Saviour!{color_end|delay::5000|pass}<
 
-			$> TODO - Add a macro that makes the screen go white.
+			@ {hide_text_box|raise_game_state|pass}<<
 		</dialogue>
 	</dialogueGroup>
 
 	$> Character-specific dialogue goes here.
 	<dialogueGroup name::"CharacterDialogues">
 		<dialogue name::"HazelDialogue"        src::"HazelAlonoire.dialogue.xvnml" pathMode::Relative/>
-		<dialogue name::"KokoDialogue"         src::$nil pathMode::Relative/>
-		<dialogue name::"SatouDialogue"		   src::$nil pathMode::Relative/>
-		<dialogue name::"AmariDialogue"        src::$nil pathMode::Relative/>
-		<dialogue name::"AzuletteDialogue"     src::$nil pathMode::Relative/>
-		<dialogue name::"CharoletteDialogue"   src::$nil pathMode::Relative/>
-		<dialogue name::"EstereDialogue"       src::$nil pathMode::Relative/>
-		<dialogue name::"KamuiDialogue"        src::$nil pathMode::Relative/>
-		<dialogue name::"MakoDialogue"         src::$nil pathMode::Relative/>
-		<dialogue name::"OthellaDialogue"      src::$nil pathMode::Relative/>
-		<dialogue name::"PatchouliDialogue"    src::$nil pathMode::Relative/>
-		<dialogue name::"RosaDialogue"         src::$nil pathMode::Relative/>
-		<dialogue name::"RyugaDialogue"        src::$nil pathMode::Relative/>
-		<dialogue name::"SuiseiDialogue"       src::$nil pathMode::Relative/>
-		<dialogue name::"UllaDialogue"         src::$nil pathMode::Relative/>
-		<dialogue name::"YumiDialogue"         src::$nil pathMode::Relative/>
+		<dialogue name::"KokoDialogue"         src::"InugamiKoko.dialogue.xvnml"   pathMode::Relative/>
+		<dialogue name::"SatouDialogue"		   src::"Satou.dialogue.xvnml"         pathMode::Relative/>
+		<dialogue name::"AmariDialogue"        src::"Amari.dialogue.xvnml"         pathMode::Relative/>
+		<dialogue name::"AzuletteDialogue"     src::"Azulette.dialogue.xvnml"      pathMode::Relative/>
+		<dialogue name::"CharoletteDialogue"   src::"Charolette.dialogue.xvnml"    pathMode::Relative/>
+		<dialogue name::"EstereDialogue"       src::"Estere.dialogue.xvnml"        pathMode::Relative/>
+		<dialogue name::"KamuiDialogue"        src::"Kamui.dialogue.xvnml"         pathMode::Relative/>
+		<dialogue name::"MakoDialogue"         src::"Mako.dialogue.xvnml"          pathMode::Relative/>
+		<dialogue name::"OthellaDialogue"      src::"Othella.dialogue.xvnml"       pathMode::Relative/>
+		<dialogue name::"PatchouliDialogue"    src::"Patchouli.dialogue.xvnml"     pathMode::Relative/>
+		<dialogue name::"RosaDialogue"         src::"Rosa.dialogue.xvnml"          pathMode::Relative/>
+		<dialogue name::"RyugaDialogue"        src::"Ryuga.dialogue.xvnml"         pathMode::Relative/>
+		<dialogue name::"SuiseiDialogue"       src::"Suisei.dialogue.xvnml"        pathMode::Relative/>
+		<dialogue name::"UllaDialogue"         src::"Ulla.dialogue.xvnml"          pathMode::Relative/>
+		<dialogue name::"YumiDialogue"         src::"Yumi.dialogue.xvnml"          pathMode::Relative/>
 	</dialogueGroup>
 </proxy>

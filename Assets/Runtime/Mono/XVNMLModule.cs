@@ -40,14 +40,18 @@ namespace XVNML2U.Mono
             get
             {
                 if (_main == null) return null;
-                return _main.top!.Root;
+                return _main.objectDOM!.Root;
             }
         }
 
         [Tooltip("Begin to manifest the XVNML DOM through Tokenization and Parsing.")]
         public void Build()
         {
-            if (BuildComplete) return;
+            if (BuildComplete)
+            {
+                onModuleBuildProcessComplete?.Invoke(_main?.objectDOM);
+                return;
+            }
 
             //SearchAndApplyUserOverrideSettings();
 

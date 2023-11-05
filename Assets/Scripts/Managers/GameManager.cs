@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.U2D;
+using XVNML.Core.Native;
 using XVNML2U.Mono;
 using static SharedData.Constants;
 
@@ -90,7 +92,25 @@ public sealed class GameManager : Singleton<GameManager>
     private List<Achievement> achievements = new List<Achievement>();
 
     internal static PlayerDataState? PlayerDataState;
-    internal static string? PlayerName;
+
+    internal static string? PlayerName
+    {
+        get
+        {
+            return RuntimeReferenceTable
+                .Get()
+                .value?
+                .ToString();
+        }
+        set
+        {
+            StringBuilder sb = new();
+            string valueCapitalized = sb.Append(value?[0].ToString().ToUpper())
+               .Append(value?[1..])
+               .ToString();
+            RuntimeReferenceTable.Set(value: valueCapitalized);
+        }
+    }
 
     public static PlayerEntity? Player { get; set; }
     public static BossEntity? Boss { get; set; }

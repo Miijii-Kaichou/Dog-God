@@ -642,10 +642,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _receiveLogs: 1
-  _enableVerbose: 1
-  _enableWarning: 1
-  _enableError: 1
+  _enableVerbose: 0
+  _enableWarning: 0
+  _enableError: 0
   _pauseGamePlayOnError: 0
+  _syncWithUnityConsoleSettings: 1
 --- !u!4 &734142195
 Transform:
   m_ObjectHideFlags: 0
