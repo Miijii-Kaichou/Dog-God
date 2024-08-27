@@ -1,6 +1,8 @@
 ﻿#nullable enable
 
 using System;
+using System.Diagnostics;
+using UnityEditor;
 
 [Serializable]
 public sealed record UniversalGameState
@@ -24,10 +26,12 @@ public sealed record UniversalGameState
     public void Raise()
     {
         flag++;
+        UnityEngine.Debug.Log($"Game State Raised: {flag - 1} >> {flag}");
     }
 
     public void Set(int value)
     {
+        UnityEngine.Debug.Log($"Game State Flag Set: {flag} >> {value}");
         flag = value;
     }
 }

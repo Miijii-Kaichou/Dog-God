@@ -646,7 +646,6 @@ MonoBehaviour:
   _enableWarning: 0
   _enableError: 0
   _pauseGamePlayOnError: 0
-  _syncWithUnityConsoleSettings: 1
 --- !u!4 &734142195
 Transform:
   m_ObjectHideFlags: 0
@@ -1255,6 +1254,9 @@ MonoBehaviour:
     Type: 0
   - Key: SI_ProfileCreation
     Value: 4
+    Type: 0
+  - Key: SI_GameIntroduction
+    Value: 9
     Type: 0
   - Key: EVT_CreateProfile
     Value: 1000

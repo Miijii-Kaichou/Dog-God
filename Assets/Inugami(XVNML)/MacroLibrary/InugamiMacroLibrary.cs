@@ -3,7 +3,7 @@ using XVNML.Utilities.Macros;
 using XVNML2U;
 
 [MacroLibrary(typeof(InugamiMacroLibrary))]
-public sealed class InugamiMacroLibrary : ActionSender
+public sealed class InugamiMacroLibrary : ActionSender<InugamiMacroLibrary>
 {
     [Macro("enable_input")]
     private static void EnableInputMacro(MacroCallInfo info, int inputLength)
@@ -27,18 +27,39 @@ public sealed class InugamiMacroLibrary : ActionSender
     [Macro("set_game_state")]
     private static void SetGameStateMacro(MacroCallInfo info, int flagValue)
     {
-        GameManager.PlayerDataState.gameState.Set(flagValue);
+        UnityEngine.Debug.Log($"Set game state: {flagValue}");
+
+        var gameData = GameManager.PlayerDataState;
+        if (gameData == null)
+        {
+            SaveGameStateMacro(info);
+            GameManager.Load();
+            gameData = GameManager.PlayerDataState;
+        }
+
+        gameData.gameState.Set(flagValue);
     }
 
     [Macro("raise_game_state")]
     private static void RaiseGameStateMacro(MacroCallInfo info)
     {
-        GameManager.PlayerDataState.gameState.Raise();
+        var gameData = GameManager.PlayerDataState;
+        if (gameData == null) SaveGameStateMacro(info);
+        gameData.gameState.Raise();
     }
 
     [Macro("save_game")]
     private static void SaveGameStateMacro(MacroCallInfo info)
     {
         GameManager.Save();
+    }
+
+    [Macro("scene_index")]
+    [Macro("sidx")]
+    private static void LoadSceneByIndex(MacroCallInfo info, int index)
+    {
+        GameSceneManager.Prepare(index);
+        GameSceneManager.Deploy();
+        UnityEngine.Debug.Log($"Scene {index} loaded...");
     }
 }

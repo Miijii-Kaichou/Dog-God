@@ -299,12 +299,22 @@ public sealed class GameManager : Singleton<GameManager>
     {
         GameState ??= new(0);
         GameState.identifier = PlayerName;
-        PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfileIndex].UpdateUniversalGameState(GameState);
+
+        var updatedState = PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfileIndex];
+        updatedState.UpdateUniversalGameState(GameState);
+
+        PlayerDataState = updatedState;
+
+        PlayerDataSerializationSystem.SavePlayerDataState(ActiveProfileIndex);
     }
 
     public static void Load()
     {
-        GameState = PlayerDataSerializationSystem.PlayerDataStateSet[ActiveProfileIndex].GetUniversalGameState();
-        PlayerName = GameState.identifier;
+        PlayerDataSerializationSystem.LoadPlayerDataState(ActiveProfileIndex, pds =>
+        {
+            PlayerDataState = pds;
+            GameState = PlayerDataState?.GetUniversalGameState();
+            PlayerName = GameState?.identifier;
+        });
     }
 }
