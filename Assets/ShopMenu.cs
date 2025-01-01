@@ -22,6 +22,14 @@ public class ShopMenu : MonoBehaviour
         _curtainController.Open(null);
     }
 
+    public void ReadyUp()
+    {
+        _curtainController.Close(() =>
+        {
+            // You would return to the battlefield to fight Koko Inugami
+        });
+    }
+
     public void GoIntoItemShop()
     {
         EnterShop(ItemShopIndex);
