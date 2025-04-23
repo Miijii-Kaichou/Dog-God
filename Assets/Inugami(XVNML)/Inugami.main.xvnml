@@ -38,9 +38,10 @@
 		<cast name::"Yumi"       src::$nil/>
 	</castDefinitions>
 
-	<macroCache>
+	<macroCache name::"global.macro.cache">
 		<macro symbol::"set_text_speed" arg::20 	name::"_default_text_speed"/>
-		<macro symbol::"set_text_speed" arg::5 		name::"_slow_down_text"/>
+		<macro symbol::"set_text_speed" arg::50 	name::"_shop_text_speed"/>
+		<macro symbol::"set_text_speed" arg::05 	name::"_slow_down_text"/>
 		<macro symbol::"delay" 			arg::1000 	name::"_delay1s"/>
 		<macro name::"_think">
 			<macro symbol::"delay" 	arg::500/>

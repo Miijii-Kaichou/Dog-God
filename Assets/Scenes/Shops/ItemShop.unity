@@ -276,6 +276,8 @@ MonoBehaviour:
   shopKeeper: {fileID: 0}
   _curtainController: {fileID: 937974314}
   itemEntryPool: {fileID: 327372273}
+  _characterName: Amari
+  _dialogueControl: {fileID: 672493069}
 --- !u!1 &310369881
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &327372271
@@ -979,6 +981,7 @@ GameObject:
   - component: {fileID: 672493066}
   - component: {fileID: 672493068}
   - component: {fileID: 672493067}
+  - component: {fileID: 672493069}
   m_Layer: 0
   m_Name: Textbox
   m_TagString: Untagged
@@ -1046,6 +1049,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672493065}
   m_CullTransparentMesh: 1
+--- !u!114 &672493069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672493065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6631b5574174865409d5e25945eed5dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  module: {fileID: 0}
+  runOnAwakeUp: 1
+  processChannel: 0
+  tickSound: {fileID: 0}
+  stageObj: {fileID: 0}
+  allowAutomaticDetection: 0
+  dialogueReferenceValue: Amari
+  dialogueReferenceType: 1
+  dialogueGroupReferenceValue: CharacterDialogue
+  dialogueGroupReferenceType: 1
+  _castNameText: {fileID: 1527914482}
+  _mainText: {fileID: 2142321447}
+  _confirmMarker: {fileID: 0}
+  _promptUnitComponent: {fileID: 0}
+  _onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  _onFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  _onChannelBlock:
+    m_PersistentCalls:
+      m_Calls: []
+  _onChannelUnblock:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &822102813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,6 +1130,7 @@ GameObject:
   - component: {fileID: 937974311}
   - component: {fileID: 937974313}
   - component: {fileID: 937974314}
+  - component: {fileID: 937974315}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1243,6 +1285,19 @@ MonoBehaviour:
   _onFadeOut:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &937974315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937974309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1776b9ba3dee7754490c5583dddba7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 672493069}
 --- !u!1 &981616835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,6 +1839,7 @@ GameObject:
   - component: {fileID: 1527914479}
   - component: {fileID: 1527914481}
   - component: {fileID: 1527914480}
+  - component: {fileID: 1527914482}
   m_Layer: 0
   m_Name: Cast
   m_TagString: Untagged
@@ -1908,6 +1964,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527914478}
   m_CullTransparentMesh: 1
+--- !u!114 &1527914482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527914478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa83028b2168704ca6855b33a5937e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1527914480}
+  _onTextChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1566690302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,9 +2129,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142321444}
-  - component: {fileID: 2142321447}
   - component: {fileID: 2142321446}
   - component: {fileID: 2142321445}
+  - component: {fileID: 2142321447}
   m_Layer: 0
   m_Name: TypeWriter
   m_TagString: Untagged
@@ -2194,17 +2266,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2142321443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38561629f8ff10642885c672d32df738, type: 3}
+  m_Script: {fileID: 11500000, guid: aaa83028b2168704ca6855b33a5937e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textInput: ...Could you refrain from staring at me too long? We're still working
-    on my outfit design...
-  _targetOutput: {fileID: 2142321445}
-  _playOnAwake: 0
-  _allowSkipOnInput: 0
-  _rate: 0.1
-  _typeAudioName: 
-  _source: {fileID: 0}
+  _target: {fileID: 2142321445}
+  _onTextChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!222 &1797547573354414082
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38252,7 +38320,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573405674048}
   itemImage: {fileID: 3863734690629164639}
   itemPriceText: {fileID: 1797547575115759289}
-  itemDescription: 
 --- !u!114 &7902038158039743488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38268,7 +38335,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573354414083}
   itemImage: {fileID: 3863734690646864924}
   itemPriceText: {fileID: 1797547575133443322}
-  itemDescription: 
 --- !u!114 &7902038158049761847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38284,7 +38350,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573461837364}
   itemImage: {fileID: 3863734690572997163}
   itemPriceText: {fileID: 1797547575173755597}
-  itemDescription: 
 --- !u!114 &7902038158077283681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38300,7 +38365,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573459480930}
   itemImage: {fileID: 3863734690541274493}
   itemPriceText: {fileID: 1797547575171917211}
-  itemDescription: 
 --- !u!114 &7902038158127606464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38316,7 +38380,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573543343811}
   itemImage: {fileID: 3863734690490966748}
   itemPriceText: {fileID: 1797547574987375162}
-  itemDescription: 
 --- !u!114 &7902038158129541063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38332,7 +38395,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573541147588}
   itemImage: {fileID: 3863734690493163483}
   itemPriceText: {fileID: 1797547574985443133}
-  itemDescription: 
 --- !u!114 &7902038158175826925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38348,7 +38410,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573486768110}
   itemImage: {fileID: 3863734690513992689}
   itemPriceText: {fileID: 1797547574997883671}
-  itemDescription: 
 --- !u!114 &7902038158189109389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38364,7 +38425,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573601115278}
   itemImage: {fileID: 3863734690433722513}
   itemPriceText: {fileID: 1797547575042787447}
-  itemDescription: 
 --- !u!114 &7902038158193264046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38380,7 +38440,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573605349805}
   itemImage: {fileID: 3863734690429488562}
   itemPriceText: {fileID: 1797547575047023956}
-  itemDescription: 
 --- !u!114 &7902038158216513014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38396,7 +38455,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573565618677}
   itemImage: {fileID: 3863734690469219818}
   itemPriceText: {fileID: 1797547575074106636}
-  itemDescription: 
 --- !u!114 &7902038158219221747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38412,7 +38470,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573562615536}
   itemImage: {fileID: 3863734690471695087}
   itemPriceText: {fileID: 1797547575071928841}
-  itemDescription: 
 --- !u!114 &7902038158235406889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38428,7 +38485,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573546429994}
   itemImage: {fileID: 3863734690454329909}
   itemPriceText: {fileID: 1797547575055743699}
-  itemDescription: 
 --- !u!114 &7902038158241218260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38444,7 +38500,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573555299031}
   itemImage: {fileID: 3863734690445457096}
   itemPriceText: {fileID: 1797547575066711598}
-  itemDescription: 
 --- !u!114 &7902038158248561267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38460,7 +38515,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573558474352}
   itemImage: {fileID: 3863734690442281583}
   itemPriceText: {fileID: 1797547575067746953}
-  itemDescription: 
 --- !u!114 &7902038158263512586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38476,7 +38530,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573675643401}
   itemImage: {fileID: 3863734690896061974}
   itemPriceText: {fileID: 1797547575387817712}
-  itemDescription: 
 --- !u!114 &7902038158378252394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38492,7 +38545,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573689058409}
   itemImage: {fileID: 3863734690848567414}
   itemPriceText: {fileID: 1797547575466545296}
-  itemDescription: 
 --- !u!114 &7902038158394414554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38508,7 +38560,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573805050329}
   itemImage: {fileID: 3863734690766134726}
   itemPriceText: {fileID: 1797547575249059104}
-  itemDescription: 
 --- !u!114 &7902038158519360707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38524,7 +38575,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573931499712}
   itemImage: {fileID: 3863734690103334111}
   itemPriceText: {fileID: 1797547574569940025}
-  itemDescription: 
 --- !u!114 &7902038158591358572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38540,7 +38590,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574002371183}
   itemImage: {fileID: 3863734690032467568}
   itemPriceText: {fileID: 1797547574640549526}
-  itemDescription: 
 --- !u!114 &7902038158603876495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38556,7 +38605,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573981463692}
   itemImage: {fileID: 3863734690019815571}
   itemPriceText: {fileID: 1797547574619639925}
-  itemDescription: 
 --- !u!114 &7902038158618374717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38572,7 +38620,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573966933566}
   itemImage: {fileID: 3863734690067380769}
   itemPriceText: {fileID: 1797547574672775879}
-  itemDescription: 
 --- !u!114 &7902038158623597639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38588,7 +38635,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573972228164}
   itemImage: {fileID: 3863734690062085211}
   itemPriceText: {fileID: 1797547574675934397}
-  itemDescription: 
 --- !u!114 &7902038158639427925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38604,7 +38650,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547573954039126}
   itemImage: {fileID: 3863734690047244617}
   itemPriceText: {fileID: 1797547574659586479}
-  itemDescription: 
 --- !u!114 &7902038158673260107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38620,7 +38665,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574054392392}
   itemImage: {fileID: 3863734689946363479}
   itemPriceText: {fileID: 1797547574424946353}
-  itemDescription: 
 --- !u!114 &7902038158687665095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38636,7 +38680,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574031632324}
   itemImage: {fileID: 3863734690003203035}
   itemPriceText: {fileID: 1797547574468743997}
-  itemDescription: 
 --- !u!114 &7902038158733582185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38652,7 +38695,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574145065834}
   itemImage: {fileID: 3863734689889245045}
   itemPriceText: {fileID: 1797547574515627923}
-  itemDescription: 
 --- !u!114 &7902038158735023227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38668,7 +38710,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574145982584}
   itemImage: {fileID: 3863734689888851047}
   itemPriceText: {fileID: 1797547574513661057}
-  itemDescription: 
 --- !u!114 &7902038158759121719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38684,7 +38725,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574103043892}
   itemImage: {fileID: 3863734689931795243}
   itemPriceText: {fileID: 1797547574539893709}
-  itemDescription: 
 --- !u!114 &7902038158776962654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38700,7 +38740,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574087266909}
   itemImage: {fileID: 3863734689914013250}
   itemPriceText: {fileID: 1797547574522046116}
-  itemDescription: 
 --- !u!114 &7902038158782785703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38716,7 +38755,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574097990820}
   itemImage: {fileID: 3863734689902764219}
   itemPriceText: {fileID: 1797547574533521501}
-  itemDescription: 
 --- !u!114 &7902038158789490947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38732,7 +38770,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574200567040}
   itemImage: {fileID: 3863734690371137823}
   itemPriceText: {fileID: 1797547574836679161}
-  itemDescription: 
 --- !u!114 &7902038158802951230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38748,7 +38785,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574184747069}
   itemImage: {fileID: 3863734690353402914}
   itemPriceText: {fileID: 1797547574823220420}
-  itemDescription: 
 --- !u!114 &7902038158915229490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38764,7 +38800,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574225595185}
   itemImage: {fileID: 3863734690312560430}
   itemPriceText: {fileID: 1797547574929047496}
-  itemDescription: 
 --- !u!114 &7902038158916474081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38780,7 +38815,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574230640866}
   itemImage: {fileID: 3863734690306989309}
   itemPriceText: {fileID: 1797547574936714267}
-  itemDescription: 
 --- !u!114 &7902038158952295379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38796,7 +38830,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574329300944}
   itemImage: {fileID: 3863734690208326607}
   itemPriceText: {fileID: 1797547574699557673}
-  itemDescription: 
 --- !u!114 &7902038159068485855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38812,7 +38845,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574483641564}
   itemImage: {fileID: 3863734689551192259}
   itemPriceText: {fileID: 1797547574045978661}
-  itemDescription: 
 --- !u!114 &7902038159075141634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38828,7 +38860,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574457848833}
   itemImage: {fileID: 3863734689543430174}
   itemPriceText: {fileID: 1797547574022537464}
-  itemDescription: 
 --- !u!114 &7902038159107229222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38844,7 +38875,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574417603109}
   itemImage: {fileID: 3863734689583681082}
   itemPriceText: {fileID: 1797547574049173212}
-  itemDescription: 
 --- !u!114 &7902038159125939300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38860,7 +38890,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574541236327}
   itemImage: {fileID: 3863734689493601400}
   itemPriceText: {fileID: 1797547574105959582}
-  itemDescription: 
 --- !u!114 &7902038159131164396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38876,7 +38905,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574546498287}
   itemImage: {fileID: 3863734689488336624}
   itemPriceText: {fileID: 1797547574109132310}
-  itemDescription: 
 --- !u!114 &7902038159179055408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38892,7 +38920,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574490479923}
   itemImage: {fileID: 3863734689510803756}
   itemPriceText: {fileID: 1797547574119950794}
-  itemDescription: 
 --- !u!114 &7902038159251207200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38908,7 +38935,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574560966691}
   itemImage: {fileID: 3863734689439792188}
   itemPriceText: {fileID: 1797547573922503898}
-  itemDescription: 
 --- !u!114 &7902038159264623056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38924,7 +38950,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574679377363}
   itemImage: {fileID: 3863734689354932684}
   itemPriceText: {fileID: 1797547573976187178}
-  itemDescription: 
 --- !u!114 &7902038159301588675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38940,7 +38965,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574650800832}
   itemImage: {fileID: 3863734689384038111}
   itemPriceText: {fileID: 1797547574014205497}
-  itemDescription: 
 --- !u!114 &7902038159315056132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38956,7 +38980,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574629206535}
   itemImage: {fileID: 3863734689371553304}
   itemPriceText: {fileID: 1797547573992873726}
-  itemDescription: 
 --- !u!114 &7902038159334402833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38972,7 +38995,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574745945874}
   itemImage: {fileID: 3863734689825235725}
   itemPriceText: {fileID: 1797547574309061611}
-  itemDescription: 
 --- !u!114 &7902038159362368121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38988,7 +39010,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574707461754}
   itemImage: {fileID: 3863734689864247909}
   itemPriceText: {fileID: 1797547574339291779}
-  itemDescription: 
 --- !u!114 &7902038159468077168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39004,7 +39025,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574878575731}
   itemImage: {fileID: 3863734689692608620}
   itemPriceText: {fileID: 1797547574175385738}
-  itemDescription: 
 --- !u!114 &7902038159561846490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39020,7 +39040,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574910931673}
   itemImage: {fileID: 3863734689660774086}
   itemPriceText: {fileID: 1797547574274033184}
-  itemDescription: 
 --- !u!114 &7902038159565651110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39036,7 +39055,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574908960933}
   itemImage: {fileID: 3863734689662219450}
   itemPriceText: {fileID: 1797547574270760028}
-  itemDescription: 
 --- !u!114 &7902038159567481453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39052,7 +39070,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574915520110}
   itemImage: {fileID: 3863734689656185457}
   itemPriceText: {fileID: 1797547574276784791}
-  itemDescription: 
 --- !u!114 &7902038159611284872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39068,7 +39085,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574989418891}
   itemImage: {fileID: 3863734689011336596}
   itemPriceText: {fileID: 1797547573478532466}
-  itemDescription: 
 --- !u!114 &7902038159628805361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39084,7 +39100,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574977894642}
   itemImage: {fileID: 3863734689056943341}
   itemPriceText: {fileID: 1797547573535984651}
-  itemDescription: 
 --- !u!114 &7902038159645131986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39100,7 +39115,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547574955571409}
   itemImage: {fileID: 3863734689045712078}
   itemPriceText: {fileID: 1797547573511269416}
-  itemDescription: 
 --- !u!114 &7902038159660527746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39116,7 +39130,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575072001153}
   itemImage: {fileID: 3863734688962312350}
   itemPriceText: {fileID: 1797547573563512952}
-  itemDescription: 
 --- !u!114 &7902038159680213731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39132,7 +39145,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575063064288}
   itemImage: {fileID: 3863734688938220287}
   itemPriceText: {fileID: 1797547573551692313}
-  itemDescription: 
 --- !u!114 &7902038159733815111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39148,7 +39160,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575150005060}
   itemImage: {fileID: 3863734688884834139}
   itemPriceText: {fileID: 1797547573372264381}
-  itemDescription: 
 --- !u!114 &7902038159762840771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39164,7 +39175,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575106298048}
   itemImage: {fileID: 3863734688928011487}
   itemPriceText: {fileID: 1797547573394093113}
-  itemDescription: 
 --- !u!114 &7902038159840053162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39180,7 +39190,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575188175785}
   itemImage: {fileID: 3863734688846663606}
   itemPriceText: {fileID: 1797547573475733328}
-  itemDescription: 
 --- !u!114 &7902038159930523135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39196,7 +39205,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575341007356}
   itemImage: {fileID: 3863734689230173667}
   itemPriceText: {fileID: 1797547573830391045}
-  itemDescription: 
 --- !u!114 &7902038159957533775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39212,7 +39220,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575339128908}
   itemImage: {fileID: 3863734689199025235}
   itemPriceText: {fileID: 1797547573828013237}
-  itemDescription: 
 --- !u!114 &7902038160030802413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39228,7 +39235,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575375175150}
   itemImage: {fileID: 3863734689196009969}
   itemPriceText: {fileID: 1797547573662992663}
-  itemDescription: 
 --- !u!114 &7902038160063856204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39244,7 +39250,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575474274895}
   itemImage: {fileID: 3863734689096906320}
   itemPriceText: {fileID: 1797547573697058486}
-  itemDescription: 
 --- !u!114 &7902038160083816745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39260,4 +39265,3 @@ MonoBehaviour:
   itemNameText: {fileID: 1797547575462407466}
   itemImage: {fileID: 3863734689075747125}
   itemPriceText: {fileID: 1797547573684959699}
-  itemDescription: 

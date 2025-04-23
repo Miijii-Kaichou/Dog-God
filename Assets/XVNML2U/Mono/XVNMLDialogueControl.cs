@@ -126,7 +126,7 @@ namespace XVNML2U.Mono
 
         private void StartControl()
         {
-            module!.onModuleBuildProcessComplete += Initialize;
+            module!.onModuleBuildProcessComplete = Initialize;
             module!.Build();
         }
 
@@ -138,8 +138,11 @@ namespace XVNML2U.Mono
 
         private void Initialize(XVNMLObj? obj)
         {
-            _mainText = _mainText != null ? _mainText : GetComponent<XVNMLTextRenderer>();
-            _canvasGroup = _canvasGroup != null ? _canvasGroup : GetComponent<CanvasGroup>();
+            if (_mainText == null)
+                _mainText = _mainText != null ? _mainText : GetComponent<XVNMLTextRenderer>();
+
+            if (_canvasGroup == null)
+                _canvasGroup = _canvasGroup != null ? _canvasGroup : GetComponent<CanvasGroup>();
 
             PrepareActionSchedular();
             PrepareInputManager();
@@ -378,7 +381,7 @@ namespace XVNML2U.Mono
         {
             SendNewAction(() =>
             {
-                _confirmMarker.OnAccept();
+                _confirmMarker?.OnAccept();
                 SetCastName(sender);
                 return WCResult.Ok();
             });
@@ -404,11 +407,11 @@ namespace XVNML2U.Mono
                     return NextLine(sender);
                 }
 
-                _confirmMarker.OnPending();
+                _confirmMarker?.OnPending();
 
                 if (XVNMLInputManager.OnInputActive(module, InputEvent.PROCEED) && sender.ID == 0)
                 {
-                    _confirmMarker.OnAccept();
+                    _confirmMarker?.OnAccept();
                     return NextLine(sender);
                 }
                 return WCResult.Unknown();

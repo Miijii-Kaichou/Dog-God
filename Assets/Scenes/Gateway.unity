@@ -641,11 +641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491b0805b9a6d0844aa5e74f2dcc57eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _receiveLogs: 1
-  _enableVerbose: 0
-  _enableWarning: 0
-  _enableError: 0
-  _pauseGamePlayOnError: 0
 --- !u!4 &734142195
 Transform:
   m_ObjectHideFlags: 0
@@ -1564,7 +1559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206b4bfafeeee0e44971fd2daa4952a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  channelSize: 1
 --- !u!4 &1904723614
 Transform:
   m_ObjectHideFlags: 0
@@ -1701,8 +1695,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _main: {fileID: 2747702726088250577, guid: 7ba7a950897e52d44a4a3aa5558aa3af, type: 3}
-  _allowForCacheUsageAndGeneration: 0
+  _markAsReadyForBuild: 0
   _mainCamera: {fileID: 0}
+  _buildOnAwake: 1
 --- !u!4 &2076467803
 Transform:
   m_ObjectHideFlags: 0

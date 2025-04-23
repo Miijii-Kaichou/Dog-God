@@ -1,5 +1,113 @@
 <source name::"Yumi.dialogue">
-    <dialogue name::"YumiDialogue">
+    <dialogueGroup name::"CharacterDialogue">
+        <dialogue name::"Yumi">
+            @Yumi {duin|$_shop_text_speed}Hi!{delay::500} Don't worry.{delay::500} You won't get Nihongo Jouzu'd.<<
+        </dialogue>
+    </dialogueGroup>
 
-    </dialogue>
+    $> All Item Descriptions
+    $> When talking to Yumi!!!
+    <dialogueGroup name::"ItemDescriptions">
+        <dialogue name::"Beelzebub">
+            @Yumi {$_shop_text_speed}Oooo!{delay::500} With this one, you can engulf your enemies 
+            in darkness.{delay::500} Steal both Health and Mana, 
+            and keeps your opponent down for 5 seconds...<<
+        </dialogue>
+        <dialogue name::"Blaze Runner">
+            @Yumi {$_shop_text_speed}As if I'm not hot enough.{delay::500} This skill takes it to a whole new level.<<
+        </dialogue>
+        <dialogue name::"Bless">
+            @Yumi {$_shop_text_speed}Perhaps how you feel with me around!{delay::500} 
+            That's something to be proud of.<<
+        </dialogue>
+        <dialogue name::"Blizzard">
+            @Yumi {$_shop_text_speed}Be careful not to cause a new ice age and whip everyone out.<<
+        </dialogue>
+        <dialogue name::"Brace For Impact">
+            @Yumi {$_shop_text_speed}You pretend you don't know death for several seconds{delay::500}, then 
+            you snap back into reality making mom's spagetti.<<
+        </dialogue>
+        <dialogue name::"Charmer">
+            @Yumi {$_shop_text_speed}Soo...{delay::500} Trynna improve your communication skills, huh?{delay::500} 
+            Hoping to get to know someone at a personal level?{delay::500} Aren't you the charmer? Hehe.<<
+        </dialogue>
+        <dialogue name::"Chatter">
+            @Yumi {$_shop_text_speed}Use a bit of your charisma to talk your way 
+            out of a situation. Try not to do anything...{delay::500} dishonest...{delay::1000}. 
+            That normally doesn't go well.<<
+        </dialogue>
+        <dialogue name::"Comfort">
+            @Yumi {$_shop_text_speed}Hey handsome!{delay::500} Come at me like that, and I might 
+            just lower my defenses and win me over.{delay::500} Perhaps even cuddle a bit?<<
+        </dialogue>
+        <dialogue name::"Embrace">
+            @Yumi {$_shop_text_speed}Sometimes, you just got to embrace everything that you have!{delay::500} 
+            You'll feel pretty great about it over time.<<
+        </dialogue>
+        <dialogue name::"Engage">
+            @Yumi {$_shop_text_speed}You must always keep your guard up, 
+            and wait for the perfect opening.<<
+        </dialogue>
+        <dialogue name::"Eruption">
+            @Yumi {$_shop_text_speed}Exactly what happens if anyone where to eat my leftover fruitcake.<<
+        </dialogue>
+        <dialogue name::"Fury">
+            @Yumi {$_shop_text_speed}Hope you're not seeing just red when using this move...{delay::500} 
+            because you'll be doing consecutive hits.<<
+        </dialogue>
+        <dialogue name::"Gluttony">
+            @Yumi {$_shop_text_speed}You're hungry for something.{delay::500} I'm not telling you what though!<<
+        </dialogue>
+        <dialogue name::"Heal">
+            @Yumi {$_shop_text_speed}Everyone knows this skill.{delay::500} 
+            Slap a bandage on yourself and call it a day.<<
+        </dialogue>
+        <dialogue name::"Holy Flare">
+            @Yumi {$_shop_text_speed}If I was down there{delay::500}, I'd cast this skill on a 
+            New Year's Eve with just how bright it is.<<
+        </dialogue>
+        <dialogue name::"Holy Prism">
+            @Yumi {$_shop_text_speed}It's more than a triangle with this one.{delay::500} 
+            perhaps a 5th dimensional triangle?{delay::500} Perhaps it was never a triangle 
+            to begin with.<<
+        </dialogue>
+        <dialogue name::"Holy Smite">
+            @Yumi {$_shop_text_speed}A nice{delay::500}, elegent{delay::500}, heroic downward slash!{delay::500} Almost 
+            resembles a crescent moon.<<
+        </dialogue>
+        <dialogue name::"Holy Thrust">
+            @Yumi {$_shop_text_speed}A pretty devastating move, but pretty hard to use too...<<
+        </dialogue>
+        <dialogue name::"Instinct">
+            @Yumi {$_shop_text_speed}You just sort of have to feel it with this one.<<
+        </dialogue>
+        <dialogue name::"Meganddo">
+            @Yumi {$_shop_text_speed}You basically have control of someone's mind.{delay::500} 
+            Turns them into a vegetable for several seconds.<<
+        </dialogue>
+        <dialogue name::"Railgun">
+            @Yumi {$_shop_text_speed}You won't be using a coin for this one.{delay::500} You're weapon is 
+            practically a gun at this point.{delay::500} Hehe<<
+        </dialogue>
+        <dialogue name::"Smash">
+            @Yumi {$_shop_text_speed}Let gravity help you to deliver a downward killer blow!<<
+        </dialogue>
+        <dialogue name::"Talonite">
+            @Yumi {$_shop_text_speed}You'll practically be a wildabeast with this skill.{delay::500} 
+            Has a pretty cool effect too!<<
+        </dialogue>
+        <dialogue name::"Trifecta">
+            @Yumi {$_shop_text_speed}You know that one franchise...{delay::500} You know...{delay::250} 
+            with the triangles...{delay::1000} Sort of imagine that in a way.<<
+        </dialogue>
+        <dialogue name::"Typhoon">
+            @Yumi {$_shop_text_speed}You'll brew up a storm with this one.<<
+        </dialogue>
+        <dialogue name::"Ultraheal">
+            @Yumi {$_shop_text_speed}It's heal{delay::500}, but ULTRA!<<
+        </dialogue>
+        <dialogue name::"Yeti">
+            @Yumi {$_shop_text_speed}I learned this one by living in the Tundra for too long.<<
+        </dialogue>
+    </dialogueGroup>
 </source>

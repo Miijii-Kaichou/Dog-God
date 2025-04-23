@@ -1,6 +1,9 @@
 using XVNML.Core.Native;
+using XVNML.Utilities.Dialogue;
 using XVNML.Utilities.Macros;
 using XVNML2U;
+using XVNML2U.Data;
+using XVNML2U.Mono;
 
 [MacroLibrary(typeof(InugamiMacroLibrary))]
 public sealed class InugamiMacroLibrary : ActionSender<InugamiMacroLibrary>
@@ -61,5 +64,18 @@ public sealed class InugamiMacroLibrary : ActionSender<InugamiMacroLibrary>
         GameSceneManager.Prepare(index);
         GameSceneManager.Deploy();
         UnityEngine.Debug.Log($"Scene {index} loaded...");
+    }
+
+    [Macro("disable_user_input")]
+    [Macro("duin")]
+    private static void DisableUserInputMacro(MacroCallInfo info)
+    {
+        XVNMLInputManager.Enabled = false;
+    }
+
+    [Macro("shop_text_speed")]
+    private static void ShopTextSpeed(MacroCallInfo info)
+    {
+        
     }
 }

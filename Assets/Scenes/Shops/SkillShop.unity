@@ -196,7 +196,6 @@ MonoBehaviour:
   itemNameText: {fileID: 821671339}
   itemImage: {fileID: 176932903}
   itemPriceText: {fileID: 2033930378}
-  itemDescription: 
 --- !u!114 &12079079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +351,6 @@ MonoBehaviour:
   itemNameText: {fileID: 867711793}
   itemImage: {fileID: 738799542}
   itemPriceText: {fileID: 649494500}
-  itemDescription: 
 --- !u!114 &26986929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,7 +583,6 @@ MonoBehaviour:
   itemNameText: {fileID: 334216800}
   itemImage: {fileID: 1112434691}
   itemPriceText: {fileID: 1421626242}
-  itemDescription: 
 --- !u!114 &48051390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,7 +1057,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1799637497}
   itemImage: {fileID: 928101154}
   itemPriceText: {fileID: 1355195138}
-  itemDescription: 
 --- !u!114 &72967455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,7 +1288,6 @@ MonoBehaviour:
   itemNameText: {fileID: 69125452}
   itemImage: {fileID: 1194655407}
   itemPriceText: {fileID: 813880300}
-  itemDescription: 
 --- !u!114 &96662413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1448,7 +1443,6 @@ MonoBehaviour:
   itemNameText: {fileID: 894346763}
   itemImage: {fileID: 293556579}
   itemPriceText: {fileID: 1840739000}
-  itemDescription: 
 --- !u!114 &106852216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1604,7 +1598,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1747940633}
   itemImage: {fileID: 1414607541}
   itemPriceText: {fileID: 272999419}
-  itemDescription: 
 --- !u!114 &107651045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,7 +2192,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1440787810}
   itemImage: {fileID: 1048513254}
   itemPriceText: {fileID: 366886718}
-  itemDescription: 
 --- !u!114 &172870681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2508,7 +2500,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1118258850}
   itemImage: {fileID: 641945659}
   itemPriceText: {fileID: 1426359901}
-  itemDescription: 
 --- !u!114 &177404869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3010,7 +3001,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1627028198}
   itemImage: {fileID: 162796203}
   itemPriceText: {fileID: 886706014}
-  itemDescription: 
 --- !u!114 &220258127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3706,7 +3696,6 @@ MonoBehaviour:
   itemNameText: {fileID: 272373141}
   itemImage: {fileID: 1976822330}
   itemPriceText: {fileID: 169334620}
-  itemDescription: 
 --- !u!114 &235757353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4554,7 +4543,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1230391448}
   itemImage: {fileID: 491289467}
   itemPriceText: {fileID: 889186143}
-  itemDescription: 
 --- !u!114 &270082751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5269,7 +5257,6 @@ MonoBehaviour:
   itemNameText: {fileID: 909519523}
   itemImage: {fileID: 336242770}
   itemPriceText: {fileID: 576445568}
-  itemDescription: 
 --- !u!114 &276985057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5637,7 +5624,6 @@ MonoBehaviour:
   itemNameText: {fileID: 227301982}
   itemImage: {fileID: 339301048}
   itemPriceText: {fileID: 240234180}
-  itemDescription: 
 --- !u!114 &289685847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6310,7 +6296,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1154984514}
   itemImage: {fileID: 881791631}
   itemPriceText: {fileID: 549577504}
-  itemDescription: 
 --- !u!114 &317403816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6466,7 +6451,6 @@ MonoBehaviour:
   itemNameText: {fileID: 186933812}
   itemImage: {fileID: 1558310568}
   itemPriceText: {fileID: 1122554396}
-  itemDescription: 
 --- !u!114 &322362354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7061,7 +7045,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1748244895}
   itemImage: {fileID: 1244083443}
   itemPriceText: {fileID: 540314028}
-  itemDescription: 
 --- !u!114 &341614849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8123,7 +8106,6 @@ MonoBehaviour:
   itemNameText: {fileID: 829367551}
   itemImage: {fileID: 1417599469}
   itemPriceText: {fileID: 1140596464}
-  itemDescription: 
 --- !u!114 &393943639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9088,6 +9070,7 @@ GameObject:
   - component: {fileID: 427992108}
   - component: {fileID: 427992110}
   - component: {fileID: 427992109}
+  - component: {fileID: 427992111}
   m_Layer: 0
   m_Name: Cast
   m_TagString: Untagged
@@ -9212,6 +9195,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427992107}
   m_CullTransparentMesh: 1
+--- !u!114 &427992111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427992107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa83028b2168704ca6855b33a5937e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 427992109}
+  _onTextChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &432646052
 GameObject:
   m_ObjectHideFlags: 0
@@ -9407,6 +9406,8 @@ MonoBehaviour:
   shopKeeper: {fileID: 0}
   _curtainController: {fileID: 1354395918}
   itemEntryPool: {fileID: 568286552}
+  _characterName: Yumi
+  _dialogueControl: {fileID: 1140376072}
 --- !u!114 &441532100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10736,7 +10737,6 @@ MonoBehaviour:
   itemNameText: {fileID: 2140534669}
   itemImage: {fileID: 752001539}
   itemPriceText: {fileID: 1468541628}
-  itemDescription: 
 --- !u!114 &498222527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11027,7 +11027,6 @@ MonoBehaviour:
   itemNameText: {fileID: 674271811}
   itemImage: {fileID: 420473128}
   itemPriceText: {fileID: 1726466447}
-  itemDescription: 
 --- !u!114 &520915927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12751,9 +12750,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 616624588}
-  - component: {fileID: 616624591}
   - component: {fileID: 616624590}
   - component: {fileID: 616624589}
+  - component: {fileID: 616624591}
   m_Layer: 0
   m_Name: TypeWriter
   m_TagString: Untagged
@@ -12888,17 +12887,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 616624587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38561629f8ff10642885c672d32df738, type: 3}
+  m_Script: {fileID: 11500000, guid: aaa83028b2168704ca6855b33a5937e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textInput: I'll just be a placeholder for now until we can get someone to shopkeeper
-    this story. I believe her name is Umi.
-  _targetOutput: {fileID: 616624589}
-  _playOnAwake: 0
-  _allowSkipOnInput: 0
-  _rate: 0.1
-  _typeAudioName: 
-  _source: {fileID: 0}
+  _target: {fileID: 616624589}
+  _onTextChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &625733111
 GameObject:
   m_ObjectHideFlags: 0
@@ -12972,7 +12967,6 @@ MonoBehaviour:
   itemNameText: {fileID: 843095860}
   itemImage: {fileID: 1533046636}
   itemPriceText: {fileID: 825857568}
-  itemDescription: 
 --- !u!114 &625733115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13627,7 +13621,6 @@ MonoBehaviour:
   itemNameText: {fileID: 222085361}
   itemImage: {fileID: 1397661470}
   itemPriceText: {fileID: 1645033546}
-  itemDescription: 
 --- !u!114 &658045252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13783,7 +13776,6 @@ MonoBehaviour:
   itemNameText: {fileID: 735380992}
   itemImage: {fileID: 1274304449}
   itemPriceText: {fileID: 1494466309}
-  itemDescription: 
 --- !u!114 &658581176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14363,7 +14355,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1072203625}
   itemImage: {fileID: 1358662808}
   itemPriceText: {fileID: 2024229337}
-  itemDescription: 
 --- !u!114 &705566174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14519,7 +14510,6 @@ MonoBehaviour:
   itemNameText: {fileID: 460965059}
   itemImage: {fileID: 1179222060}
   itemPriceText: {fileID: 2061217899}
-  itemDescription: 
 --- !u!114 &707413663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15233,7 +15223,6 @@ MonoBehaviour:
   itemNameText: {fileID: 389467715}
   itemImage: {fileID: 1822112505}
   itemPriceText: {fileID: 1461855958}
-  itemDescription: 
 --- !u!114 &740457051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15600,7 +15589,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1092252999}
   itemImage: {fileID: 1157174311}
   itemPriceText: {fileID: 252996361}
-  itemDescription: 
 --- !u!114 &764631307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15810,7 +15798,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1045102143}
   itemImage: {fileID: 146081566}
   itemPriceText: {fileID: 746885336}
-  itemDescription: 
 --- !u!114 &792049199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16606,7 +16593,6 @@ MonoBehaviour:
   itemNameText: {fileID: 484701389}
   itemImage: {fileID: 1988841287}
   itemPriceText: {fileID: 1812198487}
-  itemDescription: 
 --- !u!114 &834829429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16762,7 +16748,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1620238541}
   itemImage: {fileID: 1953509252}
   itemPriceText: {fileID: 1126970443}
-  itemDescription: 
 --- !u!114 &838481970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19206,7 +19191,6 @@ MonoBehaviour:
   itemNameText: {fileID: 475571333}
   itemImage: {fileID: 312698087}
   itemPriceText: {fileID: 2017076036}
-  itemDescription: 
 --- !u!114 &982860951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19746,7 +19730,6 @@ MonoBehaviour:
   itemNameText: {fileID: 427939495}
   itemImage: {fileID: 1882363461}
   itemPriceText: {fileID: 549003091}
-  itemDescription: 
 --- !u!114 &1031722508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20479,7 +20462,6 @@ MonoBehaviour:
   itemNameText: {fileID: 212296728}
   itemImage: {fileID: 544928674}
   itemPriceText: {fileID: 258055327}
-  itemDescription: 
 --- !u!114 &1060616192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21995,6 +21977,8 @@ GameObject:
   - component: {fileID: 1140376069}
   - component: {fileID: 1140376071}
   - component: {fileID: 1140376070}
+  - component: {fileID: 1140376072}
+  - component: {fileID: 1140376073}
   m_Layer: 0
   m_Name: Textbox
   m_TagString: Untagged
@@ -22062,6 +22046,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140376068}
   m_CullTransparentMesh: 1
+--- !u!114 &1140376072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140376068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6631b5574174865409d5e25945eed5dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  module: {fileID: 0}
+  runOnAwakeUp: 1
+  processChannel: 0
+  tickSound: {fileID: 0}
+  stageObj: {fileID: 0}
+  allowAutomaticDetection: 0
+  dialogueReferenceValue: Yumi
+  dialogueReferenceType: 1
+  dialogueGroupReferenceValue: CharacterDialogue
+  dialogueGroupReferenceType: 1
+  _castNameText: {fileID: 427992111}
+  _mainText: {fileID: 616624591}
+  _confirmMarker: {fileID: 0}
+  _promptUnitComponent: {fileID: 0}
+  _onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  _onFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  _onChannelBlock:
+    m_PersistentCalls:
+      m_Calls: []
+  _onChannelUnblock:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1140376073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140376068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1776b9ba3dee7754490c5583dddba7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1140376072}
 --- !u!1 &1140596462
 GameObject:
   m_ObjectHideFlags: 0
@@ -22963,7 +22998,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1982491674}
   itemImage: {fileID: 269736948}
   itemPriceText: {fileID: 1365246815}
-  itemDescription: 
 --- !u!114 &1170265884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23119,7 +23153,6 @@ MonoBehaviour:
   itemNameText: {fileID: 258124395}
   itemImage: {fileID: 1626390349}
   itemPriceText: {fileID: 469576287}
-  itemDescription: 
 --- !u!114 &1174603552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23562,7 +23595,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1948687961}
   itemImage: {fileID: 1917919474}
   itemPriceText: {fileID: 274394212}
-  itemDescription: 
 --- !u!114 &1202847491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24007,7 +24039,6 @@ MonoBehaviour:
   itemNameText: {fileID: 225009448}
   itemImage: {fileID: 1349525652}
   itemPriceText: {fileID: 511514165}
-  itemDescription: 
 --- !u!114 &1230529811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24796,7 +24827,6 @@ MonoBehaviour:
   itemNameText: {fileID: 911886408}
   itemImage: {fileID: 1358610804}
   itemPriceText: {fileID: 450126793}
-  itemDescription: 
 --- !u!114 &1296800328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26040,7 +26070,6 @@ MonoBehaviour:
   itemNameText: {fileID: 2047324671}
   itemImage: {fileID: 335515774}
   itemPriceText: {fileID: 2035601578}
-  itemDescription: 
 --- !u!114 &1368235610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26196,7 +26225,6 @@ MonoBehaviour:
   itemNameText: {fileID: 734656379}
   itemImage: {fileID: 120512721}
   itemPriceText: {fileID: 1039265953}
-  itemDescription: 
 --- !u!114 &1372346887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27324,7 +27352,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1269083032}
   itemImage: {fileID: 1716676630}
   itemPriceText: {fileID: 288976571}
-  itemDescription: 
 --- !u!114 &1426685321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28232,7 +28259,6 @@ MonoBehaviour:
   itemNameText: {fileID: 2081226965}
   itemImage: {fileID: 1232392489}
   itemPriceText: {fileID: 1575520747}
-  itemDescription: 
 --- !u!114 &1468743191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28388,7 +28414,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1408143475}
   itemImage: {fileID: 187547227}
   itemPriceText: {fileID: 1709259506}
-  itemDescription: 
 --- !u!114 &1468807391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29598,7 +29623,6 @@ MonoBehaviour:
   itemNameText: {fileID: 534868769}
   itemImage: {fileID: 1494184495}
   itemPriceText: {fileID: 1329224759}
-  itemDescription: 
 --- !u!114 &1574528492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29889,7 +29913,6 @@ MonoBehaviour:
   itemNameText: {fileID: 867838903}
   itemImage: {fileID: 1063693137}
   itemPriceText: {fileID: 369793184}
-  itemDescription: 
 --- !u!114 &1582257419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30045,7 +30068,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1524207336}
   itemImage: {fileID: 931359000}
   itemPriceText: {fileID: 2110709813}
-  itemDescription: 
 --- !u!114 &1583105010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30778,7 +30800,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1936259082}
   itemImage: {fileID: 75031096}
   itemPriceText: {fileID: 1155048275}
-  itemDescription: 
 --- !u!114 &1641180389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31415,7 +31436,6 @@ MonoBehaviour:
   itemNameText: {fileID: 523715680}
   itemImage: {fileID: 950439645}
   itemPriceText: {fileID: 1952958855}
-  itemDescription: 
 --- !u!114 &1677951660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31571,7 +31591,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1069894610}
   itemImage: {fileID: 2118925394}
   itemPriceText: {fileID: 941690201}
-  itemDescription: 
 --- !u!114 &1699912826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31727,7 +31746,6 @@ MonoBehaviour:
   itemNameText: {fileID: 464751810}
   itemImage: {fileID: 583591711}
   itemPriceText: {fileID: 1271530399}
-  itemDescription: 
 --- !u!114 &1700058636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32018,7 +32036,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1651564250}
   itemImage: {fileID: 293859037}
   itemPriceText: {fileID: 717279982}
-  itemDescription: 
 --- !u!114 &1704738608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32385,7 +32402,6 @@ MonoBehaviour:
   itemNameText: {fileID: 402335617}
   itemImage: {fileID: 1654456158}
   itemPriceText: {fileID: 2045631441}
-  itemDescription: 
 --- !u!114 &1722169705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32633,7 +32649,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetCamera: {fileID: 1354395917}
-  _centrePoint: {fileID: 1973523504}
   _controlPoints:
   - {fileID: 1407175357}
   - {fileID: 1988869673}
@@ -33002,7 +33017,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1145290890}
   itemImage: {fileID: 135576057}
   itemPriceText: {fileID: 1027598535}
-  itemDescription: 
 --- !u!114 &1769345146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33234,7 +33248,6 @@ MonoBehaviour:
   itemNameText: {fileID: 405025969}
   itemImage: {fileID: 1783656801}
   itemPriceText: {fileID: 1164872615}
-  itemDescription: 
 --- !u!114 &1782888248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33601,7 +33614,6 @@ MonoBehaviour:
   itemNameText: {fileID: 222413809}
   itemImage: {fileID: 50550272}
   itemPriceText: {fileID: 682500176}
-  itemDescription: 
 --- !u!114 &1796877718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34238,7 +34250,6 @@ MonoBehaviour:
   itemNameText: {fileID: 432646054}
   itemImage: {fileID: 335502083}
   itemPriceText: {fileID: 2077019373}
-  itemDescription: 
 --- !u!114 &1840437576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34816,7 +34827,6 @@ MonoBehaviour:
   itemNameText: {fileID: 309030362}
   itemImage: {fileID: 405399409}
   itemPriceText: {fileID: 1197598267}
-  itemDescription: 
 --- !u!114 &1936565993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34972,7 +34982,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1246060749}
   itemImage: {fileID: 1069304384}
   itemPriceText: {fileID: 1025919774}
-  itemDescription: 
 --- !u!114 &1946140329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35263,7 +35272,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1700202521}
   itemImage: {fileID: 1770221734}
   itemPriceText: {fileID: 2012609523}
-  itemDescription: 
 --- !u!114 &1950288231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35815,7 +35823,6 @@ MonoBehaviour:
   itemNameText: {fileID: 375563859}
   itemImage: {fileID: 1063968624}
   itemPriceText: {fileID: 628938050}
-  itemDescription: 
 --- !u!114 &1976437385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36047,7 +36054,6 @@ MonoBehaviour:
   itemNameText: {fileID: 946891064}
   itemImage: {fileID: 838706835}
   itemPriceText: {fileID: 1641395509}
-  itemDescription: 
 --- !u!114 &1978890260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37756,7 +37762,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1794750783}
   itemImage: {fileID: 267148146}
   itemPriceText: {fileID: 1839984070}
-  itemDescription: 
 --- !u!114 &2064649933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38483,7 +38488,6 @@ MonoBehaviour:
   itemNameText: {fileID: 1327689843}
   itemImage: {fileID: 653282471}
   itemPriceText: {fileID: 376284964}
-  itemDescription: 
 --- !u!114 &2113276950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38783,7 +38787,6 @@ MonoBehaviour:
   itemNameText: {fileID: 537948584}
   itemImage: {fileID: 2128430448}
   itemPriceText: {fileID: 1534689449}
-  itemDescription: 
 --- !u!114 &2126834516
 MonoBehaviour:
   m_ObjectHideFlags: 0

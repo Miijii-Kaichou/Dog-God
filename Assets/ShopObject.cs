@@ -4,6 +4,7 @@ using Extensions;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using XVNML2U.Mono;
 
 public sealed class ShopObject : MonoBehaviour
 {
@@ -27,8 +28,15 @@ public sealed class ShopObject : MonoBehaviour
     [SerializeField]
     private ObjectPooler itemEntryPool;
 
+    [Header("Dialogue-Specific Information")]
+    [SerializeField]
+    private string _characterName;
+    [SerializeField]
+    private XVNMLDialogueControl _dialogueControl;
+
     private ItemEntry[] itemEntries;
 
+    private const string _dialogueGroupTarget = "CharacterDialogue";
 
     private void Start()
     {
@@ -68,6 +76,11 @@ public sealed class ShopObject : MonoBehaviour
         };
 
         ShowItemEntries(content!);
+
+        if (string.IsNullOrEmpty(_characterName)) return;
+        if (string.IsNullOrEmpty(_dialogueGroupTarget)) return;
+
+        _dialogueControl.Play(_characterName, _dialogueGroupTarget);
     }
 
     public void ShowItemEntries(ItemEntryModel[] entries)
@@ -80,6 +93,7 @@ public sealed class ShopObject : MonoBehaviour
                 itemEntries[i].gameObject.Enable();
 
             itemEntries[i].SetEntry(entries[i]);
+            itemEntries[i].targetDialogueControl = _dialogueControl;
             i.Next();
         }
 

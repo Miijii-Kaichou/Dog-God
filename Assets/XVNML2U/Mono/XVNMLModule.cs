@@ -32,6 +32,9 @@ namespace XVNML2U.Mono
         [SerializeField]
         private Camera _mainCamera;
 
+        [SerializeField]
+        private bool _buildOnAwake;
+
         internal Action<XVNMLObj?>? onModuleBuildProcessComplete;
         internal Camera Camera => _mainCamera;
 
@@ -46,10 +49,24 @@ namespace XVNML2U.Mono
             }
         }
 
+        private void Awake()
+        {
+            if (_buildOnAwake == false) return;
+            Build();
+        }
+
         [Tooltip("Begin to manifest the XVNML DOM through Tokenization and Parsing.")]
         public void Build()
         {
-            if (BuildComplete) return;
+            if (BuildComplete)
+            {
+                if (_main == null) return;
+
+                // We already have the information, so just say the process has been completed again for anyone
+                // else that needs it.
+                onModuleBuildProcessComplete?.Invoke(_main.top);
+                return;
+            }
 
             //SearchAndApplyUserOverrideSettings();
 
