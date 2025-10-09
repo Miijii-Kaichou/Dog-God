@@ -58,6 +58,10 @@
 	$> a new profile.
 	<dialogueGroup name::"Questionaire">
 		<dialogue>
+			$> The latest XVNML version will also have access to branching conditions.
+			$> If the XVNML parser detects the ?{} format, it'll check the condition first
+			$> before bouncing off. Just another cool way to use the "interrogative" Skriptr
+			$> line.
 			@ What is your name?{enable_input::7}<
 			@ What's your favorite number?{delay::500} Pick between 0 and 99.{enable_input::2}<
 			@ If you had the change to change one's fate...{delay::500}{clear}

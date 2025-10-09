@@ -22,6 +22,7 @@ namespace XVNML2U.Mono
         internal static void Register(BaseCastReaction reaction)
         {
             var reactionName = reaction.GetName();
+            if (CastReactions.ContainsKey(reactionName)) return;
             CastReactions.Add(reactionName, reaction);
         }
 

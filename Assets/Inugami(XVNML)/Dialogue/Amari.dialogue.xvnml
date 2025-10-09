@@ -1,6 +1,6 @@
 <source name::"Amari.dialogue">
     <dialogueGroup name::"CharacterDialogue">
-        <dialogue name::"Amari">
+        <dialogue name::"Amari" id::000>
             @Amari {duin|$_shop_text_speed}Welcome to the Item Shop. Feel free to look around and see what you like.<<
         </dialogue>
     </dialogueGroup>
