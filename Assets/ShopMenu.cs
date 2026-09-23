@@ -27,6 +27,7 @@ public class ShopMenu : MonoBehaviour
         _curtainController.Close(() =>
         {
             // You would return to the battlefield to fight Koko Inugami
+            HeavensPlazaSystem.Leave();
         });
     }
 

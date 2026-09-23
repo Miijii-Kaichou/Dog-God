@@ -72,11 +72,9 @@ public sealed class PlayerEntity : MonoBehaviour, IHealthProperty, IManaProperty
 
     private void Awake()
     {
-        GameManager.OnSystemRegistrationProcessCompleted += () => {
-            GameManager.ReferencePlayer(this);
-            // Health system can talk multiple, so we use this instead
-            HealthSystem.AddNewEntry(nameof(PlayerEntity), this);
-        };
+        GameManager.ReferencePlayer(this);
+        // Health system can talk multiple, so we use this instead
+        HealthSystem.AddNewEntry(nameof(PlayerEntity), this);
     }
 
     private void Start()

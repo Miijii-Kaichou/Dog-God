@@ -50,18 +50,25 @@ public class TranslationTween : MonoBehaviour
 
     private void DoTranslationTweening(bool reverse = false)
     {
-        var target = reverse ? from : to;
-        switch (axis)
+        // Temporary....
+        try
         {
-            case TranslationAxis.X:
-                transform?.DOLocalMoveX(target, duration);
-                break;
-            case TranslationAxis.Y:
-                transform?.DOLocalMoveY(target, duration);
-                break;
-            case TranslationAxis.Z:
-                transform?.DOLocalMoveZ(target, duration);
-                break;
+            var target = reverse ? from : to;
+            switch (axis)
+            {
+                case TranslationAxis.X:
+                    transform?.DOLocalMoveX(target, duration);
+                    break;
+                case TranslationAxis.Y:
+                    transform?.DOLocalMoveY(target, duration);
+                    break;
+                case TranslationAxis.Z:
+                    transform?.DOLocalMoveZ(target, duration);
+                    break;
+            }
+        } catch
+        {
+            return;
         }
     }
 }

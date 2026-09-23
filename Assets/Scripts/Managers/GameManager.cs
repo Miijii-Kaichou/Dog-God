@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -129,8 +130,6 @@ public sealed class GameManager : Singleton<GameManager>
         }
         #endregion  
         RegisterSystems();
-        StartUpAllSystems();
-        ReportStartUp();
     }
 
     public static void ReferencePlayer(PlayerEntity player)
@@ -154,9 +153,11 @@ public sealed class GameManager : Singleton<GameManager>
     void Start()
     {
         Screen.SetResolution((int)resolutionWidth, (int)resolutionHeight, FullScreenMode.FullScreenWindow);
+        
+        StartUpAllSystems();
+        ReportStartUp();
 
         //I want to also create a folder of Profiles if one exists or not.
-
         dirInfo = new DirectoryInfo(Application.persistentDataPath + "/Profiles");
 
         if (!dirInfo.Exists)
@@ -165,7 +166,7 @@ public sealed class GameManager : Singleton<GameManager>
 
     void RegisterSystems()
     {
-        GameSystem[] allGameSystems = FindObjectsOfType<GameSystem>();
+        GameSystem[] allGameSystems = FindObjectsByType<GameSystem>(FindObjectsSortMode.None);
         foreach (GameSystem entry in allGameSystems)
         {
             SystemInfo newSystemInfo = new SystemInfo

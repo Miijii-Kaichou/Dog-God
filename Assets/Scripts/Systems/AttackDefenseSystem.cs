@@ -35,12 +35,12 @@ public class AttackDefenseSystem : GameSystem
     private const float GuardTimeThreshold = 0.1f;
     private const float ChargeAttackTimeThreshold = 0.5f;
 
-    public static EventCall? OnAttack;
-    public static EventCall? OnChargedAttack;
-    public static EventCall? OnGuard;
-    public static EventCall? OnParry;
-    public static EventCall? OnParrySuccess;
-    public static EventCall? OnPoiseLost;
+    public static EventCall? OnAttack           = new(100, nameof(OnAttack));
+    public static EventCall? OnChargedAttack    = new(101, nameof(OnChargedAttack));
+    public static EventCall? OnGuard            = new(102, nameof(OnGuard));
+    public static EventCall? OnParry            = new(103, nameof(OnParry));
+    public static EventCall? OnParrySuccess     = new(104, nameof(OnParrySuccess));
+    public static EventCall? OnPoiseLost        = new(105, nameof(OnPoiseLost));
 
     static ILevelProperty? PlayerLevel => Self!.Player;
     static IEntityStatus? PlayerStanceState => Self!.Player;
@@ -91,6 +91,7 @@ public class AttackDefenseSystem : GameSystem
         if (Input.GetMouseButtonUp(LeftClick + ReversalValue))
         {
             ExecuteAttack();
+            Debug.Log("Attacking");
             LeftClickHoldFrames = Zero;
             PlayerStanceState?.ChangeOffensiveState(OffensiveState.None);
         }

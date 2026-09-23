@@ -1,5 +1,6 @@
 ﻿#nullable enable
 
+using System;
 using UnityEngine;
 using static SharedData.Constants;
 
@@ -45,5 +46,10 @@ public class HeavensPlazaSystem : GameSystem
     public static void Register(ShopMenu instance)
     {
         Menu ??= instance;
+    }
+
+    internal static void Leave()
+    {
+        GameSceneManager.LoadScene(SI_Battle);
     }
 }

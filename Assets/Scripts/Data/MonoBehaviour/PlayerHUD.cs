@@ -53,6 +53,10 @@ public class PlayerHUD : MonoBehaviour
 
     private void Start()
     {
+        GameManager.GetSystem<ActionSystem>().Run();
+        GameManager.GetSystem<RuntimeActionSystem>().Run();
+        GameManager.GetSystem<AttackDefenseSystem>().Run();
+
         ExperienceSystem.onLevelChange = () =>
         {
             EXPSlider.value = EXPSlider.minValue;

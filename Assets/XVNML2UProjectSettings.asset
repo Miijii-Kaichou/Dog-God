@@ -18,7 +18,7 @@ MonoBehaviour:
   _defaultInterval: 1
   _CDPChannelLimit: 12
   _receiveLogs: 1
-  _enableVerbose: 1
-  _enableWarning: 1
+  _enableVerbose: 0
+  _enableWarning: 0
   _enableError: 1
   _pauseGamePlayOnError: 1

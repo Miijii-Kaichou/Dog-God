@@ -41,14 +41,14 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
     public OffensiveState EntityOffensiveState { get; set; }
     public DefensiveState EntityDefensiveState { get; set; }
     public Action? OnHealthDown { get; set; }
-    public Action? OnHealthNegativeChange {get;set;}
+    public Action? OnHealthNegativeChange { get; set; }
     public Action? OnHealthPositiveChange { get; set; }
 
     public bool WasParryTimed
     {
         get
         {
-            return  EntityOffensiveState != OffensiveState.None && 
+            return EntityOffensiveState != OffensiveState.None &&
                     motionPercentage >= parryPercentageRange.Item1 &&
                     motionPercentage <= parryPercentageRange.Item2;
         }
@@ -61,10 +61,8 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
 
     private void Awake()
     {
-        GameManager.OnSystemRegistrationProcessCompleted += () => {
-            GameManager.ReferenceBoss(this);
-            HealthSystem.AddNewEntry(nameof(BossEntity), this);
-        };
+        GameManager.ReferenceBoss(this);
+        HealthSystem.AddNewEntry(nameof(BossEntity), this);
     }
 
     void Start()
@@ -112,8 +110,8 @@ public class BossEntity : MonoBehaviour, IHealthProperty, IEntityStatus
             EntityOffensiveState = OffensiveState.None;
             motionPercentage = Zero;
         });
-    
-        while(motionPercentage < 0.99f)
+
+        while (motionPercentage < 0.99f)
         {
             EntityOffensiveState = OffensiveState.Attack;
             motionPercentage = alarm![One].CurrentTime / alarm[One].SetDuration;
